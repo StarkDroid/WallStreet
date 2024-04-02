@@ -24,7 +24,7 @@ fun openFile(url: String) {
     if (!downloadFile.exists()) {
         val inputStream = URL(url).openStream()
         val outputStream = FileOutputStream(downloadFile)
-        var byteArray = ByteArray(1024)
+        val byteArray = ByteArray(1024)
         var count: Int
         while (run {
                 count = inputStream.read(byteArray)

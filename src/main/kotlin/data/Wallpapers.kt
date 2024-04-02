@@ -13,5 +13,6 @@ data class Wallpapers(
 data class Desktop(
     val author: String,
     val imageUrl: String,
-    val wallpaper_name: String
+    @SerialName("wallpaper_name")
+    val wallpaperName: String
 )

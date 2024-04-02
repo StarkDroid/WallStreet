@@ -71,7 +71,7 @@ fun GridView(wallpapers: List<Desktop>) {
                                     contentScale = ContentScale.Crop
                                 )
                             }
-                            Text(it.wallpaper_name)
+                            Text(it.wallpaperName)
                         }
                     }
                 }
