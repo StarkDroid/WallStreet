@@ -38,6 +38,7 @@ object WallpaperApiClient {
     suspend fun getWallpapers(): Wallpapers {
         val url = "https://raw.githubusercontent.com/StarkDroid/WallStreet-API/main/wallstreet_walls.json"
         val response: HttpResponse = client.get(url)
+        // Log our responses, to see if data is being pulled through fine
         println(response.body<String>())
         return if (response.status.isSuccess()) {
             decodeFromString(response.body())

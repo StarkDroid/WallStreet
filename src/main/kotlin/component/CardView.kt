@@ -7,17 +7,21 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import data.Desktop
+import utils.AsyncImage
 import utils.handCursor
-import utils.loadPicture
 import utils.openFile
+import java.net.URL
 
 @Composable
 fun CardView(wallpapers: Desktop) {
@@ -48,13 +52,19 @@ fun CardView(wallpapers: Desktop) {
                     contentScale = ContentScale.Crop
                 )
             } else {
-                Image(
-                    loadPicture(wallpapers.imageUrl),
-                    "Wallpaper thumbnail",
-                    contentScale = ContentScale.Crop
+                AsyncImage(
+                    load = { loadImageBitmapUrl(wallpapers.imageUrl) },
+                    painterFor = { remember { BitmapPainter(it) } },
+                    contentDescription = "Wallpaper thumbnail",
                 )
             }
             Text(wallpapers.wallpaperName)
         }
     }
 }
+
+/**
+* Helper function to load image using URL
+*/
+fun loadImageBitmapUrl(url: String): ImageBitmap =
+    URL(url).openStream().buffered().use(::loadImageBitmap)
