@@ -1,11 +1,13 @@
 package component
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.*
 import data.Desktop
 import data.WallpaperApiClient
 import io.ktor.client.plugins.*
 import kotlinx.coroutines.launch
 
+@Preview
 @Composable
 fun MainScreen() {
     var wallpapers by remember { mutableStateOf(emptyList<Desktop>()) }
