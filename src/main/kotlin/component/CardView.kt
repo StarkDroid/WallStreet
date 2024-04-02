@@ -27,8 +27,8 @@ import java.net.URL
 fun CardView(wallpapers: Desktop) {
     Card(
         modifier = Modifier
-            .width(400.dp)
-            .height(200.dp)
+            .width(500.dp)
+            .height(250.dp)
             .padding(8.dp)
             .pointerHoverIcon(handCursor())
             .clickable {

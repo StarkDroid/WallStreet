@@ -21,7 +21,7 @@ fun GridView(wallpapers: List<Desktop>) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White)
+                .background(Color(0xFFEEEEEE))
                 .padding(14.dp)
         ) {
             LazyVerticalGrid(
