@@ -23,7 +23,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.res.loadSvgPainter
 import androidx.compose.ui.res.useResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import data.Desktop
@@ -111,6 +113,7 @@ fun CardView(wallpapers: Desktop) {
 
                         Text(
                             "Download",
+                            fontFamily = FontFamily(Font("font/Pacifico.ttf")),
                             fontWeight = FontWeight.Medium,
                             style = MaterialTheme.typography.body1
                         )
