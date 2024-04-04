@@ -37,6 +37,11 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "WallStreet"
             packageVersion = "1.0.0"
+            description = "Jetpack Compose Desktop based Wallpaper app"
+            copyright = "© 2024 Trishiraj. All rights reserved."
+            windows {
+                iconFile.set(project.file("WallStreet.ico"))
+            }
         }
     }
 }

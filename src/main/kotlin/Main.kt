@@ -5,7 +5,7 @@ import androidx.compose.ui.window.application
 import ui.MainScreen
 
 fun main() = application {
-    val icon = painterResource("drawables/wallstreet_icon.png")
+    val icon = painterResource("drawables/WallStreet.png")
     Window(onCloseRequest = ::exitApplication, title = "WallStreet", icon = icon) {
         MaterialTheme {
             MainScreen()
