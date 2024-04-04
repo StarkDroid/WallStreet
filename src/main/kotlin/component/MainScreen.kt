@@ -13,6 +13,7 @@ import data.Desktop
 import data.WallpaperApiClient
 import io.ktor.client.plugins.*
 import kotlinx.coroutines.launch
+import utils.Constants
 import utils.brandFont
 
 @Composable
@@ -44,7 +45,7 @@ fun MainScreen() {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "WallStreet",
+                            text = Constants.mainscreen_title_text,
                             fontFamily = brandFont,
                             style = MaterialTheme.typography.h3
                         )

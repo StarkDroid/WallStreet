@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import utils.Constants
 import utils.handCursor
 
 @Composable
@@ -24,9 +25,8 @@ fun BottomBarCredits() {
 
     val craftedText = buildAnnotatedString {
         withStyle(style = SpanStyle(fontWeight = FontWeight.Medium)) {
-            append("Crafted with ❤ by Trishiraj, visit source at \uD83D\uDC19")
+            append(Constants.bottom_bar_credits_text)
         }
-        pushStringAnnotation("URL", "https://fitgirl-repacks.site/")
         withStyle(
             style = SpanStyle(
                 fontWeight = FontWeight.Medium,
@@ -35,13 +35,12 @@ fun BottomBarCredits() {
         ) {
             append("Github")
         }
-        pop()
     }
 
     val onClick: (Int) -> Unit = {
         when (it) {
             in craftedText.indexOf("Github") until craftedText.indexOf("Github") + "Github".length -> {
-                uriHandler.openUri("https://github.com/StarkDroid/")
+                uriHandler.openUri(Constants.GITHUB_URL)
             }
         }
     }

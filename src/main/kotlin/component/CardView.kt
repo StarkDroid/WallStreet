@@ -28,16 +28,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.loadImageBitmap
 import androidx.compose.ui.res.loadSvgPainter
 import androidx.compose.ui.res.useResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.platform.Font
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import data.Desktop
-import utils.AsyncImage
-import utils.displayFont
-import utils.handCursor
-import utils.openFile
+import utils.*
 import java.net.URL
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -95,7 +89,7 @@ fun CardView(wallpapers: Desktop) {
             if (wallpapers.imageUrl.isEmpty()) {
                 Image(
                     bitmap,
-                    "No image available",
+                    Constants.no_thumbnail_desc,
                     modifier = Modifier.size(100.dp).align(Alignment.Center),
                     contentScale = ContentScale.Crop
                 )
@@ -106,7 +100,7 @@ fun CardView(wallpapers: Desktop) {
                     modifier = Modifier
                         .blur(if (isHovering) 10.dp else 0.dp)
                         .alpha(if (isHovering) 0.7f else 1f),
-                    contentDescription = "Wallpaper thumbnail",
+                    contentDescription = Constants.wallpaper_thumbnail_desc,
                 )
 
                 if (isHovering) {
@@ -117,12 +111,12 @@ fun CardView(wallpapers: Desktop) {
                     ) {
                         Image(
                             downloadIcon,
-                            "Download wallpaper icon",
+                            Constants.download_icon_desc,
                             modifier = Modifier.size(64.dp)
                         )
 
                         Text(
-                            "Download",
+                            Constants.download_text,
                             fontFamily = displayFont,
                             fontWeight = FontWeight.Medium,
                             style = MaterialTheme.typography.body1

@@ -11,6 +11,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
+import utils.Constants
 
 object WallpaperApiClient {
     private val client = HttpClient(CIO) {
@@ -36,7 +37,7 @@ object WallpaperApiClient {
     }
 
     suspend fun getWallpapers(): Wallpapers {
-        val url = "https://raw.githubusercontent.com/StarkDroid/WallStreet-API/main/wallstreet_walls.json"
+        val url = Constants.WALLPAPER_API
         val response: HttpResponse = client.get(url)
         // Log our responses, to see if data is being pulled through fine
         println(response.body<String>())
