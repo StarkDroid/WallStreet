@@ -1,5 +1,7 @@
 package component
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
@@ -26,7 +29,6 @@ import androidx.compose.ui.res.useResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import data.Desktop
 import utils.AsyncImage
@@ -39,8 +41,12 @@ import java.net.URL
 fun CardView(wallpapers: Desktop) {
     var cornerRadius by remember { mutableStateOf(8.dp) }
     var elevation by remember { mutableStateOf(4.dp) }
-    var offset by remember { mutableStateOf(IntOffset(0, 0)) }
     var isHovering by remember { mutableStateOf(false) }
+
+    val offset by animateFloatAsState(
+        targetValue = if (isHovering) -8f else 0f,
+        animationSpec = tween(durationMillis = 300)
+    )
 
     // Init the hover modifications
     val hoverModifier = Modifier
@@ -48,16 +54,16 @@ fun CardView(wallpapers: Desktop) {
         .onPointerEvent(PointerEventType.Enter) {
             cornerRadius = 16.dp
             elevation = 20.dp
-            offset = IntOffset(0, -8)
             isHovering = true
         }
         .onPointerEvent(PointerEventType.Exit) {
             cornerRadius = 8.dp
             elevation = 4.dp
-            offset = IntOffset(0, 0)
             isHovering = false
         }
-        .offset { offset }
+        .graphicsLayer {
+            translationY = offset
+        }
 
     Card(
         modifier = Modifier
