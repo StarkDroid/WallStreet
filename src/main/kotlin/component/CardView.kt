@@ -3,6 +3,7 @@ package component
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.BitmapPainter
@@ -29,9 +31,11 @@ import androidx.compose.ui.res.useResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import data.Desktop
 import utils.AsyncImage
+import utils.displayFont
 import utils.handCursor
 import utils.openFile
 import java.net.URL
@@ -79,7 +83,7 @@ fun CardView(wallpapers: Desktop) {
         shape = RoundedCornerShape(cornerRadius),
         elevation = elevation,
     ) {
-        Box {
+        Box(modifier = Modifier.fillMaxSize()) {
             val bitmap = useResource("no_wallpaper.png") {
                 loadImageBitmap(it)
             }
@@ -119,7 +123,7 @@ fun CardView(wallpapers: Desktop) {
 
                         Text(
                             "Download",
-                            fontFamily = FontFamily(Font("font/Pacifico.ttf")),
+                            fontFamily = displayFont,
                             fontWeight = FontWeight.Medium,
                             style = MaterialTheme.typography.body1
                         )
@@ -128,7 +132,19 @@ fun CardView(wallpapers: Desktop) {
             }
 
             if (isHovering.not()) {
-                Text(wallpapers.wallpaperName)
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 12.dp)
+                        .background(Color.White, RoundedCornerShape(8.dp))
+                ) {
+                    Text(
+                        text = wallpapers.wallpaperName,
+                        fontFamily = displayFont,
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.padding(horizontal = 12.dp)
+                    )
+                }
             }
         }
     }

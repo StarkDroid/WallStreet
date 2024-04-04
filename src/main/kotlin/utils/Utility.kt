@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.platform.Font
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -80,3 +82,9 @@ fun <T> AsyncImage(
         )
     }
 }
+
+/**
+ * Load Fonts from here
+ */
+val displayFont = FontFamily(Font("font/Outfit-Medium.ttf"))
+val brandFont = FontFamily(Font("font/Pacifico.ttf"))

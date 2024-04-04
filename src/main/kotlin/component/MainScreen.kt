@@ -8,13 +8,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.dp
 import data.Desktop
 import data.WallpaperApiClient
 import io.ktor.client.plugins.*
 import kotlinx.coroutines.launch
+import utils.brandFont
 
 @Composable
 fun MainScreen() {
@@ -46,7 +45,7 @@ fun MainScreen() {
                     ) {
                         Text(
                             text = "WallStreet",
-                            fontFamily = FontFamily(Font("font/Pacifico.ttf")),
+                            fontFamily = brandFont,
                             style = MaterialTheme.typography.h3
                         )
                     }
