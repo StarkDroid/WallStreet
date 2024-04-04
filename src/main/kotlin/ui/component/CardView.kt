@@ -1,4 +1,4 @@
-package component
+package ui.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -31,7 +31,7 @@ import androidx.compose.ui.res.useResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.Desktop
+import data.model.Desktop
 import utils.*
 import java.net.URL
 
@@ -79,15 +79,15 @@ fun CardView(wallpapers: Desktop) {
         elevation = elevation,
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            val bitmap = useResource("no_wallpaper.png") {
+            val bitmap = useResource("drawables/no_wallpaper.png") {
                 loadImageBitmap(it)
             }
 
-            val downloadIcon = useResource("wallpaper_download_icon.svg") {
+            val downloadIcon = useResource("drawables/wallpaper_download_icon.svg") {
                 loadSvgPainter(it, LocalDensity.current)
             }
 
-            val authorIcon = useResource("ic_author.svg") {
+            val authorIcon = useResource("drawables/ic_author.svg") {
                 loadSvgPainter(it, LocalDensity.current)
             }
 

@@ -1,4 +1,4 @@
-package component
+package ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,10 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import data.Desktop
+import data.model.Desktop
 import data.WallpaperApiClient
 import io.ktor.client.plugins.*
 import kotlinx.coroutines.launch
+import ui.component.BottomBarCredits
+import ui.component.GridView
 import utils.Constants
 import utils.brandFont
 
