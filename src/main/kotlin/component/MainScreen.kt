@@ -1,6 +1,16 @@
 package component
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.platform.Font
+import androidx.compose.ui.unit.dp
 import data.Desktop
 import data.WallpaperApiClient
 import io.ktor.client.plugins.*
@@ -23,6 +33,35 @@ fun MainScreen() {
         }
     }
 
-    GridView(wallpapers)
-
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                modifier = Modifier.height(100.dp),
+                backgroundColor = Color(0xFFEEEEEE),
+                elevation = 0.dp,
+                title = {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "WallStreet",
+                            fontFamily = FontFamily(Font("font/Pacifico.ttf")),
+                            style = MaterialTheme.typography.h3
+                        )
+                    }
+                },
+            )
+        },
+        bottomBar = {
+            BottomAppBar(
+                modifier = Modifier.height(30.dp),
+                backgroundColor = Color(0xFFEEEEEE),
+            ) {
+                BottomBarCredits()
+            }
+        },
+    ) {
+        GridView(wallpapers)
+    }
 }
