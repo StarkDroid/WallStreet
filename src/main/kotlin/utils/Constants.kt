@@ -4,6 +4,7 @@ object Constants {
     // Strings
     const val no_thumbnail_desc = "No image available"
     const val download_icon_desc = "Download wallpaper icon"
+    const val author_icon_desc = "Author icon"
     const val wallpaper_thumbnail_desc = "Download wallpaper icon"
     const val download_text = "Download"
     const val mainscreen_title_text  = "WallStreet"

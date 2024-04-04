@@ -30,6 +30,7 @@ import androidx.compose.ui.res.loadSvgPainter
 import androidx.compose.ui.res.useResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import data.Desktop
 import utils.*
 import java.net.URL
@@ -86,6 +87,10 @@ fun CardView(wallpapers: Desktop) {
                 loadSvgPainter(it, LocalDensity.current)
             }
 
+            val authorIcon = useResource("ic_author.svg") {
+                loadSvgPainter(it, LocalDensity.current)
+            }
+
             if (wallpapers.imageUrl.isEmpty()) {
                 Image(
                     bitmap,
@@ -138,6 +143,32 @@ fun CardView(wallpapers: Desktop) {
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(horizontal = 12.dp)
                     )
+                }
+
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(bottom = 12.dp)
+                        .background(Color(0xFF8B93FF), RoundedCornerShape(8.dp, 0.dp, 0.dp, 8.dp))
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            authorIcon,
+                            Constants.author_icon_desc,
+                            modifier = Modifier.size(18.dp).padding(start = 2.dp)
+                        )
+
+                        Text(
+                            text = wallpapers.author,
+                            fontFamily = displayFont,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
                 }
             }
         }
