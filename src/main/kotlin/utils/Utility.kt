@@ -28,25 +28,29 @@ fun handCursor() = PointerIcon(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))
 /**
  * Helper method to download and open the chosen wallpaper in default image viewer
  */
-fun openFile(url: String) {
-    val fileUrl = Url(url)
-    val fileName = fileUrl.pathSegments.last()
-    val downloadDirectory = File(System.getProperty("user.home") + File.separator + "Downloads")
-    val downloadFile = File(downloadDirectory, fileName)
-    if (!downloadFile.exists()) {
-        val inputStream = URL(url).openStream()
-        val outputStream = FileOutputStream(downloadFile)
-        val byteArray = ByteArray(1024)
-        var count: Int
-        while (run {
-                count = inputStream.read(byteArray)
-                count
-            } > 0) {
-            outputStream.write(byteArray, 0, count)
+suspend fun openFile(url: String) {
+    withContext(Dispatchers.IO) {
+        val fileUrl = Url(url)
+        val fileName = fileUrl.pathSegments.last()
+        val downloadDirectory = File(System.getProperty("user.home") + File.separator + "Downloads")
+        val downloadFile = File(downloadDirectory, fileName)
+        if (!downloadFile.exists()) {
+            val inputStream = URL(url).openStream()
+            val outputStream = FileOutputStream(downloadFile)
+            val byteArray = ByteArray(1024)
+            var count: Int
+            while (run {
+                    count = inputStream.read(byteArray)
+                    count
+                } > 0) {
+                outputStream.write(byteArray, 0, count)
+            }
+            outputStream.close()
+            inputStream.close()
         }
-        outputStream.close()
-        inputStream.close()
-        Desktop.getDesktop().open(downloadFile)
+        if (downloadFile.exists()) {
+            Desktop.getDesktop().open(downloadFile)
+        }
     }
 }
 

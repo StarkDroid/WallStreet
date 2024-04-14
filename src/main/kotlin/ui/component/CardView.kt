@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.model.Desktop
+import kotlinx.coroutines.launch
 import utils.*
 import java.net.URL
 
@@ -41,6 +42,7 @@ fun CardView(wallpapers: Desktop) {
     var cornerRadius by remember { mutableStateOf(8.dp) }
     var elevation by remember { mutableStateOf(4.dp) }
     var isHovering by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
 
     val offset by animateFloatAsState(
         targetValue = if (isHovering) -8f else 0f,
@@ -72,7 +74,9 @@ fun CardView(wallpapers: Desktop) {
             .then(hoverModifier)
             .clickable {
                 if (wallpapers.imageUrl.isNotEmpty()) {
-                    openFile(wallpapers.imageUrl)
+                    coroutineScope.launch {
+                        openFile(wallpapers.imageUrl)
+                    }
                 }
             },
         shape = RoundedCornerShape(cornerRadius),
