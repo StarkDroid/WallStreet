@@ -14,7 +14,7 @@ import java.net.URI
 suspend fun openFile(url: String) {
     withContext(Dispatchers.IO) {
         val fileUrl = Url(url)
-        val fileName = fileUrl.pathSegments.last()
+        val fileName = fileUrl.segments.last()
         val downloadDirectory = File(System.getProperty("user.home") + File.separator + "Downloads")
         val downloadFile = File(downloadDirectory, fileName)
         if (!downloadFile.exists()) {

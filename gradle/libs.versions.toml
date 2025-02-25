@@ -8,7 +8,7 @@ androidx-lifecycle = "2.8.4"
 compose-multiplatform = "1.7.0"
 kotlin = "2.1.0"
 kotlinx-coroutines = "1.10.1"
-ktor = "2.3.9"
+ktor = "3.0.3"
 gson = "2.10.1"
 coil = "3.1.0"
 
@@ -24,6 +24,9 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-java = { group = "io.ktor", name = "ktor-client-java", version.ref = "ktor" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
