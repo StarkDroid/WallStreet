@@ -17,6 +17,7 @@ kotlin {
     }
     
     jvm("desktop")
+    version = "2.0.1"
     
     sourceSets {
         val desktopMain by getting
@@ -89,7 +90,9 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.velocity.wallstreet"
-            packageVersion = "1.0.0"
+            packageVersion = project.version.toString()
+            description = "Compose Multiplatform based windows app for winget GUI package manager"
+            copyright = "© 2024 Trishiraj. All rights reserved."
         }
     }
 }

@@ -28,9 +28,7 @@ actual fun GridView(
 
     if (wallpapers.isNotEmpty()) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 8.dp)
+            modifier = Modifier.fillMaxSize()
         ) {
             LazyVerticalGrid(
                 modifier = Modifier.padding(16.dp),
@@ -44,9 +42,12 @@ actual fun GridView(
             }
 
             VerticalScrollbar(
-                modifier = Modifier.align(Alignment.CenterEnd),
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(8.dp),
                 adapter = rememberScrollbarAdapter(listState),
                 style = defaultScrollbarStyle().copy(
+                    minimalHeight = 40.dp,
                     hoverColor = MaterialTheme.colorScheme.onBackground,
                     unhoverColor = MaterialTheme.colorScheme.onBackground.copy(0.5f)
                 )

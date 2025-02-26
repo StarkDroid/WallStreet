@@ -38,7 +38,6 @@ fun MainScreen() {
     var wallpapers by remember { mutableStateOf(emptyList<Desktop>()) }
 
     val scope = rememberCoroutineScope()
-    val scrollState = rememberScrollState(0)
 
     LaunchedEffect(key1 = true) {
         scope.launch {
@@ -79,7 +78,4 @@ fun MainScreen() {
             GridView(wallpapers)
         }
     }
-    VerticalScrollbar(
-        adapter = rememberScrollbarAdapter(scrollState),
-    )
 }
