@@ -40,8 +40,6 @@ object WallpaperApiClient {
     suspend fun getWallpapers(): Wallpapers {
         val url = Constants.WALLPAPER_API
         val response: HttpResponse = client.get(url)
-        // Log our responses, to see if data is being pulled through fine
-        println(response.body<String>())
         return if (response.status.isSuccess()) {
             decodeFromString(response.body())
         } else {

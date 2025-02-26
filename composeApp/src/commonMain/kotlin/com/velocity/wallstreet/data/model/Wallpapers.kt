@@ -11,8 +11,6 @@ data class Wallpapers(
 
 @Serializable
 data class Desktop(
-    val author: String,
+    val category: String,
     val imageUrl: String,
-    @SerialName("wallpaper_name")
-    val wallpaperName: String
 )

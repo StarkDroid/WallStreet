@@ -148,7 +148,7 @@ actual fun CardView(wallpapers: Desktop) {
                         )
                 ) {
                     Text(
-                        text = wallpapers.wallpaperName,
+                        text = wallpapers.category,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(horizontal = 12.dp)
                     )
