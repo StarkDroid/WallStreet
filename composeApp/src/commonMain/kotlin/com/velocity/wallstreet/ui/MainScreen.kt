@@ -1,10 +1,13 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +38,7 @@ fun MainScreen() {
     var wallpapers by remember { mutableStateOf(emptyList<Desktop>()) }
 
     val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState(0)
 
     LaunchedEffect(key1 = true) {
         scope.launch {
@@ -75,4 +79,7 @@ fun MainScreen() {
             GridView(wallpapers)
         }
     }
+    VerticalScrollbar(
+        adapter = rememberScrollbarAdapter(scrollState),
+    )
 }
