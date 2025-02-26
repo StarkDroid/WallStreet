@@ -1,14 +1,14 @@
 package com.velocity.wallstreet
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import com.velocity.wallstreet.theme.AppTheme
 import com.velocity.wallstreet.ui.MainScreen
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    AppTheme {
         MainScreen()
     }
 }
