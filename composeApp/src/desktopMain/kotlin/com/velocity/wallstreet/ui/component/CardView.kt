@@ -29,7 +29,9 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerIcon
@@ -120,6 +122,7 @@ actual fun CardView(wallpapers: Desktop) {
                     ) {
                         Image(
                             painter = painterResource(Res.drawable.wallpaper_download_icon),
+                            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface),
                             contentDescription = Constants.download_icon_desc,
                             modifier = Modifier.size(64.dp)
                         )
@@ -136,13 +139,15 @@ actual fun CardView(wallpapers: Desktop) {
             if (isHovering.not()) {
                 Box(
                     modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 12.dp)
-                        .background(Color(0xFF8B93FF), RoundedCornerShape(0.dp, 8.dp, 0.dp, 0.dp))
+                        .align(Alignment.BottomStart)
+                        .background(
+                            color = MaterialTheme.colorScheme.tertiary,
+                            RoundedCornerShape(0.dp, 8.dp, 0.dp, 0.dp)
+                        )
                 ) {
                     Text(
                         text = wallpapers.wallpaperName,
-                        fontWeight = FontWeight.Medium,
+                        style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(horizontal = 12.dp)
                     )
                 }

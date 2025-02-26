@@ -11,6 +11,6 @@ object Constants {
     const val bottom_bar_credits_text  = "Crafted with ❤ by Trishiraj, visit source at \uD83D\uDC19"
 
     // URL
-    const val GITHUB_URL = "https://github.com/StarkDroid/"
+    const val GITHUB_URL = "https://github.com/StarkDroid/WallStreet"
     const val WALLPAPER_API = "https://raw.githubusercontent.com/StarkDroid/WallStreet-API/main/wallstreet_walls.json"
 }
