@@ -25,6 +25,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.utils.Constants
+import org.jetbrains.compose.resources.stringResource
+import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.bottom_bar_credits_text
 
 @Composable
 fun BottomBarCredits() {
@@ -32,7 +35,7 @@ fun BottomBarCredits() {
 
     val craftedText = buildAnnotatedString {
         withStyle(style = SpanStyle(fontWeight = FontWeight.Medium)) {
-            append(Constants.bottom_bar_credits_text)
+            append(stringResource(Res.string.bottom_bar_credits_text))
         }
         withStyle(
             style = SpanStyle(

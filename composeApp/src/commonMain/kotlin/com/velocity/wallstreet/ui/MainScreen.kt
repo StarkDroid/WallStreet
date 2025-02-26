@@ -1,19 +1,16 @@
 package com.velocity.wallstreet.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,9 +25,11 @@ import com.velocity.wallstreet.data.WallpaperApiClient
 import com.velocity.wallstreet.data.model.Desktop
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.GridView
-import com.velocity.wallstreet.utils.Constants
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.mainscreen_title_text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +58,7 @@ fun MainScreen() {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = Constants.mainscreen_title_text,
+                            text = stringResource(Res.string.mainscreen_title_text),
                             style = MaterialTheme.typography.headlineLarge
                         )
                     }

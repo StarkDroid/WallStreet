@@ -29,8 +29,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventType
@@ -42,13 +40,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.velocity.wallstreet.data.model.Desktop
-import com.velocity.wallstreet.utils.Constants
 import com.velocity.wallstreet.utils.openFile
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.download_icon_desc
+import wallstreet.composeapp.generated.resources.download_text
+import wallstreet.composeapp.generated.resources.no_thumbnail_desc
 import wallstreet.composeapp.generated.resources.no_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_download_icon
+import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -99,7 +101,7 @@ actual fun CardView(wallpapers: Desktop) {
             if (wallpapers.imageUrl.isEmpty()) {
                 Image(
                     painter = painterResource(Res.drawable.no_wallpaper),
-                    Constants.no_thumbnail_desc,
+                    contentDescription = stringResource(Res.string.no_thumbnail_desc),
                     modifier = Modifier.size(100.dp).align(Alignment.Center),
                     contentScale = ContentScale.Crop
                 )
@@ -111,7 +113,7 @@ actual fun CardView(wallpapers: Desktop) {
                         .blur(if (isHovering) 10.dp else 0.dp)
                         .alpha(if (isHovering) 0.7f else 1f),
                     contentScale = ContentScale.Crop,
-                    contentDescription = Constants.wallpaper_thumbnail_desc,
+                    contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc),
                 )
 
                 if (isHovering) {
@@ -123,12 +125,12 @@ actual fun CardView(wallpapers: Desktop) {
                         Image(
                             painter = painterResource(Res.drawable.wallpaper_download_icon),
                             colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface),
-                            contentDescription = Constants.download_icon_desc,
+                            contentDescription = stringResource(Res.string.download_icon_desc),
                             modifier = Modifier.size(64.dp)
                         )
 
                         Text(
-                            Constants.download_text,
+                            text = stringResource(Res.string.download_text),
                             fontWeight = FontWeight.Medium,
                             style = MaterialTheme.typography.bodyMedium
                         )

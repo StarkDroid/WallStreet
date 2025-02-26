@@ -1,0 +1,8 @@
+<resources>
+    <string name="no_thumbnail_desc">No image available</string>
+    <string name="download_icon_desc">Download wallpaper icon</string>
+    <string name="wallpaper_thumbnail_desc">wallpaper</string>
+    <string name="download_text">Download</string>
+    <string name="mainscreen_title_text">WallStreet</string>
+    <string name="bottom_bar_credits_text">Crafted with ❤ by Trishiraj, visit source at 🐙</string>
+</resources>
