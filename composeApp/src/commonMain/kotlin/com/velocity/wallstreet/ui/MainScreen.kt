@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,9 +22,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.data.WallpaperApiClient
 import com.velocity.wallstreet.data.model.Desktop
+import com.velocity.wallstreet.ui.component.AnimatedHeaderText
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.GridView
 import io.ktor.client.plugins.ClientRequestException
@@ -35,6 +39,7 @@ import wallstreet.composeapp.generated.resources.mainscreen_title_text
 @Composable
 fun MainScreen() {
     var wallpapers by remember { mutableStateOf(emptyList<Desktop>()) }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val scope = rememberCoroutineScope()
 
@@ -50,20 +55,23 @@ fun MainScreen() {
     }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
+            LargeTopAppBar(
                 title = {
-                    Box(
+                    Column (
                         modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
                             text = stringResource(Res.string.mainscreen_title_text),
-                            style = MaterialTheme.typography.headlineLarge
+                            style = MaterialTheme.typography.headlineLarge,
                         )
                     }
                 },
+                scrollBehavior = scrollBehavior
             )
+            AnimatedHeaderText(scrollBehavior = scrollBehavior)
         },
         bottomBar = {
             BottomAppBar(
@@ -73,7 +81,11 @@ fun MainScreen() {
             }
         },
     ) { padding ->
-        Column(modifier = Modifier.padding(padding)) {
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
             GridView(wallpapers)
         }
     }

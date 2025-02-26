@@ -5,4 +5,11 @@
     <string name="download_text">Download</string>
     <string name="mainscreen_title_text">WallStreet</string>
     <string name="bottom_bar_credits_text">Crafted with ❤ by Trishiraj, visit source at 🐙</string>
+
+    <string-array name="subtitle_texts">
+        <item>Explore beautiful wallpapers</item>
+        <item>Find the perfect background</item>
+        <item>High-quality images for your desktop</item>
+        <item>Update your look with fresh designs</item>
+    </string-array>
 </resources>
