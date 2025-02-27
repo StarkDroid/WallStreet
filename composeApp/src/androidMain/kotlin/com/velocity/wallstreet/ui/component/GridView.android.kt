@@ -26,7 +26,7 @@ actual fun GridView(wallpapers: List<Desktop>) {
             LazyVerticalGrid(
                 modifier = Modifier.padding(16.dp),
                 state = listState,
-                columns = GridCells.Adaptive(minSize = 400.dp),
+                columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(wallpapers) {

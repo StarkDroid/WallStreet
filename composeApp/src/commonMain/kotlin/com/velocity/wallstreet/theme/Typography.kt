@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.Font
 import wallstreet.composeapp.generated.resources.Outfit_Medium
@@ -31,7 +32,7 @@ fun AppTypography(): Typography{
         bodyLarge = TextStyle(
             fontFamily = bodyFont,
             fontWeight = FontWeight.Normal,
-            fontSize = 24.sp
+            fontSize = AppTypography.bodyLarge
         ),
 
         bodyMedium = TextStyle(
@@ -46,4 +47,12 @@ fun AppTypography(): Typography{
             fontSize = 12.sp
         )
     )
+}
+
+/**
+ * Since we need different font sizes for different platforms, We define
+ * actual/expect block for each platform and add the respective font sizes there.
+ * */
+expect object AppTypography {
+    val bodyLarge: TextUnit
 }
