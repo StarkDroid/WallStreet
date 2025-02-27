@@ -21,7 +21,8 @@ import com.velocity.wallstreet.data.model.Model
 
 @Composable
 actual fun GridView(
-    wallpapers: List<Model>
+    wallpapers: List<Model>,
+    onImageClick: (String) -> Unit
 ) {
     val listState = rememberLazyGridState()
 
@@ -35,8 +36,8 @@ actual fun GridView(
                 columns = GridCells.Adaptive(minSize = 400.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                items(wallpapers) {
-                    CardView(it)
+                items(wallpapers) { wallpaper ->
+                    CardView(wallpaper, onImageClick)
                 }
             }
 

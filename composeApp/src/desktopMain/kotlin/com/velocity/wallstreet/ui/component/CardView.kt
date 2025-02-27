@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -53,7 +52,7 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-actual fun CardView(wallpapers: Model) {
+actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
     var cornerRadius by remember { mutableStateOf(8.dp) }
     var elevation by remember { mutableStateOf(4.dp) }
     var isHovering by remember { mutableStateOf(false) }
@@ -87,7 +86,7 @@ actual fun CardView(wallpapers: Model) {
             .then(hoverModifier)
             .clickable {
                 if (wallpapers.imageUrl.isNotEmpty()) {
-                        setWallpaper(wallpapers)
+                    setWallpaper(wallpapers)
                 }
             },
         shape = RoundedCornerShape(cornerRadius),

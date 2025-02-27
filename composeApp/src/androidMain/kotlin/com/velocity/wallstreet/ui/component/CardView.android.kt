@@ -28,14 +28,14 @@ import wallstreet.composeapp.generated.resources.no_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 @Composable
-actual fun CardView(wallpapers: Model) {
+actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
     Card(
         modifier = Modifier
             .height(350.dp)
             .padding(8.dp)
             .clickable {
                 if (wallpapers.imageUrl.isNotEmpty()) {
-
+                    onImageClick(wallpapers.imageUrl)
                 }
             },
         shape = RoundedCornerShape(16.dp),

@@ -26,6 +26,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
+            implementation(libs.navigation.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

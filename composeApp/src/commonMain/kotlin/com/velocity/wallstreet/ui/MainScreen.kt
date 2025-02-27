@@ -38,7 +38,7 @@ import wallstreet.composeapp.generated.resources.mainscreen_title_text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(onImageClick: (String) -> Unit) {
     var wallpapers by remember { mutableStateOf<List<Model>>(emptyList()) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
@@ -87,7 +87,7 @@ fun MainScreen() {
                 .padding(padding)
                 .fillMaxSize()
         ) {
-            GridView(wallpapers)
+            GridView(wallpapers, onImageClick)
         }
     }
 }
