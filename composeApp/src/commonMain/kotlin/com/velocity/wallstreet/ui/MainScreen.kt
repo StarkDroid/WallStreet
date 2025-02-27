@@ -29,6 +29,7 @@ import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.GridView
+import com.velocity.wallstreet.utils.getWallpaperList
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -38,7 +39,7 @@ import wallstreet.composeapp.generated.resources.mainscreen_title_text
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    var wallpapers by remember { mutableStateOf(emptyList<Model>()) }
+    var wallpapers by remember { mutableStateOf<List<Model>>(emptyList()) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val scope = rememberCoroutineScope()
@@ -47,7 +48,7 @@ fun MainScreen() {
         scope.launch {
             try {
                 val wallpaperData = WallpaperApiClient.getWallpapers()
-                wallpapers = wallpaperData.desktop
+                wallpapers = getWallpaperList(wallpaperData)
             } catch (e: ClientRequestException) {
                 println("Error fetching data: ${e.message}")
             }

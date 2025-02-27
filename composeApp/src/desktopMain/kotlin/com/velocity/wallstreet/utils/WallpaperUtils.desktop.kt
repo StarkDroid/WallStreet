@@ -1,5 +1,6 @@
 package com.velocity.wallstreet.utils
 
+import com.velocity.wallstreet.data.WallpaperApiClient
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.data.model.Wallpapers
 import io.ktor.http.Url
@@ -14,7 +15,7 @@ import java.net.URI
 /**
  * Helper method to download and open the chosen wallpaper in default image viewer
  */
-actual fun setWallpaper(wallpaper: Model) {
+fun setWallpaper(wallpaper: Model) {
     CoroutineScope(Dispatchers.IO).launch {
         val fileUrl = Url(wallpaper.imageUrl)
         val fileName = fileUrl.segments.last()
@@ -38,4 +39,8 @@ actual fun setWallpaper(wallpaper: Model) {
             Desktop.getDesktop().open(downloadFile)
         }
     }
+}
+
+actual fun getWallpaperList(wallpaperData: Wallpapers): List<Model> {
+    return wallpaperData.desktop
 }
