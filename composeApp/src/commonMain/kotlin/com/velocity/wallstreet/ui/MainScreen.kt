@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.data.WallpaperApiClient
-import com.velocity.wallstreet.data.model.Desktop
+import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.GridView
@@ -38,7 +38,7 @@ import wallstreet.composeapp.generated.resources.mainscreen_title_text
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    var wallpapers by remember { mutableStateOf(emptyList<Desktop>()) }
+    var wallpapers by remember { mutableStateOf(emptyList<Model>()) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val scope = rememberCoroutineScope()

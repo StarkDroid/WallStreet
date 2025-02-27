@@ -39,9 +39,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.velocity.wallstreet.data.model.Desktop
-import com.velocity.wallstreet.utils.openFile
-import kotlinx.coroutines.launch
+import com.velocity.wallstreet.data.model.Model
+import com.velocity.wallstreet.utils.setWallpaper
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
@@ -54,11 +53,10 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-actual fun CardView(wallpapers: Desktop) {
+actual fun CardView(wallpapers: Model) {
     var cornerRadius by remember { mutableStateOf(8.dp) }
     var elevation by remember { mutableStateOf(4.dp) }
     var isHovering by remember { mutableStateOf(false) }
-    val coroutineScope = rememberCoroutineScope()
 
     val offset by animateFloatAsState(
         targetValue = if (isHovering) -8f else 0f,
@@ -89,9 +87,7 @@ actual fun CardView(wallpapers: Desktop) {
             .then(hoverModifier)
             .clickable {
                 if (wallpapers.imageUrl.isNotEmpty()) {
-                    coroutineScope.launch {
-                        openFile(wallpapers.imageUrl)
-                    }
+                        setWallpaper(wallpapers)
                 }
             },
         shape = RoundedCornerShape(cornerRadius),

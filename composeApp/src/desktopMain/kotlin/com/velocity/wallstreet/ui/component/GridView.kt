@@ -1,6 +1,5 @@
 package com.velocity.wallstreet.ui.component
 
-import androidx.compose.foundation.ScrollbarStyle
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.defaultScrollbarStyle
 import androidx.compose.foundation.layout.Arrangement
@@ -18,11 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.data.model.Desktop
+import com.velocity.wallstreet.data.model.Model
 
 @Composable
 actual fun GridView(
-    wallpapers: List<Desktop>
+    wallpapers: List<Model>
 ) {
     val listState = rememberLazyGridState()
 

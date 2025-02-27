@@ -6,11 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Wallpapers(
     @SerialName("desktop")
-    val desktop: List<Desktop>
+    val desktop: List<Model>
 )
 
 @Serializable
-data class Desktop(
+data class Model(
     val category: String,
     val imageUrl: String,
 )

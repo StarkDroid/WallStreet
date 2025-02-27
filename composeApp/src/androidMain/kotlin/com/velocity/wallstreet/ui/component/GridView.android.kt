@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.data.model.Desktop
+import com.velocity.wallstreet.data.model.Model
 
 @Composable
-actual fun GridView(wallpapers: List<Desktop>) {
+actual fun GridView(wallpapers: List<Model>) {
     val listState = rememberLazyGridState()
 
     if (wallpapers.isNotEmpty()) {
