@@ -54,7 +54,6 @@ fun AnimatedHeaderText(scrollBehavior: TopAppBarScrollBehavior) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
                 .padding(top = TopAppBarDefaults.TopAppBarExpandedHeight.div(2)),
             contentAlignment = Alignment.Center
         ) {
