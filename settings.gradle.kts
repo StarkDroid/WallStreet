@@ -1,6 +1,6 @@
-rootProject.name = "WallStreet"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+@Suppress("UnstableApiUsage")
 pluginManagement {
     repositories {
         google {
@@ -15,6 +15,7 @@ pluginManagement {
     }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositories {
         google {
