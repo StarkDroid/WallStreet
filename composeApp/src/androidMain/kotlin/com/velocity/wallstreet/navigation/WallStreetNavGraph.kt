@@ -22,10 +22,8 @@ sealed class NavRoute(val route: String) {
 fun WallStreetNavGraph(navController: NavHostController) {
     NavHost(navController, startDestination = NavRoute.MainScreen.route) {
         composable(NavRoute.MainScreen.route) {
-            AppTheme {
-                MainScreen { imageUrl ->
-                    navController.navigate(NavRoute.WallpaperViewScreen.createRoute(imageUrl))
-                }
+            MainScreen { imageUrl ->
+                navController.navigate(NavRoute.WallpaperViewScreen.createRoute(imageUrl))
             }
         }
 

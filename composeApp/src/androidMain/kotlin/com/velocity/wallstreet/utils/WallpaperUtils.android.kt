@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-fun setWallpaper(imageUrl: String, context: Context) {
+fun setWallpaper(imageUrl: String, context: Context, type: Int) {
     val httpClient = HttpClient()
 
     CoroutineScope(Dispatchers.IO).launch {
@@ -26,7 +26,7 @@ fun setWallpaper(imageUrl: String, context: Context) {
 
             withContext(Dispatchers.Main) {
                 val wallpaperManager = WallpaperManager.getInstance(context)
-                wallpaperManager.setBitmap(bitmap)
+                wallpaperManager.setBitmap(bitmap, null, true, type)
                 Toast.makeText(context, "Wallpaper set successfully", Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
