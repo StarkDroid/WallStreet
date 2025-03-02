@@ -56,11 +56,15 @@ fun MainScreen(onImageClick: (String) -> Unit) {
     }
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                ),
                 title = {
-                    Column (
+                    Column(
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -76,7 +80,7 @@ fun MainScreen(onImageClick: (String) -> Unit) {
         },
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.height(30.dp),
+                modifier = Modifier.height(60.dp),
             ) {
                 BottomBarCredits()
             }
