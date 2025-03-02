@@ -1,6 +1,5 @@
 package com.velocity.wallstreet.ui
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -10,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.net.toUri
 import coil3.compose.AsyncImage
 import com.velocity.wallstreet.utils.setWallpaper
 import org.jetbrains.compose.resources.stringResource
