@@ -6,6 +6,7 @@
     <string name="mainscreen_title_text">WallStreet</string>
     <string name="bottom_bar_credits_text">Crafted with ❤ by Trishiraj, visit source at 🐙</string>
     <string name="wallpaper_screen_button_label">Apply Wallpaper</string>
+    <string name="main_screen_header_logo">MainScreen header logo</string>
     <string-array name="subtitle_texts">
         <item>Explore beautiful wallpapers</item>
         <item>Find the perfect background</item>
