@@ -1,16 +1,15 @@
 package com.velocity.wallstreet.ui
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,48 +35,51 @@ fun WallpaperViewScreen(imageUrl: String) {
 
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-
-        AsyncImage(
-            model = imageUrl,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop,
-            contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
-        )
-
-        Button(
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            ),
+    Scaffold { innerPadding ->
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(vertical = 4.dp, horizontal = 16.dp)
-                .padding(WindowInsets.navigationBars.asPaddingValues()),
-            onClick = {
-                showBottomSheet = true
-            }
+                .fillMaxSize()
         ) {
-            Text(
-                 text = stringResource(Res.string.wallpaper_screen_button_label),
-                style = MaterialTheme.typography.bodyLarge
+            AsyncImage(
+                model = imageUrl,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
             )
-        }
 
-        if (showBottomSheet) {
-            BottomSheetDialog(
-                onDismissRequest = { showBottomSheet = false },
-                onApplyWallpaper = { type ->
-                    setWallpaper(
-                        imageUrl = imageUrl,
-                        context = context,
-                        type = type.flag
-                    )
-                },
-            )
+            Button(
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
+                    .size(48.dp),
+                onClick = {
+                    showBottomSheet = true
+                }
+            ) {
+                Text(
+                    text = stringResource(Res.string.wallpaper_screen_button_label),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+
+            if (showBottomSheet) {
+                BottomSheetDialog(
+                    onDismissRequest = { showBottomSheet = false },
+                    onApplyWallpaper = { type ->
+                        setWallpaper(
+                            imageUrl = imageUrl,
+                            context = context,
+                            type = type.flag
+                        )
+                    },
+                )
+            }
         }
     }
 }
