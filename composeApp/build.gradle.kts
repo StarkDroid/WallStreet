@@ -32,6 +32,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -92,8 +93,8 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.velocity.wallstreet"
             packageVersion = project.version.toString()
-            description = "Compose Multiplatform based windows app for winget GUI package manager"
-            copyright = "© 2024 Trishiraj. All rights reserved."
+            description = "A compose multiplatform Wallpaper app made with MaterialUI for Desktop and Mobile"
+            copyright = "© 2024 - 25 Trishiraj. All rights reserved."
         }
     }
 }
