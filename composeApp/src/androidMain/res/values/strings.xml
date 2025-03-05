@@ -3,5 +3,6 @@
     <string name="wallpaper_type_homescreen">HomeScreen</string>
     <string name="wallpaper_type_lockscreen">LockScreen</string>
     <string name="wallpaper_type_both">Both</string>
+    <string name="wallpaper_type_download">Download</string>
     <string name="wallpaper_set_button_icon_desc">Both</string>
 </resources>

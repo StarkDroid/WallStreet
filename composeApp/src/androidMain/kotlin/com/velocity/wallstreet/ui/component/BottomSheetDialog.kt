@@ -83,14 +83,15 @@ fun BottomSheetDialog(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            type.iconRes.let {
-                                Icon(
-                                    imageVector = it,
-                                    tint = MaterialTheme.colorScheme.tertiary,
-                                    contentDescription = stringResource(R.string.wallpaper_set_button_icon_desc)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                            }
+
+                            Icon(
+                                imageVector = type.iconRes,
+                                tint = MaterialTheme.colorScheme.tertiary,
+                                contentDescription = stringResource(R.string.wallpaper_set_button_icon_desc)
+                            )
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
                             Text(
                                 text = stringResource(type.label),
                                 style = MaterialTheme.typography.bodyMedium

@@ -1,5 +1,7 @@
 package com.velocity.wallstreet.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,12 +25,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.velocity.wallstreet.ui.component.BottomSheetDialog
-import com.velocity.wallstreet.utils.setWallpaper
+import com.velocity.wallstreet.utils.setWallpaperAction
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
+@RequiresApi(Build.VERSION_CODES.R)
 @Composable
 fun WallpaperViewScreen(imageUrl: String) {
     val context = LocalContext.current
@@ -56,7 +59,7 @@ fun WallpaperViewScreen(imageUrl: String) {
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
                     .padding(innerPadding)
-                    .padding(horizontal = 16.dp)
+                    .padding(horizontal = 16.dp, vertical = 21.dp)
                     .size(48.dp),
                 onClick = {
                     showBottomSheet = true
@@ -72,10 +75,10 @@ fun WallpaperViewScreen(imageUrl: String) {
                 BottomSheetDialog(
                     onDismissRequest = { showBottomSheet = false },
                     onApplyWallpaper = { type ->
-                        setWallpaper(
+                        setWallpaperAction(
                             imageUrl = imageUrl,
                             context = context,
-                            type = type.flag
+                            type = type
                         )
                     },
                 )
