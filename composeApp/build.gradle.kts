@@ -27,6 +27,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
+            implementation(libs.splashscreen.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -97,13 +98,13 @@ compose.desktop {
             copyright = "© 2024 - 25 Trishiraj. All rights reserved."
 
             windows {
-
+                iconFile.set(project.file("launcher.ico"))
             }
             macOS {
-
+                iconFile.set(project.file("launcher.icns"))
             }
             linux {
-                
+                iconFile.set(project.file("launcher.png"))
             }
         }
     }
