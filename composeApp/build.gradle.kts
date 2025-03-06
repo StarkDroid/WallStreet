@@ -91,10 +91,20 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.velocity.wallstreet"
+            packageName = "WallStreet"
             packageVersion = project.version.toString()
             description = "A compose multiplatform Wallpaper app made with MaterialUI for Desktop and Mobile"
             copyright = "© 2024 - 25 Trishiraj. All rights reserved."
+
+            windows {
+
+            }
+            macOS {
+
+            }
+            linux {
+                
+            }
         }
     }
 }
