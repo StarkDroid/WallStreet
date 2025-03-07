@@ -38,6 +38,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.utils.setWallpaper
 import org.jetbrains.compose.resources.painterResource
@@ -102,7 +105,10 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                 )
             } else {
                 AsyncImage(
-                    model = wallpapers.imageUrl,
+                    model = ImageRequest.Builder(LocalPlatformContext.current)
+                        .data(wallpapers.imageUrl)
+                        .crossfade(true)
+                        .build(),
                     modifier = Modifier
                         .fillMaxSize()
                         .blur(if (isHovering) 10.dp else 0.dp)

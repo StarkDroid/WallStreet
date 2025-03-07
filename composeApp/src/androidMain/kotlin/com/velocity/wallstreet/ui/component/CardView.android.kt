@@ -17,8 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -53,7 +56,10 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                 )
             } else {
                 AsyncImage(
-                    model = wallpapers.imageUrl,
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(wallpapers.imageUrl)
+                        .crossfade(true)
+                        .build(),
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc),
