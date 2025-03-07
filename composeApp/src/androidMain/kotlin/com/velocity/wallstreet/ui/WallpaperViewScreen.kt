@@ -1,7 +1,5 @@
 package com.velocity.wallstreet.ui
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +29,7 @@ import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
-@RequiresApi(Build.VERSION_CODES.R)
+
 @Composable
 fun WallpaperViewScreen(imageUrl: String) {
     val context = LocalContext.current

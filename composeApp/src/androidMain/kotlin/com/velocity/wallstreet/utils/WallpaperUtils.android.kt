@@ -6,11 +6,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.data.model.Wallpapers
 import io.ktor.client.HttpClient
@@ -21,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@RequiresApi(Build.VERSION_CODES.R)
 fun setWallpaperAction(imageUrl: String, context: Context, type: WallpaperType) {
     val httpClient = HttpClient()
 
