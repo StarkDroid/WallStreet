@@ -106,7 +106,7 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
             } else {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalPlatformContext.current)
-                        .data(wallpapers.imageUrl)
+                        .data(wallpapers.thumbnailUrl)
                         .crossfade(true)
                         .build(),
                     modifier = Modifier

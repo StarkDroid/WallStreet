@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class Wallpapers(
     @SerialName("desktop")
     val desktop: List<Model>,
+    @SerialName("mobile")
     val mobile: List<Model>
 )
 
@@ -14,4 +15,5 @@ data class Wallpapers(
 data class Model(
     val category: String,
     val imageUrl: String,
+    val thumbnailUrl: String,
 )

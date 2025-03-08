@@ -22,6 +22,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 import com.velocity.wallstreet.ui.component.BottomSheetDialog
 import com.velocity.wallstreet.utils.setWallpaperAction
 import org.jetbrains.compose.resources.stringResource
@@ -42,7 +44,10 @@ fun WallpaperViewScreen(imageUrl: String) {
                 .fillMaxSize()
         ) {
             AsyncImage(
-                model = imageUrl,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(imageUrl)
+                    .crossfade(true)
+                    .build(),
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)

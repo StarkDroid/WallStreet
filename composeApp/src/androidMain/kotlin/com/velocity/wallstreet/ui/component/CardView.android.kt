@@ -57,7 +57,7 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
             } else {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(wallpapers.imageUrl)
+                        .data(wallpapers.thumbnailUrl)
                         .crossfade(true)
                         .build(),
                     modifier = Modifier.fillMaxSize(),
