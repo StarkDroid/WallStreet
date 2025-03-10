@@ -5,14 +5,12 @@ android-targetSdk = "34"
 androidx-activityCompose = "1.10.1"
 androidx-lifecycle = "2.8.4"
 compose-multiplatform = "1.7.0"
-kotlin = "2.1.0"
+kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
-ktor = "3.0.3"
-gson = "2.10.1"
+ktor = "3.1.1"
 coil = "3.1.0"
 navigation = "2.8.8"
 splashscreen = "1.0.1"
-
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -21,10 +19,8 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }

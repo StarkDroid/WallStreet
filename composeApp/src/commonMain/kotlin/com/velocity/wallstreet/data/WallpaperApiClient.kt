@@ -10,9 +10,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import com.velocity.wallstreet.utils.Constants
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
-import com.velocity.wallstreet.utils.Constants
 
 object WallpaperApiClient {
     private val client = HttpClient(CIO) {

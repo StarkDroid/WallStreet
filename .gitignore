@@ -1,6 +1,7 @@
 *.iml
 .kotlin
 .gradle
+composeApp/release
 **/build/
 xcuserdata
 !src/**/build/
@@ -11,7 +12,7 @@ captures
 .externalNativeBuild
 .cxx
 .fleet
-*.xcodeproj/*
+*.xcodeproj/*g
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/

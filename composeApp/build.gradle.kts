@@ -12,7 +12,7 @@ plugins {
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
     
@@ -40,11 +40,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.cio)
-            implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.cio)
             implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.google.gson)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
         }
@@ -63,8 +61,8 @@ android {
         applicationId = "com.velocity.wallstreet"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = project.version.toString()
     }
     packaging {
         resources {
@@ -73,12 +71,19 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt")
+            )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
     }
 }
 
@@ -91,21 +96,35 @@ compose.desktop {
         mainClass = "com.velocity.wallstreet.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Exe, TargetFormat.Deb)
             packageName = "WallStreet"
+            vendor = "Trishiraj"
             packageVersion = project.version.toString()
             description = "A compose multiplatform Wallpaper app made with MaterialUI for Desktop and Mobile"
             copyright = "© 2024 - 25 Trishiraj. All rights reserved."
 
+            val iconsRoot = project.file("src/desktopMain/desktop-icons")
             windows {
-                iconFile.set(project.file("launcher.ico"))
+                iconFile.set(iconsRoot.resolve("launcher.ico"))
+                upgradeUuid = "8cfc414b-35a1-40a7-9d94-82b8c9b47c90"
+                dirChooser = true
+                menu = true
             }
             macOS {
-                iconFile.set(project.file("launcher.icns"))
+                iconFile.set(iconsRoot.resolve("launcher.icns"))
             }
             linux {
-                iconFile.set(project.file("launcher.png"))
+                iconFile.set(iconsRoot.resolve("launcher.png"))
+                debMaintainer = "trishiraj.247@gmail.com"
+            }
+
+            buildTypes.release.proguard {
+                isEnabled = true
+                optimize = true
+                obfuscate = true
+                configurationFiles.from("src/desktopMain/proguard-rules.pro")
             }
         }
     }
 }
+
