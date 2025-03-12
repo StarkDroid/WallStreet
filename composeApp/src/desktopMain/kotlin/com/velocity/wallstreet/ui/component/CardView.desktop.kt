@@ -139,13 +139,13 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                 }
             }
 
-            if (isHovering.not()) {
+            if (isHovering.not() and wallpapers.category.isNotBlank()) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .background(
                             color = MaterialTheme.colorScheme.tertiary,
-                            RoundedCornerShape(0.dp, 8.dp, 0.dp, 0.dp)
+                            RoundedCornerShape(8.dp)
                         )
                 ) {
                     Text(

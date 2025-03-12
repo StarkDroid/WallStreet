@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -66,19 +67,22 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                 )
             }
 
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .background(
-                        color = MaterialTheme.colorScheme.tertiary,
-                        RoundedCornerShape(0.dp, 8.dp, 0.dp, 0.dp)
+            if (wallpapers.category.isNotBlank()) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(4.dp)
+                        .background(
+                            color = MaterialTheme.colorScheme.tertiary,
+                            RoundedCornerShape(8.dp)
+                        )
+                ) {
+                    Text(
+                        text = wallpapers.category,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(horizontal = 12.dp)
                     )
-            ) {
-                Text(
-                    text = wallpapers.category,
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(horizontal = 12.dp)
-                )
+                }
             }
         }
     }
