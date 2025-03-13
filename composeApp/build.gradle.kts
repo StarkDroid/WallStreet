@@ -95,6 +95,10 @@ compose.desktop {
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
 
+        run {
+            jvmArgs += listOf("-Dapp.version=${project.version}")
+        }
+
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Exe, TargetFormat.Deb)
             packageName = "WallStreet"

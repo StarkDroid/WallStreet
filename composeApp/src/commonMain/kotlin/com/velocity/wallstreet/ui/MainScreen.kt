@@ -1,20 +1,14 @@
 package com.velocity.wallstreet.ui
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -24,26 +18,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.data.WallpaperApiClient
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
+import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.GridView
-import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.getWallpaperList
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
-import wallstreet.composeapp.generated.resources.Res
-import wallstreet.composeapp.generated.resources.main_screen_header_logo
-import wallstreet.composeapp.generated.resources.mainscreen_title_text
-import wallstreet.composeapp.generated.resources.wallstreet_logo_android
-import wallstreet.composeapp.generated.resources.wallstreet_logo_common
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,27 +59,7 @@ fun MainScreen(onImageClick: (String) -> Unit) {
                     containerColor = MaterialTheme.colorScheme.background,
                 ),
                 title = {
-                    Row (
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-
-                        Image(
-                            modifier = Modifier.size(52.dp),
-                            painter = if (PlatformUtils.isMacOS()) {
-                                painterResource(Res.drawable.wallstreet_logo_common)
-                            } else {
-                                painterResource(Res.drawable.wallstreet_logo_android)
-                            },
-                            contentDescription = stringResource(Res.string.main_screen_header_logo)
-                        )
-
-                        Text(
-                            text = stringResource(Res.string.mainscreen_title_text),
-                            style = MaterialTheme.typography.headlineLarge,
-                        )
-                    }
+                    AppHeader()
                 },
                 scrollBehavior = scrollBehavior
             )

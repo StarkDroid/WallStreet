@@ -5,10 +5,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Wallpapers(
+    @SerialName("config")
+    val config: Config,
     @SerialName("desktop")
     val desktop: List<Model>,
     @SerialName("mobile")
     val mobile: List<Model>
+)
+
+@Serializable
+data class Config(
+    val appUpdateVersion: String?,
+    val androidUpdateUrl: String?,
+    val windowsUpdateUrl: String?,
+    val linuxUpdateUrl: String?,
+    val macUpdateUrl: String?
 )
 
 @Serializable
