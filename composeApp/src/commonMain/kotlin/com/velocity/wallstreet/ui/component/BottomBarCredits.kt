@@ -37,7 +37,8 @@ fun BottomBarCredits() {
                 TextLinkStyles(
                     style = SpanStyle(
                         fontWeight = FontWeight.Medium,
-                        textDecoration = TextDecoration.Underline
+                        textDecoration = TextDecoration.Underline,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 )
             )
