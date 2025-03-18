@@ -15,11 +15,11 @@ data class Wallpapers(
 
 @Serializable
 data class Config(
-    val appUpdateVersion: String?,
-    val androidUpdateUrl: String?,
-    val windowsUpdateUrl: String?,
-    val linuxUpdateUrl: String?,
-    val macUpdateUrl: String?
+    val appUpdateVersion: String,
+    val androidUpdateUrl: String,
+    val windowsUpdateUrl: String,
+    val linuxUpdateUrl: String,
+    val macUpdateUrl: String
 )
 
 @Serializable

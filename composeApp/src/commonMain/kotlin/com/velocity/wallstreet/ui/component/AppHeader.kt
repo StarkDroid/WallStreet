@@ -11,10 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import coil3.compose.LocalPlatformContext
 import com.velocity.wallstreet.utils.PlatformUtils
-import com.velocity.wallstreet.utils.getAppVersion
+import com.velocity.wallstreet.utils.isNewVersionAvailable
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
@@ -24,7 +24,13 @@ import wallstreet.composeapp.generated.resources.wallstreet_logo_android
 import wallstreet.composeapp.generated.resources.wallstreet_logo_common
 
 @Composable
-fun AppHeader() {
+fun AppHeader(
+    downloadUrl: AnnotatedString,
+    currentAppVersion: String,
+    latestAppVersion: String
+) {
+    val isUpdateAvailable = isNewVersionAvailable(currentAppVersion, latestAppVersion)
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -47,10 +53,17 @@ fun AppHeader() {
                 style = MaterialTheme.typography.headlineLarge,
             )
 
-            Text(
-                text = getAppVersion(context = LocalPlatformContext.current),
-                style = MaterialTheme.typography.labelSmall,
-            )
+            if (isUpdateAvailable) {
+                Text(
+                    text = downloadUrl,
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            } else {
+                Text(
+                    text = currentAppVersion,
+                    style = MaterialTheme.typography.labelSmall,
+                )
+            }
         }
     }
 }
