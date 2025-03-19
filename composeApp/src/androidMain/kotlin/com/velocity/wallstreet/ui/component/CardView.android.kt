@@ -1,7 +1,6 @@
 package com.velocity.wallstreet.ui.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,12 +10,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -65,24 +61,6 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc),
                 )
-            }
-
-            if (wallpapers.category.isNotBlank()) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(4.dp)
-                        .background(
-                            color = MaterialTheme.colorScheme.tertiary,
-                            RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    Text(
-                        text = wallpapers.category,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(horizontal = 12.dp)
-                    )
-                }
             }
         }
     }

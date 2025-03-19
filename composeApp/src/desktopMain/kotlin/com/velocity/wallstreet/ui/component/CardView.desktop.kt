@@ -3,7 +3,6 @@ package com.velocity.wallstreet.ui.component
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -136,23 +135,6 @@ actual fun CardView(wallpapers: Model, onImageClick: (String) -> Unit) {
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
-                }
-            }
-
-            if (isHovering.not() and wallpapers.category.isNotBlank()) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .background(
-                            color = MaterialTheme.colorScheme.tertiary,
-                            RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    Text(
-                        text = wallpapers.category,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(horizontal = 12.dp)
-                    )
                 }
             }
         }
