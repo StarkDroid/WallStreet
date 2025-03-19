@@ -70,7 +70,7 @@ fun MainScreen(onImageClick: (String) -> Unit) {
                     PlatformUtils.isMacOS() -> wallpaperData.config.macUpdateUrl
                     PlatformUtils.isWindows() -> wallpaperData.config.windowsUpdateUrl
                     PlatformUtils.isLinux() -> wallpaperData.config.linuxUpdateUrl
-                    else -> ""
+                    else -> wallpaperData.config.androidUpdateUrl
                 }
             } catch (e: ClientRequestException) {
                 println("Error fetching data: ${e.message}")
