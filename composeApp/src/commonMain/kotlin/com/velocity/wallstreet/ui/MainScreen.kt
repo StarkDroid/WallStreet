@@ -1,6 +1,8 @@
 package com.velocity.wallstreet.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,8 +37,10 @@ import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
 import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
+import com.velocity.wallstreet.ui.component.CategoryButton
 import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.utils.PlatformUtils
+import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
 import com.velocity.wallstreet.utils.getWallpaperList
 import io.ktor.client.plugins.ClientRequestException
@@ -50,13 +54,11 @@ import wallstreet.composeapp.generated.resources.update_available_text
 fun MainScreen(onImageClick: (String) -> Unit) {
     var wallpapers by remember { mutableStateOf<List<Model>>(emptyList()) }
     var config by remember { mutableStateOf<Config?>(null) }
+    var selectedCategory by remember { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-
     val updateUrl = remember { mutableStateOf("") }
-
     val scope = rememberCoroutineScope()
-
 
     LaunchedEffect(key1 = true) {
         scope.launch {
@@ -76,6 +78,14 @@ fun MainScreen(onImageClick: (String) -> Unit) {
                 println("Error fetching data: ${e.message}")
             }
         }
+    }
+
+    val categories = extractUniqueCategories(wallpapers)
+
+    val filteredWallpapers = if (selectedCategory != null) {
+        wallpapers.filter { it.category == selectedCategory }
+    } else {
+        wallpapers
     }
 
     val hyperLinkText = buildAnnotatedString {
@@ -129,7 +139,22 @@ fun MainScreen(onImageClick: (String) -> Unit) {
                 .padding(padding)
                 .fillMaxSize()
         ) {
-            GridView(wallpapers, onImageClick)
+            Column {
+                Spacer(modifier = Modifier.height(12.dp))
+
+                CategoryButton(
+                    categories = categories,
+                    selectedCategory = selectedCategory,
+                    onCategorySelected = { category ->
+                        selectedCategory = if (selectedCategory == category) null else category
+                    }
+                )
+
+                GridView(
+                    wallpapers = filteredWallpapers,
+                    onImageClick = onImageClick
+                )
+            }
         }
     }
 }

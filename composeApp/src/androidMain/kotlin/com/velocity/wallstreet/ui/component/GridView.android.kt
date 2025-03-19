@@ -24,7 +24,7 @@ actual fun GridView(wallpapers: List<Model>, onImageClick: (String) -> Unit) {
             modifier = Modifier.fillMaxSize()
         ) {
             LazyVerticalGrid(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(12.dp),
                 state = listState,
                 columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
