@@ -1,35 +1,44 @@
 # WallStreet
 ![WallStreet Github header](static/wallstreet-github-header.png)
 
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
+
 [![Jetpack Compose Desktop](https://img.shields.io/badge/Latest_release_download-v1.0.0-blue.svg)](https://github.com/StarkDroid/WallStreet)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/StarkDroid/WallStreet/total)
+[![Github Stars](https://img.shields.io/github/stars/StarkDroid/WallStreet)](https://github.com/StarkDroid/WallStreet)
 
-This app leverages **Jetpack Compose Desktop** to create a beautiful and responsive Wallpaper app for any desktop platform like
-**(Windows, MacOS and Linux)**. While there are a lot of Wallpaper app and alternatives out there, Here's why you would choose **WallStreet**. <br>
+This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beautiful and responsive Wallpaper app for above mentioned platforms. While there are a lot of Wallpaper app and alternatives out there, Here's why you could choose **WallStreet**. <br>
 ✅ Always free and OpenSource <br>
 ✅ No Ads or purchases <br>
 ✅ Performant, Responsive and Beautiful UI <br>
 ✅ Your app, your own wallpaper collection (Read below to know how you can add more wallpapers yourself) <br>
-✅ Multiplatform compatibility (Windows, macOS, Linux)
+✅ Multiplatform compatibility <br>
+✅ Wallpapers constantly refreshed and added <br>
+✅ Fits devices of all screen sizes <br>
+✅ Single click to apply <br>
+✅ Quickly filter through various wallpaper categories <br>
+✅ Actively maintained <br>
 
-### Screenshot
+## **Screenshots**
 ![Screenshot](static/screenshot/wallstreet-windows-screenshot.png)
 
-## Support the Project 🫶
-
-While I love to give to the community than take, A tiny gesture of buying me a coffee☕️
-is always appreciated 😁
-
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-brown.svg)](https://www.buymeacoffee.com/trishiraj)<br>
-
-### If you liked the project, star the repository to encourage me
-[![Github Stars](https://img.shields.io/github/stars/StarkDroid/WallStreet)](https://github.com/StarkDroid/WallStreet)
+## **Compatibilitty** 🖥️📱
+| Platform | Compatibility |
+| -------- | ------------- |
+| Windows  | ✅            |
+| MacOS    | ✅            |
+| Linux    | ✅            |
+| Android  | ✅            |
+| IOS      | ❌           |
 
 > [!NOTE]
 > Although the project is OpenSource, It is appreciated **not** to re-package and sell this project with the same name.
 > This helps maintain authenticity of the project.
 
-## Build it yourself 🏗️
+## **Build it yourself** 🏗️
 
 To build and run the application on your local machine, follow these instructions:
 
@@ -46,11 +55,13 @@ To build and run the application on your local machine, follow these instruction
    git clone https://github.com/StarkDroid/WallStreet.git
 2. Open the project in IntelliJ IDEA.
 3. Ensure that you have the required JDK configured in IntelliJ IDEA.
-4. Build package using Gradle within the IDE to make your life easier <br>
-   `Gralde icon > Tasks > compose desktop > package DistributionForCurrentOs`
-5. The above step creates the installer package, i.e `.exe` and `.dmg`
-6. To create an executable package, head to <br>
-   `Gralde icon > Tasks > compose desktop > createDistributable`
+
+Build package using Gradle within the IDE to make your life easier <br>
+`Gradle icon > Tasks > compose desktop > packageReleaseDistributionForCurrentOS`
+The above step creates the installer package, i.e `.exe` and `.dmg`
+
+To simply run the project on (desktop) using
+`Gradle icon > Tasks > compose desktop > run`
 
 ## Contributing 🤝
 > Any pull request that can make a difference and or improve the project is highly appreciated!
@@ -65,6 +76,14 @@ Head over to the [WallStreet-API](https://github.com/StarkDroid/WallStreet-API) 
 - [Jetpack Compose](https://developer.android.com/develop/ui/compose/documentation)
 - [Material Design](https://m3.material.io/)
 - [Compose Multiplatform Development](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html)
+
+## **Support the Project** 🫶
+
+While I love to give to the community than take, I wouldn't say no to some coffee 😁☕️
+
+[![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/trishiraj)
+
+**If you liked the project, star the repository to encourage me** 🌟
 
 
 ## License 📃
