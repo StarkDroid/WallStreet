@@ -33,7 +33,7 @@ fun CategoryButton(
                     .padding(4.dp)
                     .background(
                         color = if (category == selectedCategory) {
-                            MaterialTheme.colorScheme.tertiary
+                            MaterialTheme.colorScheme.secondary
                         } else {
                             MaterialTheme.colorScheme.primary
                         },
