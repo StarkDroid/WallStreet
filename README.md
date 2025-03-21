@@ -6,7 +6,7 @@
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 
-[![Jetpack Compose Desktop](https://img.shields.io/badge/Latest_release_download-v1.0.0-blue.svg)](https://github.com/StarkDroid/WallStreet)
+[![Jetpack Compose Desktop](https://img.shields.io/badge/Latest_release_download-v2.0.1-blue.svg)](https://github.com/StarkDroid/WallStreet/releases)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/StarkDroid/WallStreet/total)
 [![Github Stars](https://img.shields.io/github/stars/StarkDroid/WallStreet)](https://github.com/StarkDroid/WallStreet)
 
