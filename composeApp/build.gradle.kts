@@ -76,6 +76,16 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt")
             )
+
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val newFileName = "WallStreet-${defaultConfig.versionName}.apk"
+                        output.outputFileName = newFileName
+                    }
+            }
         }
     }
     compileOptions {
