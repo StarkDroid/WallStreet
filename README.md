@@ -25,10 +25,10 @@ This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beaut
 ## **Screenshots**
 
 ### **Desktop**
-![Desktop Screenshot](static/screenshot/screenshot-desktop.png)
+![Desktop Screenshot](static/screenshot-desktop.png)
 
 ### **Mobile**
-![Mobile Screenshot](static/screenshot/screenshot-mobile.png)
+![Mobile Screenshot](static/screenshot-mobile.png)
 
 ## **Compatibilitty** 🖥️📱
 | Platform | Compatibility |
