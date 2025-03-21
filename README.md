@@ -23,16 +23,21 @@ This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beaut
 ✅ Actively maintained <br>
 
 ## **Screenshots**
-![Screenshot](static/screenshot/wallstreet-windows-screenshot.png)
+
+### **Desktop**
+![Desktop Screenshot](static/screenshot/screenshot-desktop.png)
+
+### **Mobile**
+![Mobile Screenshot](static/screenshot/screenshot-mobile.png)
 
 ## **Compatibilitty** 🖥️📱
 | Platform | Compatibility |
-| -------- | ------------- |
-| Windows  | ✅            |
-| MacOS    | ✅            |
-| Linux    | ✅            |
-| Android  | ✅            |
-| IOS      | ❌           |
+| -------- |---------------|
+| Windows  | ✅             |
+| MacOS    | ✅             |
+| Linux    | ✅             |
+| Android  | ✅             |
+| IOS      | ❌             |
 
 > [!NOTE]
 > Although the project is OpenSource, It is appreciated **not** to re-package and sell this project with the same name.
