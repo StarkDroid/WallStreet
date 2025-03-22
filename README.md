@@ -10,6 +10,8 @@
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/StarkDroid/WallStreet/total)
 [![Github Stars](https://img.shields.io/github/stars/StarkDroid/WallStreet)](https://github.com/StarkDroid/WallStreet)
 
+<a href="https://www.producthunt.com/posts/wallstreet?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-wallstreet" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=944846&theme=light&t=1742632083350" alt="WallStreet - A&#0032;simple&#0032;yet&#0032;stylish&#0032;💅🏼&#0032;multi&#0045;platform&#0032;wallpaper&#0032;app&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beautiful and responsive Wallpaper app for above mentioned platforms. While there are a lot of Wallpaper app and alternatives out there, Here's why you could choose **WallStreet**. <br>
 ✅ Always free and OpenSource <br>
 ✅ No Ads or purchases <br>
