@@ -22,13 +22,16 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringArrayResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.subtitle_texts
@@ -41,15 +44,21 @@ fun AnimatedHeaderText(scrollBehavior: TopAppBarScrollBehavior) {
 
     var currentSubtitleIndex by remember { mutableStateOf(0) }
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(3000)
-            currentSubtitleIndex = (currentSubtitleIndex + 1) % headerTexts.size
+    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(headerTexts.size) {
+        coroutineScope.launch {
+            while (true) {
+                delay(3000)
+                currentSubtitleIndex = (currentSubtitleIndex + 1) % headerTexts.size
+            }
         }
     }
 
+    val isVisible = remember { derivedStateOf { scrollBehavior.state.collapsedFraction < 0.5f } }
+
     AnimatedVisibility(
-        visible = scrollBehavior.state.collapsedFraction < 0.5f,
+        visible = isVisible.value,
         enter = fadeIn() + expandVertically(),
         exit = fadeOut() + shrinkVertically(),
         modifier = Modifier.padding(WindowInsets.statusBars.asPaddingValues())
@@ -57,14 +66,14 @@ fun AnimatedHeaderText(scrollBehavior: TopAppBarScrollBehavior) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = TopAppBarDefaults.TopAppBarExpandedHeight.div(2)),
+                .padding(top = TopAppBarDefaults.TopAppBarExpandedHeight / 2),
             contentAlignment = Alignment.Center
         ) {
             AnimatedContent(
                 targetState = currentSubtitleIndex,
                 transitionSpec = {
-                    (slideInVertically { height -> height } + fadeIn()) togetherWith
-                    (slideOutVertically { height -> -height } + fadeOut())
+                    (slideInVertically { it } + fadeIn()) togetherWith
+                            (slideOutVertically { it } + fadeOut())
                 }
             ) { index ->
                 Text(
