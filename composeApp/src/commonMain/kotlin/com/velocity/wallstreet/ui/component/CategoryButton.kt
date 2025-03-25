@@ -23,14 +23,14 @@ fun CategoryButton(
 ) {
     Row (
         modifier = Modifier
-            .padding(horizontal = 12.dp)
+            .padding(horizontal = 14.dp)
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState()),
     ) {
         categories.forEach { category ->
             Box(
                 modifier = Modifier
-                    .padding(4.dp)
+                    .padding(2.dp)
                     .background(
                         color = if (category == selectedCategory) {
                             MaterialTheme.colorScheme.secondary
@@ -43,9 +43,9 @@ fun CategoryButton(
             ) {
                 Text(
                     text = category,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(12.dp)
                 )
             }
         }
