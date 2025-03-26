@@ -33,7 +33,12 @@ fun WallStreetNavGraph() {
             arguments = listOf(navArgument("imageUrl") { type = NavType.StringType })
         ) { navBackStackEntry ->
             val imageUrl = navBackStackEntry.arguments?.getString("imageUrl") ?: ""
-            WallpaperViewScreen(imageUrl)
+            WallpaperViewScreen(
+                imageUrl = imageUrl,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
