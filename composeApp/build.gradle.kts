@@ -18,7 +18,6 @@ kotlin {
     }
     
     jvm("desktop")
-    version = "2.0.1"
     
     sourceSets {
         val desktopMain by getting
@@ -57,6 +56,7 @@ kotlin {
 }
 
 android {
+    version = "2.0.2"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -105,6 +105,8 @@ dependencies {
 }
 
 compose.desktop {
+    version = "2.0.1"
+
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
 
