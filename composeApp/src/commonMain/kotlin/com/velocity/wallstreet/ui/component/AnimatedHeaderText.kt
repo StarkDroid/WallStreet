@@ -55,7 +55,7 @@ fun AnimatedHeaderText(scrollBehavior: TopAppBarScrollBehavior) {
         }
     }
 
-    val isVisible = remember { derivedStateOf { scrollBehavior.state.collapsedFraction < 0.5f } }
+    val isVisible = remember { derivedStateOf { scrollBehavior.state.collapsedFraction < 0.1f } }
 
     AnimatedVisibility(
         visible = isVisible.value,
