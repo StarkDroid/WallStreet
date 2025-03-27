@@ -105,7 +105,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.0.1"
+    version = "2.0.2"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"

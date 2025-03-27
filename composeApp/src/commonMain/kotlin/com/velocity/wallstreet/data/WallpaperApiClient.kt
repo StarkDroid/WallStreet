@@ -19,6 +19,8 @@ object WallpaperApiClient {
         install(ContentNegotiation) {
             json(
                 Json {
+                    prettyPrint = true
+                    isLenient = true
                     ignoreUnknownKeys = true
                 }
             )
