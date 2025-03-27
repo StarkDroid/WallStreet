@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.google.gms.google-services")
     kotlin("plugin.serialization") version "2.1.10"
 }
 
@@ -17,7 +18,6 @@ kotlin {
     }
     
     jvm("desktop")
-    version = "2.0.1"
     
     sourceSets {
         val desktopMain by getting
@@ -28,6 +28,8 @@ kotlin {
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
+            implementation(libs.firebase.messaging)
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -54,6 +56,7 @@ kotlin {
 }
 
 android {
+    version = "2.0.2"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -102,6 +105,8 @@ dependencies {
 }
 
 compose.desktop {
+    version = "2.0.2"
+
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
 

@@ -6,8 +6,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.twotone.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,16 +29,21 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.velocity.wallstreet.R
 import com.velocity.wallstreet.ui.component.BottomSheetDialog
 import com.velocity.wallstreet.utils.setWallpaperAction
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.ui.res.stringResource as stringResourceCompose
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 
 @Composable
-fun WallpaperViewScreen(imageUrl: String) {
+fun WallpaperViewScreen(
+    imageUrl: String,
+    onBackClick: () -> Unit
+) {
     val context = LocalContext.current
 
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -52,6 +62,21 @@ fun WallpaperViewScreen(imageUrl: String) {
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
             )
+
+            IconButton(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(innerPadding)
+                    .padding(start = 16.dp, top = 16.dp),
+                colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.primary),
+                onClick = onBackClick,
+            ) {
+                Icon(
+                    imageVector = Icons.TwoTone.ArrowBackIosNew,
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
+                )
+            }
 
             Button(
                 shape = RoundedCornerShape(8.dp),

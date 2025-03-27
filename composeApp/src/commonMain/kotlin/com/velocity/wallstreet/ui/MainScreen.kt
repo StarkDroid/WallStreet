@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -54,7 +55,7 @@ import wallstreet.composeapp.generated.resources.update_available_text
 fun MainScreen(onImageClick: (String) -> Unit) {
     var wallpapers by remember { mutableStateOf<List<Model>>(emptyList()) }
     var config by remember { mutableStateOf<Config?>(null) }
-    var selectedCategory by remember { mutableStateOf<String?>(null) }
+    var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val updateUrl = remember { mutableStateOf("") }

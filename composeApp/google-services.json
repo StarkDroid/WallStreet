@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "33030988062",
+    "project_id": "fitgirlrepacks-app",
+    "storage_bucket": "fitgirlrepacks-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33030988062:android:c3e35d828d4835e061a90f",
+        "android_client_info": {
+          "package_name": "com.velocity.fitgirlrepacks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZjhKE995eZc647VxjthaHgY6L_3SAWlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33030988062:android:2847bf781a9d21af61a90f",
+        "android_client_info": {
+          "package_name": "com.velocity.wallstreet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZjhKE995eZc647VxjthaHgY6L_3SAWlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

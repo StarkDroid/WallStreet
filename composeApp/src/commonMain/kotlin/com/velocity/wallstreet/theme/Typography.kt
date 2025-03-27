@@ -41,6 +41,12 @@ fun AppTypography(): Typography{
             fontSize = 16.sp
         ),
 
+        bodySmall = TextStyle(
+            fontFamily = bodyFont,
+            fontWeight = FontWeight.Normal,
+            fontSize = 14.sp
+        ),
+
         labelSmall = TextStyle(
             fontFamily = bodyFont,
             fontWeight = FontWeight.Normal,
