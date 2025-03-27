@@ -25,6 +25,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.fragment.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
