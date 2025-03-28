@@ -66,7 +66,7 @@ fun MainScreen(onImageClick: (String) -> Unit) {
             try {
                 val wallpaperData = WallpaperApiClient.getWallpapers()
 
-                wallpapers = getWallpaperList(wallpaperData)
+                wallpapers = getWallpaperList(wallpaperData).shuffled()
                 config = wallpaperData.config
 
                 updateUrl.value = when {
