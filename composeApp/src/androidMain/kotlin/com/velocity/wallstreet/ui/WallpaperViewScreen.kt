@@ -1,13 +1,12 @@
 package com.velocity.wallstreet.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.ArrowBackIosNew
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -60,12 +59,12 @@ fun WallpaperViewScreen(
                 contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
             )
 
-            IconButton(
+            NeoBrutalistButton(
+                contentPadding = PaddingValues(18.dp),
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(innerPadding)
-                    .padding(start = 16.dp, top = 16.dp),
-                colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    .padding(start = 16.dp, top = 40.dp),
                 onClick = onBackClick,
             ) {
                 Icon(
