@@ -6,12 +6,12 @@ import androidx.compose.ui.graphics.Color
 
 // Light theme color scheme
 val lightColorScheme = lightColorScheme(
-    primary = Color(0xFF2D336B),
-    onPrimary = Color.White,
+    primary = Color(0xFF90EE90),
+    onPrimary = Color.Black,
     primaryContainer = Color.Black,
-    secondary = Color(0xFF00879E),
+    secondary = Color(0xFF69D2E7),
     onSecondary = Color.White,
-    tertiary = Color(0xFFB2A5FF),
+    tertiary = Color(0xFFA388EE),
     background = Color(0xFFFEF2E8),
     onBackground = Color.Black,
     surface = Color.White,
@@ -22,12 +22,12 @@ val lightColorScheme = lightColorScheme(
 
 // Dark theme color scheme
 val darkColorScheme = darkColorScheme(
-    primary = Color(0xFFB2A5FF),
+    primary = Color(0xFF90EE90),
     onPrimary = Color.Black,
     primaryContainer = Color.Black,
-    secondary = Color(0xFF00879E),
-    tertiary = Color(0xFF2D336B),
-    onSecondary = Color.Black,
+    secondary = Color(0xFF69D2E7),
+    tertiary = Color(0xFFA388EE),
+    onSecondary = Color.White,
     background = Color(0xFF374151),
     onBackground = Color(0xFFFFFFFF),
     surface = Color(0xFF1E1E1E),

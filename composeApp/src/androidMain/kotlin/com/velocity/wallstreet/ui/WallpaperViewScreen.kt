@@ -25,7 +25,8 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.R
-import com.velocity.wallstreet.ui.component.BottomSheetDialog
+import com.velocity.wallstreet.ui.component.BottomSheetContent
+import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
 import com.velocity.wallstreet.utils.setWallpaperAction
 import org.jetbrains.compose.resources.stringResource
@@ -60,7 +61,7 @@ fun WallpaperViewScreen(
             )
 
             NeoBrutalistButton(
-                contentPadding = PaddingValues(18.dp),
+                contentPadding = PaddingValues(12.dp),
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(innerPadding)
@@ -93,16 +94,19 @@ fun WallpaperViewScreen(
 
 
             if (showBottomSheet) {
-                BottomSheetDialog(
-                    onDismissRequest = { showBottomSheet = false },
-                    onApplyWallpaper = { type ->
-                        setWallpaperAction(
-                            imageUrl = imageUrl,
-                            context = context,
-                            type = type
-                        )
-                    },
-                )
+                NeoBrutalistBottomSheet(
+                    onDismissRequest = { showBottomSheet = false }
+                ) {
+                    BottomSheetContent(
+                        onApplyWallpaper = { type ->
+                            setWallpaperAction(
+                                imageUrl = imageUrl,
+                                context = context,
+                                type = type
+                            )
+                        }
+                    )
+                }
             }
         }
     }
