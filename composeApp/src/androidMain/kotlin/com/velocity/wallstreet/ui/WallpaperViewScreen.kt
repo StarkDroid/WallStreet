@@ -1,21 +1,10 @@
 package com.velocity.wallstreet.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.ArrowBackIosNew
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -29,11 +18,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -88,45 +75,22 @@ fun WallpaperViewScreen(
                 )
             }
 
-
-//            Button(
-//                elevation = ButtonDefaults.buttonElevation(
-//                    defaultElevation = 4.dp,
-//                    pressedElevation = 0.dp
-//                ),
-//                border = BorderStroke(
-//                    width = 2.dp,
-//                    color = MaterialTheme.colorScheme.primaryContainer
-//                ),
-//                shape = RoundedCornerShape(8.dp),
-//                colors = ButtonDefaults.buttonColors(
-//                    containerColor = MaterialTheme.colorScheme.primary
-//                ),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .align(Alignment.BottomCenter)
-//                    .padding(innerPadding)
-//                    .padding(horizontal = 16.dp, vertical = 21.dp)
-//                    .size(48.dp),
-//                onClick = {
-//                    showBottomSheet = true
-//                }
-//            ) {
-//                Text(
-//                    text = stringResource(Res.string.wallpaper_screen_button_label),
-//                    style = MaterialTheme.typography.bodyLarge
-//                )
-//            }
-
             NeoBrutalistButton(
-                text = stringResource(Res.string.wallpaper_screen_button_label),
                 onClick = {
                     showBottomSheet = true
                 },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 42.dp)
-            )
+                    .padding(bottom = 42.dp, start = 24.dp, end = 24.dp)
+            ) {
+                Text(
+                    text = stringResource(Res.string.wallpaper_screen_button_label),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f)
+                )
+            }
 
 
             if (showBottomSheet) {
