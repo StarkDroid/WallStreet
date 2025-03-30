@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -108,7 +109,8 @@ fun MainScreen(onImageClick: (String) -> Unit) {
 
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .navigationBarsPadding(),
         topBar = {
             LargeTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -129,7 +131,7 @@ fun MainScreen(onImageClick: (String) -> Unit) {
         },
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.height(60.dp),
+                modifier = Modifier.height(30.dp),
             ) {
                 BottomBarCredits()
             }
