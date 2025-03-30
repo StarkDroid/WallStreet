@@ -33,7 +33,7 @@ fun NeoBrutalistBottomSheet(
     content: @Composable ColumnScope.() -> Unit
 ) {
 
-    val shape = RoundedCornerShape(topStart = cornerRadius, topEnd = cornerRadius)
+    val shape = RoundedCornerShape(cornerRadius)
 
     ModalBottomSheet(
         containerColor = Color.Transparent,
@@ -46,7 +46,7 @@ fun NeoBrutalistBottomSheet(
             modifier = modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(8.dp)
         ) {
             Box(
                 modifier = Modifier

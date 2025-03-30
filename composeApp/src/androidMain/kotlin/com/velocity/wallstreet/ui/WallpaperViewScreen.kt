@@ -70,7 +70,7 @@ fun WallpaperViewScreen(
             ) {
                 Icon(
                     imageVector = Icons.TwoTone.ArrowBackIosNew,
-                    tint = MaterialTheme.colorScheme.tertiary,
+                    tint = MaterialTheme.colorScheme.onPrimary,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
             }
@@ -81,12 +81,11 @@ fun WallpaperViewScreen(
                 },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(bottom = 42.dp, start = 24.dp, end = 24.dp)
+                    .padding(bottom = 50.dp, start = 24.dp, end = 24.dp)
             ) {
                 Text(
                     text = stringResource(Res.string.wallpaper_screen_button_label),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.primaryContainer,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f)
                 )
@@ -95,6 +94,7 @@ fun WallpaperViewScreen(
 
             if (showBottomSheet) {
                 NeoBrutalistBottomSheet(
+                    cornerRadius = 8.dp,
                     onDismissRequest = { showBottomSheet = false }
                 ) {
                     BottomSheetContent(
