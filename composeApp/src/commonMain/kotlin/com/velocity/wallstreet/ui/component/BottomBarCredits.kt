@@ -55,6 +55,7 @@ fun BottomBarCredits() {
         Text(
             text = hyperLinkText,
             style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.inversePrimary,
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .pointerHoverIcon(icon = PointerIcon.Hand)

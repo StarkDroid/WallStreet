@@ -52,6 +52,7 @@ fun AppHeader(
             Text(
                 text = stringResource(Res.string.mainscreen_title_text),
                 style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.inversePrimary
             )
 
             if (isUpdateAvailable) {
@@ -59,12 +60,14 @@ fun AppHeader(
                     modifier = Modifier.padding(start = 8.dp),
                     text = downloadUrl,
                     style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary
                 )
             } else {
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
                     text = currentAppVersion,
                     style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.inversePrimary
                 )
             }
         }
