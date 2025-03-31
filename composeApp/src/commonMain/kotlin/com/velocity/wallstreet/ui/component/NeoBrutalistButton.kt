@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.velocity.wallstreet.utils.NeoBrutalistButtonShapes
 
 @Composable
 fun NeoBrutalistButton(
@@ -93,11 +94,4 @@ fun NeoBrutalistButton(
             )
         }
     }
-}
-
-object NeoBrutalistButtonShapes {
-    val Sharp = 0.dp
-    val slightlyRounded = 4.dp
-    val Rounded = 16.dp
-    val Pill = 50.dp
 }
