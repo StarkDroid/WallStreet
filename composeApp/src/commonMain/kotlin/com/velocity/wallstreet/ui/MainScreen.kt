@@ -3,10 +3,12 @@ package com.velocity.wallstreet.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
@@ -19,7 +21,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -32,10 +33,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.LocalPlatformContext
-import com.velocity.wallstreet.data.WallpaperApiClient
-import com.velocity.wallstreet.data.model.Config
-import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
 import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
@@ -44,46 +43,36 @@ import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
-import com.velocity.wallstreet.utils.getWallpaperList
-import io.ktor.client.plugins.ClientRequestException
-import kotlinx.coroutines.launch
+import com.velocity.wallstreet.viewmodel.MainViewModel
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.update_available_text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(onImageClick: (String) -> Unit) {
-    var wallpapers by remember { mutableStateOf<List<Model>>(emptyList()) }
-    var config by remember { mutableStateOf<Config?>(null) }
+fun MainScreen(
+    viewModel: MainViewModel = viewModel { MainViewModel() },
+    onImageClick: (String) -> Unit
+) {
+    val wallpapers by viewModel.wallpapers
+    val config by viewModel.config
     var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val updateUrl = remember { mutableStateOf("") }
-    val scope = rememberCoroutineScope()
 
-    LaunchedEffect(key1 = true) {
-        scope.launch {
-            try {
-                val wallpaperData = WallpaperApiClient.getWallpapers()
-
-                wallpapers = getWallpaperList(wallpaperData).shuffled()
-                config = wallpaperData.config
-
-                updateUrl.value = when {
-                    PlatformUtils.isMacOS() -> wallpaperData.config.macUpdateUrl
-                    PlatformUtils.isWindows() -> wallpaperData.config.windowsUpdateUrl
-                    PlatformUtils.isLinux() -> wallpaperData.config.linuxUpdateUrl
-                    else -> wallpaperData.config.androidUpdateUrl
-                }
-            } catch (e: ClientRequestException) {
-                println("Error fetching data: ${e.message}")
+    LaunchedEffect(config) {
+        config?.let {
+            updateUrl.value = when {
+                PlatformUtils.isMacOS() -> it.macUpdateUrl
+                PlatformUtils.isWindows() -> it.windowsUpdateUrl
+                PlatformUtils.isLinux() -> it.linuxUpdateUrl
+                else -> it.androidUpdateUrl
             }
         }
     }
 
     val categories = extractUniqueCategories(wallpapers)
-
     val filteredWallpapers = if (selectedCategory != null) {
         wallpapers.filter { it.category == selectedCategory }
     } else {
@@ -109,12 +98,14 @@ fun MainScreen(onImageClick: (String) -> Unit) {
 
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
-            .navigationBarsPadding(),
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        containerColor = MaterialTheme.colorScheme.background,
+        contentWindowInsets = WindowInsets.systemBars,
         topBar = {
             LargeTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
+                    scrolledContainerColor = MaterialTheme.colorScheme.surface
                 ),
                 title = {
                     config?.let { config ->
@@ -131,7 +122,10 @@ fun MainScreen(onImageClick: (String) -> Unit) {
         },
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier.height(30.dp),
+                modifier = Modifier
+                    .navigationBarsPadding()
+                    .height(25.dp),
+                containerColor = MaterialTheme.colorScheme.background,
             ) {
                 BottomBarCredits()
             }
