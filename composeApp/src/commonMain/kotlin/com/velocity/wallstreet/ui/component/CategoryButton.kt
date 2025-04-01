@@ -47,7 +47,7 @@ fun CategoryButton(
                     text = category,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.surface,
-                    modifier = Modifier.padding(12.dp)
+                    modifier = Modifier.padding(8.dp)
                 )
             }
         }

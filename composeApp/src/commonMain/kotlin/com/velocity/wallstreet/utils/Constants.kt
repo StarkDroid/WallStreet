@@ -8,7 +8,7 @@ object Constants {
     const val WALLPAPER_API = "https://starkdroid.github.io/WallStreet-API/wallstreet_walls.json"
 }
 
-object NeoBrutalistButtonShapes {
+object NeoBrutalistShapes {
     val Sharp = 0.dp
     val slightlyRounded = 4.dp
     val Rounded = 16.dp

@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.utils.NeoBrutalistButtonShapes
+import com.velocity.wallstreet.utils.NeoBrutalistShapes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +30,7 @@ fun NeoBrutalistBottomSheet(
     backgroundColor: Color = MaterialTheme.colorScheme.primary,
     borderWidth: Dp = 2.dp,
     shadowOffset: Dp = 4.dp,
-    cornerRadius: Dp = NeoBrutalistButtonShapes.slightlyRounded,
+    cornerRadius: Dp = NeoBrutalistShapes.slightlyRounded,
     content: @Composable ColumnScope.() -> Unit
 ) {
 
