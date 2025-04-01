@@ -1,6 +1,7 @@
 package com.velocity.wallstreet.ui.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -31,6 +32,7 @@ fun CategoryButton(
             Box(
                 modifier = Modifier
                     .padding(2.dp)
+                    .border(2.dp, MaterialTheme.colorScheme.inversePrimary, RoundedCornerShape(8.dp))
                     .background(
                         color = if (category == selectedCategory) {
                             MaterialTheme.colorScheme.secondary
