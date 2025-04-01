@@ -21,8 +21,9 @@ class MainViewModel : ViewModel() {
     private val _isLoading = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
 
-    private val _error = mutableStateOf<String?>(null)
-    val error: State<String?> = _error
+//    TODO: Create an Error composable to retry action
+//    private val _error = mutableStateOf<String?>(null)
+//    val error: State<String?> = _error
 
     init {
         loadWallpapers()

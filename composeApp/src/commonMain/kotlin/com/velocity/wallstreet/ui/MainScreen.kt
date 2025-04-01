@@ -1,5 +1,6 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.LinkAnnotation
@@ -40,6 +42,7 @@ import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.CategoryButton
 import com.velocity.wallstreet.ui.component.GridView
+import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
@@ -56,6 +59,8 @@ fun MainScreen(
 ) {
     val wallpapers by viewModel.wallpapers
     val config by viewModel.config
+    val isLoading by viewModel.isLoading
+
     var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -136,21 +141,35 @@ fun MainScreen(
                 .padding(padding)
                 .fillMaxSize()
         ) {
-            Column {
-                Spacer(modifier = Modifier.height(12.dp))
-
-                CategoryButton(
-                    categories = categories,
-                    selectedCategory = selectedCategory,
-                    onCategorySelected = { category ->
-                        selectedCategory = if (selectedCategory == category) null else category
+            when {
+                isLoading -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        LoadingIndicator()
                     }
-                )
+                }
 
-                GridView(
-                    wallpapers = filteredWallpapers,
-                    onImageClick = onImageClick
-                )
+                else -> {
+                    Column {
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        CategoryButton(
+                            categories = categories,
+                            selectedCategory = selectedCategory,
+                            onCategorySelected = { category ->
+                                selectedCategory = if (selectedCategory == category) null else category
+                            }
+                        )
+
+                        GridView(
+                            wallpapers = filteredWallpapers,
+                            onImageClick = onImageClick
+                        )
+                    }
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun LoadingIndicator() {
     CircularProgressIndicator(
+        strokeWidth = 8.dp,
         modifier = Modifier.width(64.dp),
         color = MaterialTheme.colorScheme.primary,
     )
