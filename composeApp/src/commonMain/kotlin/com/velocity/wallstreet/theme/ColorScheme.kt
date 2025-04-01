@@ -6,11 +6,11 @@ import androidx.compose.ui.graphics.Color
 
 // Light theme color scheme
 val lightColorScheme = lightColorScheme(
-    primary = Color(0xFF90EE90),
+    primary = Color(0xff428a42),
     onPrimary = Color.Black,
     inversePrimary = Color.Black,
     primaryContainer = Color.Black,
-    secondary = Color(0xFF69D2E7),
+    secondary = Color(0xff3a8b9b),
     onSecondary = Color.White,
     tertiary = Color(0xFFA388EE),
     background = Color(0xFFFEF2E8),
