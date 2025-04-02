@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,8 +33,9 @@ import com.velocity.wallstreet.utils.NeoBrutalistShapes
 fun NeoBrutalistCardView(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color = Color.Transparent,
     borderColor: Color = Color.Black,
+    shadowColor: Color = Color.Black,
     borderWidth: Dp = 2.dp,
     shadowOffset: Dp = 4.dp,
     cornerRadius: Dp = NeoBrutalistShapes.Rounded,
@@ -77,7 +77,7 @@ fun NeoBrutalistCardView(
             modifier = Modifier
                 .offset(x = currentOffset, y = currentOffset)
                 .fillMaxWidth()
-                .border(borderWidth, borderColor, shape)
+                .border(borderWidth, shadowColor, shape)
                 .background(borderColor, shape)
                 .matchParentSize()
         )
