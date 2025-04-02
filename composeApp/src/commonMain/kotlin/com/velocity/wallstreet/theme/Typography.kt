@@ -26,35 +26,35 @@ fun AppTypography(): Typography{
     return Typography(
         headlineLarge = TextStyle(
             fontFamily = titleFont,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Bold,
             fontSize = 38.sp,
             color = Color.Black
         ),
 
         bodyLarge = TextStyle(
             fontFamily = bodyFont,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Bold,
             fontSize = AppTypography.bodyLarge,
             color = Color.Black
         ),
 
         bodyMedium = TextStyle(
             fontFamily = bodyFont,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
             color = Color.Black,
         ),
 
         bodySmall = TextStyle(
             fontFamily = bodyFont,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
             color = Color.Black
         ),
 
         labelSmall = TextStyle(
             fontFamily = bodyFont,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Bold,
             fontSize = 12.sp,
             color = Color.Black
         )
