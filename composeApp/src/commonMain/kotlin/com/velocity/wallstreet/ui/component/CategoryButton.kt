@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -35,9 +36,9 @@ fun CategoryButton(
                     .border(2.dp, MaterialTheme.colorScheme.inversePrimary, RoundedCornerShape(8.dp))
                     .background(
                         color = if (category == selectedCategory) {
-                            MaterialTheme.colorScheme.secondary
-                        } else {
                             MaterialTheme.colorScheme.primary
+                        } else {
+                            Color.Transparent
                         },
                         shape = RoundedCornerShape(8.dp)
                     )
@@ -46,7 +47,11 @@ fun CategoryButton(
                 Text(
                     text = category,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.surface,
+                    color = if (category == selectedCategory) {
+                        MaterialTheme.colorScheme.onPrimary
+                    } else {
+                        MaterialTheme.colorScheme.inversePrimary
+                    },
                     modifier = Modifier.padding(8.dp)
                 )
             }

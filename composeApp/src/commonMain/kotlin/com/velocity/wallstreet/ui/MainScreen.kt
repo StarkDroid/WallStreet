@@ -1,5 +1,8 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
@@ -19,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,6 +48,7 @@ import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.CategoryButton
 import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.ui.component.LoadingIndicator
+import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
@@ -64,18 +70,10 @@ fun MainScreen(
     var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-    val updateUrl = remember { mutableStateOf("") }
-
-    LaunchedEffect(config) {
-        config?.let {
-            updateUrl.value = when {
-                PlatformUtils.isMacOS() -> it.macUpdateUrl
-                PlatformUtils.isWindows() -> it.windowsUpdateUrl
-                PlatformUtils.isLinux() -> it.linuxUpdateUrl
-                else -> it.androidUpdateUrl
-            }
-        }
+    val collapseFraction by remember {
+        derivedStateOf { scrollBehavior.state.collapsedFraction }
     }
+    val updateUrl = remember { mutableStateOf("") }
 
     val categories = extractUniqueCategories(wallpapers)
     val filteredWallpapers = if (selectedCategory != null) {
@@ -83,6 +81,11 @@ fun MainScreen(
     } else {
         wallpapers
     }
+
+    val animatedCornerRadius by animateDpAsState(
+        targetValue = if (collapseFraction == 1f) 0.dp else NeoBrutalistShapes.Rounded,
+        animationSpec = tween(durationMillis = 200)
+    )
 
     val hyperLinkText = buildAnnotatedString {
         withLink(
@@ -101,10 +104,19 @@ fun MainScreen(
         }
     }
 
+    LaunchedEffect(config) {
+        config?.let {
+            updateUrl.value = when {
+                PlatformUtils.isMacOS() -> it.macUpdateUrl
+                PlatformUtils.isWindows() -> it.windowsUpdateUrl
+                PlatformUtils.isLinux() -> it.linuxUpdateUrl
+                else -> it.androidUpdateUrl
+            }
+        }
+    }
+
     Scaffold(
-        modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
-        containerColor = MaterialTheme.colorScheme.background,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets.systemBars,
         topBar = {
             LargeTopAppBar(
@@ -130,7 +142,7 @@ fun MainScreen(
                 modifier = Modifier
                     .navigationBarsPadding()
                     .height(25.dp),
-                containerColor = MaterialTheme.colorScheme.background,
+                containerColor = MaterialTheme.colorScheme.surface,
             ) {
                 BottomBarCredits()
             }
@@ -139,6 +151,13 @@ fun MainScreen(
         Box(
             modifier = Modifier
                 .padding(padding)
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(
+                        topStart = animatedCornerRadius,
+                        topEnd = animatedCornerRadius
+                    )
+                )
                 .fillMaxSize()
         ) {
             when {
