@@ -45,6 +45,7 @@ fun BottomSheetContent(
     ) {
         WallpaperType.values.forEach { type ->
             NeoBrutalistButton(
+                backgroundColor = MaterialTheme.colorScheme.onSecondary,
                 modifier = Modifier
                     .weight(1f),
                 onClick = {
