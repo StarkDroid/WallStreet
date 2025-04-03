@@ -1,7 +1,5 @@
 package com.velocity.wallstreet.viewmodel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.velocity.wallstreet.data.WallpaperApiClient
@@ -9,21 +7,14 @@ import com.velocity.wallstreet.data.model.Config
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.utils.getWallpaperList
 import io.ktor.client.plugins.ClientRequestException
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    private val _wallpapers = mutableStateOf<List<Model>>(emptyList())
-    val wallpapers: State<List<Model>> = _wallpapers
-
-    private val _config = mutableStateOf<Config?>(null)
-    val config: State<Config?> = _config
-
-    private val _isLoading = mutableStateOf(true)
-    val isLoading: State<Boolean> = _isLoading
-
-//    TODO: Create an Error composable to retry action
-//    private val _error = mutableStateOf<String?>(null)
-//    val error: State<String?> = _error
+    private val _state = MutableStateFlow(MainScreenState())
+    val state = _state.asStateFlow()
 
     init {
         loadWallpapers()
@@ -31,16 +22,36 @@ class MainViewModel : ViewModel() {
 
     private fun loadWallpapers() {
         viewModelScope.launch {
-            _isLoading.value = true
+            _state.update { it.copy(isLoading = true) }
             try {
                 val wallpaperData = WallpaperApiClient.getWallpapers()
-                _wallpapers.value = getWallpaperList(wallpaperData).shuffled()
-                _config.value = wallpaperData.config
+                _state.update {
+                    it.copy(
+                        wallpapers = getWallpaperList(wallpaperData).shuffled(),
+                        config = wallpaperData.config,
+                        isLoading = false
+                    )
+                }
             } catch (e: ClientRequestException) {
+                _state.update { it.copy(isLoading = false) }
                 println("Error fetching data: ${e.message}")
-            } finally {
-                _isLoading.value = false
             }
         }
     }
+
+    fun setSelectedCategory(category: String?) {
+        _state.update { it.copy(selectedCategory = category) }
+    }
+
+    fun setShowFAB(visible: Boolean) {
+        _state.update { it.copy(showFAB = visible) }
+    }
 }
+
+data class MainScreenState(
+    val wallpapers: List<Model> = emptyList(),
+    val config: Config? = null,
+    val isLoading: Boolean = true,
+    val selectedCategory: String? = null,
+    var showFAB: Boolean = false,
+)

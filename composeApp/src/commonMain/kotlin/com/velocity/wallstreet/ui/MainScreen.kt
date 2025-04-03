@@ -39,8 +39,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.LocalPlatformContext
 import com.velocity.wallstreet.ui.component.AnimatedHeaderText
@@ -78,12 +77,8 @@ fun MainScreen(
     viewModel: MainViewModel = viewModel { MainViewModel() },
     onImageClick: (String) -> Unit
 ) {
-    val wallpapers by viewModel.wallpapers
-    val config by viewModel.config
-    val isLoading by viewModel.isLoading
+    val viewState by viewModel.state.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
-
-    var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val collapseFraction by remember {
@@ -91,21 +86,37 @@ fun MainScreen(
     }
 
     val gridState = rememberLazyGridState()
-    var showFAB by remember { mutableStateOf(false) }
 
     val updateUrl = remember { mutableStateOf("") }
 
-    val categories = extractUniqueCategories(wallpapers)
-    val filteredWallpapers = if (selectedCategory != null) {
-        wallpapers.filter { it.category == selectedCategory }
+    val categories = extractUniqueCategories(viewState.wallpapers)
+    val filteredWallpapers = if (viewState.selectedCategory != null) {
+        viewState.wallpapers.filter { it.category == viewState.selectedCategory }
     } else {
-        wallpapers
+        viewState.wallpapers
     }
 
     val animatedCornerRadius by animateDpAsState(
         targetValue = if (collapseFraction == 1f) 0.dp else NeoBrutalistShapes.Rounded,
         animationSpec = tween(durationMillis = 200)
     )
+
+    LaunchedEffect(viewState.config) {
+        updateUrl.value = viewState.config?.let { config ->
+            when {
+                PlatformUtils.isMacOS() -> config.macUpdateUrl
+                PlatformUtils.isWindows() -> config.windowsUpdateUrl
+                PlatformUtils.isLinux() -> config.linuxUpdateUrl
+                else -> config.androidUpdateUrl
+            }
+        } ?: ""
+    }
+
+    LaunchedEffect(gridState) {
+        snapshotFlow { gridState.firstVisibleItemIndex }.collect { index ->
+            viewModel.setShowFAB(index > 2)
+        }
+    }
 
     val hyperLinkText = buildAnnotatedString {
         withLink(
@@ -124,23 +135,6 @@ fun MainScreen(
         }
     }
 
-    LaunchedEffect(config) {
-        config?.let {
-            updateUrl.value = when {
-                PlatformUtils.isMacOS() -> it.macUpdateUrl
-                PlatformUtils.isWindows() -> it.windowsUpdateUrl
-                PlatformUtils.isLinux() -> it.linuxUpdateUrl
-                else -> it.androidUpdateUrl
-            }
-        }
-    }
-
-    LaunchedEffect(gridState) {
-        snapshotFlow { gridState.firstVisibleItemIndex }.collect { index ->
-            showFAB = index > 2
-        }
-    }
-
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets.systemBars,
@@ -151,7 +145,7 @@ fun MainScreen(
                     scrolledContainerColor = MaterialTheme.colorScheme.surface
                 ),
                 title = {
-                    config?.let { config ->
+                    viewState.config?.let { config ->
                         AppHeader(
                             downloadUrl = hyperLinkText,
                             currentAppVersion = getAppVersion(LocalPlatformContext.current),
@@ -175,7 +169,7 @@ fun MainScreen(
         },
         floatingActionButton = {
             AnimatedVisibility(
-                visible = showFAB,
+                visible = viewState.showFAB,
                 enter = fadeIn() + slideInVertically(),
                 exit = fadeOut() + slideOutVertically(),
                 modifier = Modifier.padding(bottom = 16.dp)
@@ -212,7 +206,7 @@ fun MainScreen(
                 .fillMaxSize()
         ) {
             when {
-                isLoading -> {
+                viewState.isLoading -> {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
@@ -228,9 +222,11 @@ fun MainScreen(
 
                         CategoryButton(
                             categories = categories,
-                            selectedCategory = selectedCategory,
+                            selectedCategory = viewState.selectedCategory,
                             onCategorySelected = { category ->
-                                selectedCategory = if (selectedCategory == category) null else category
+                                viewModel.setSelectedCategory(
+                                    if (viewState.selectedCategory == category) null else category
+                                )
                             }
                         )
 
