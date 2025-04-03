@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -21,9 +22,9 @@ import com.velocity.wallstreet.data.model.Model
 @Composable
 actual fun GridView(
     wallpapers: List<Model>,
-    onImageClick: (String) -> Unit
+    onImageClick: (String) -> Unit,
+    gridState: LazyGridState
 ) {
-    val listState = rememberLazyGridState()
 
     if (wallpapers.isNotEmpty()) {
         Box(
@@ -31,7 +32,7 @@ actual fun GridView(
         ) {
             LazyVerticalGrid(
                 modifier = Modifier.padding(16.dp),
-                state = listState,
+                state = gridState,
                 columns = GridCells.Adaptive(minSize = 400.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
@@ -44,7 +45,7 @@ actual fun GridView(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(8.dp),
-                adapter = rememberScrollbarAdapter(listState),
+                adapter = rememberScrollbarAdapter(gridState),
                 style = defaultScrollbarStyle().copy(
                     minimalHeight = 40.dp,
                     hoverColor = MaterialTheme.colorScheme.onBackground,

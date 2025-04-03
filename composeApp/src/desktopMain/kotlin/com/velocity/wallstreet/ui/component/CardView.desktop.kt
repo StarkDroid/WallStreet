@@ -26,14 +26,12 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.setWallpaper
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -109,7 +107,6 @@ actual fun CardView(
                 ) {
                     Text(
                         text = stringResource(Res.string.download_text),
-                        fontWeight = FontWeight.Medium,
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }

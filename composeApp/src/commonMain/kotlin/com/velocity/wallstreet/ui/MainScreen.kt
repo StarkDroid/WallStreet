@@ -1,11 +1,17 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,9 +19,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.twotone.ArrowUpward
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -27,8 +38,10 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -48,11 +61,13 @@ import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.CategoryButton
 import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.ui.component.LoadingIndicator
+import com.velocity.wallstreet.ui.component.NeoBrutalistButton
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
 import com.velocity.wallstreet.viewmodel.MainViewModel
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.update_available_text
@@ -66,6 +81,7 @@ fun MainScreen(
     val wallpapers by viewModel.wallpapers
     val config by viewModel.config
     val isLoading by viewModel.isLoading
+    val coroutineScope = rememberCoroutineScope()
 
     var selectedCategory by rememberSaveable { mutableStateOf<String?>(null) }
 
@@ -73,6 +89,10 @@ fun MainScreen(
     val collapseFraction by remember {
         derivedStateOf { scrollBehavior.state.collapsedFraction }
     }
+
+    val gridState = rememberLazyGridState()
+    var showFAB by remember { mutableStateOf(false) }
+
     val updateUrl = remember { mutableStateOf("") }
 
     val categories = extractUniqueCategories(wallpapers)
@@ -115,6 +135,12 @@ fun MainScreen(
         }
     }
 
+    LaunchedEffect(gridState) {
+        snapshotFlow { gridState.firstVisibleItemIndex }.collect { index ->
+            showFAB = index > 2
+        }
+    }
+
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets.systemBars,
@@ -147,6 +173,31 @@ fun MainScreen(
                 BottomBarCredits()
             }
         },
+        floatingActionButton = {
+            AnimatedVisibility(
+                visible = showFAB,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically(),
+                modifier = Modifier.padding(bottom = 16.dp)
+            ) {
+                NeoBrutalistButton(
+                    cornerRadius = NeoBrutalistShapes.Rounded,
+                    contentPadding = PaddingValues(18.dp),
+                    onClick = {
+                        coroutineScope.launch {
+                            gridState.animateScrollToItem(0)
+                        }
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.TwoTone.ArrowUpward,
+                        contentDescription = "Scroll to top",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+        },
+        floatingActionButtonPosition = FabPosition.End
     ) { padding ->
         Box(
             modifier = Modifier
@@ -185,7 +236,8 @@ fun MainScreen(
 
                         GridView(
                             wallpapers = filteredWallpapers,
-                            onImageClick = onImageClick
+                            onImageClick = onImageClick,
+                            gridState = gridState
                         )
                     }
                 }
