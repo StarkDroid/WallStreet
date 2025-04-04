@@ -25,6 +25,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.fragment.ktx)
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
@@ -65,7 +66,7 @@ android {
         applicationId = "com.velocity.wallstreet"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 3
+        versionCode = 4
         versionName = project.version.toString()
     }
     packaging {
