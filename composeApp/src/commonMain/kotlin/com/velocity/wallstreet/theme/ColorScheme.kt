@@ -6,14 +6,15 @@ import androidx.compose.ui.graphics.Color
 
 // Light theme color scheme
 val lightColorScheme = lightColorScheme(
-    primary = Color(0xFF2D336B),
-    onPrimary = Color.White,
-    secondary = Color(0xFF00879E),
+    primary = Color(0xff428a42),
+    onPrimary = Color.Black,
+    inversePrimary = Color.Black,
+    secondary = Color(0xff3a8b9b),
     onSecondary = Color.White,
-    tertiary = Color(0xFFB2A5FF),
-    background = Color(0xFFFFF2F2),
+    tertiary = Color(0xFFA388EE),
+    background = Color(0xfffdfaf8),
     onBackground = Color.Black,
-    surface = Color.White,
+    surface = Color(0xfffdf1de),
     onSurface = Color.Black,
     error = Color(0xFFB00020),
     onError = Color.White
@@ -21,14 +22,15 @@ val lightColorScheme = lightColorScheme(
 
 // Dark theme color scheme
 val darkColorScheme = darkColorScheme(
-    primary = Color(0xFFB2A5FF),
+    primary = Color(0xFF90EE90),
     onPrimary = Color.Black,
-    secondary = Color(0xFF00879E),
-    tertiary = Color(0xFF2D336B),
-    onSecondary = Color.Black,
-    background = Color(0xFF121212),
+    inversePrimary = Color.White,
+    secondary = Color(0xFF69D2E7),
+    tertiary = Color(0xFFA388EE),
+    onSecondary = Color.White,
+    background = Color(0xff0b0e0e),
     onBackground = Color(0xFFFFFFFF),
-    surface = Color(0xFF1E1E1E),
+    surface = Color(0xff2e3036),
     onSurface = Color(0xFFFFFFFF),
     error = Color(0xFFCF6679),
     onError = Color.Black

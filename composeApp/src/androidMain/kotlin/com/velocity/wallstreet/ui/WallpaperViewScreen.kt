@@ -1,18 +1,12 @@
 package com.velocity.wallstreet.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.ArrowBackIosNew
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,12 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.R
-import com.velocity.wallstreet.ui.component.BottomSheetDialog
+import com.velocity.wallstreet.ui.component.BottomSheetContent
+import com.velocity.wallstreet.ui.component.LoadingIndicator
+import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
+import com.velocity.wallstreet.ui.component.NeoBrutalistButton
 import com.velocity.wallstreet.utils.setWallpaperAction
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.res.stringResource as stringResourceCompose
@@ -47,69 +45,86 @@ fun WallpaperViewScreen(
     val context = LocalContext.current
 
     var showBottomSheet by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
 
     Scaffold { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+
+            if (isLoading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    LoadingIndicator()
+                }
+            }
+
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageUrl)
                     .crossfade(true)
+                    .listener(
+                        onStart = { isLoading = true },
+                        onSuccess = { _, _ -> isLoading = false },
+                        onError = { _, _ -> isLoading = false }
+                    )
                     .build(),
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
             )
 
-            IconButton(
+            NeoBrutalistButton(
+                contentPadding = PaddingValues(12.dp),
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(innerPadding)
-                    .padding(start = 16.dp, top = 16.dp),
-                colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    .padding(start = 16.dp, top = 40.dp),
                 onClick = onBackClick,
             ) {
                 Icon(
                     imageVector = Icons.TwoTone.ArrowBackIosNew,
-                    tint = MaterialTheme.colorScheme.tertiary,
+                    tint = MaterialTheme.colorScheme.onPrimary,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
             }
 
-            Button(
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomCenter)
-                    .padding(innerPadding)
-                    .padding(horizontal = 16.dp, vertical = 21.dp)
-                    .size(48.dp),
-                onClick = {
-                    showBottomSheet = true
+            if (!isLoading) {
+                NeoBrutalistButton(
+                    onClick = {
+                        showBottomSheet = true
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 50.dp, start = 24.dp, end = 24.dp)
+                ) {
+                    Text(
+                        text = stringResource(Res.string.wallpaper_screen_button_label),
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f)
+                    )
                 }
-            ) {
-                Text(
-                    text = stringResource(Res.string.wallpaper_screen_button_label),
-                    style = MaterialTheme.typography.bodyLarge
-                )
             }
 
             if (showBottomSheet) {
-                BottomSheetDialog(
-                    onDismissRequest = { showBottomSheet = false },
-                    onApplyWallpaper = { type ->
-                        setWallpaperAction(
-                            imageUrl = imageUrl,
-                            context = context,
-                            type = type
-                        )
-                    },
-                )
+                NeoBrutalistBottomSheet(
+                    cornerRadius = 8.dp,
+                    onDismissRequest = { showBottomSheet = false }
+                ) {
+                    BottomSheetContent(
+                        onApplyWallpaper = { type ->
+                            setWallpaperAction(
+                                imageUrl = imageUrl,
+                                context = context,
+                                type = type
+                            )
+                        }
+                    )
+                }
             }
         }
     }

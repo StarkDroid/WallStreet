@@ -1,7 +1,7 @@
 package com.velocity.wallstreet.ui.component
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,7 +25,7 @@ import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.bottom_bar_credits_text
 
 @Composable
-fun BottomBarCredits() {
+internal fun BottomBarCredits() {
 
     val hyperLinkText = buildAnnotatedString {
         withStyle(style = SpanStyle(fontWeight = FontWeight.Medium)) {
@@ -48,13 +48,13 @@ fun BottomBarCredits() {
     }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-
         Text(
             text = hyperLinkText,
             style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.inversePrimary,
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .pointerHoverIcon(icon = PointerIcon.Hand)
