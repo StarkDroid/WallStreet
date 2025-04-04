@@ -25,7 +25,7 @@ import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.bottom_bar_credits_text
 
 @Composable
-fun BottomBarCredits() {
+internal fun BottomBarCredits() {
 
     val hyperLinkText = buildAnnotatedString {
         withStyle(style = SpanStyle(fontWeight = FontWeight.Medium)) {

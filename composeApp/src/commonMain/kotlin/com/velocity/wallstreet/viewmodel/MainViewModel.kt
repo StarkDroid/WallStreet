@@ -17,10 +17,10 @@ class MainViewModel : ViewModel() {
     val state = _state.asStateFlow()
 
     init {
-        loadWallpapers()
+        loadData()
     }
 
-    private fun loadWallpapers() {
+    private fun loadData() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             try {
