@@ -16,31 +16,38 @@
 This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beautiful and responsive Wallpaper app for above mentioned platforms. While there are a lot of Wallpaper app and alternatives out there, Here's why you could choose **WallStreet**. <br>
 ✅ Always free and OpenSource <br>
 ✅ No Ads or purchases <br>
-✅ Performant, Responsive and Beautiful UI <br>
+✅ Performant, Responsive and Beautiful UI (NeoBrutalism) <br>
 ✅ Your app, your own wallpaper collection (Read below to know how you can add more wallpapers yourself) <br>
-✅ Multiplatform compatibility <br>
+✅ Multi-platform compatibility <br>
 ✅ Wallpapers constantly refreshed and added <br>
 ✅ Fits devices of all screen sizes <br>
 ✅ Single click to apply <br>
 ✅ Quickly filter through various wallpaper categories <br>
-✅ Actively maintained <br>
+✅ Download HD wallpapers instantly <br>
+✅ Actively maintained and evolving <br>
 
 ## **Screenshots**
 
 ### **Desktop**
-![Desktop Screenshot](static/screenshot-desktop.png)
+<img src="https://i.postimg.cc/5NDsFcZh/image.png" width="600" alt="">
 
 ### **Mobile**
-![Mobile Screenshot](static/screenshot-mobile.png)
+<img src="https://i.postimg.cc/zGM0Ws4m/image.png" width="200" alt="">
+<img src="https://i.postimg.cc/5ynmtT8R/image.png" width="200" alt="">
+<img src="https://i.postimg.cc/hjn81crY/image.png" width="200" alt="">
+<img src="https://i.postimg.cc/pTVhdTkP/image.png" width="200" alt="">
+<img src="https://i.postimg.cc/pr4pkBvd/image.png" width="200" alt="">
+<img src="https://i.postimg.cc/ZndTYzkT/image.png" width="200" alt="">
 
-## **Compatibilitty** 🖥️📱
+
+## **Compatibility** 🖥️📱
 | Platform | Compatibility |
-| -------- |---------------|
-| Windows  | ✅             |
-| MacOS    | ✅             |
-| Linux    | ✅             |
-| Android  | ✅             |
-| IOS      | ❌             |
+|----------|:-------------:|
+| Windows  |       ✅       |
+| MacOS    |       ✅       |
+| Linux    |       ✅       |
+| Android  |       ✅       |
+| IOS      |       ❌       |
 
 > [!NOTE]
 > Although the project is OpenSource, It is appreciated **not** to re-package and sell this project with the same name.
