@@ -57,7 +57,7 @@ kotlin {
 }
 
 android {
-    version = "2.0.2"
+    version = "2.1.0"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -65,7 +65,7 @@ android {
         applicationId = "com.velocity.wallstreet"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 2
+        versionCode = 3
         versionName = project.version.toString()
     }
     packaging {
@@ -106,7 +106,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.0.2"
+    version = "2.1.0"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
