@@ -26,6 +26,7 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.R
 import com.velocity.wallstreet.ui.component.BottomSheetContent
+import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
 import com.velocity.wallstreet.utils.setWallpaperAction
@@ -44,16 +45,32 @@ fun WallpaperViewScreen(
     val context = LocalContext.current
 
     var showBottomSheet by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
 
     Scaffold { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
         ) {
+
+            if (isLoading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    LoadingIndicator()
+                }
+            }
+
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageUrl)
                     .crossfade(true)
+                    .listener(
+                        onStart = { isLoading = true },
+                        onSuccess = { _, _ -> isLoading = false },
+                        onError = { _, _ -> isLoading = false }
+                    )
                     .build(),
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
@@ -75,22 +92,23 @@ fun WallpaperViewScreen(
                 )
             }
 
-            NeoBrutalistButton(
-                onClick = {
-                    showBottomSheet = true
-                },
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 50.dp, start = 24.dp, end = 24.dp)
-            ) {
-                Text(
-                    text = stringResource(Res.string.wallpaper_screen_button_label),
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.weight(1f)
-                )
+            if (!isLoading) {
+                NeoBrutalistButton(
+                    onClick = {
+                        showBottomSheet = true
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 50.dp, start = 24.dp, end = 24.dp)
+                ) {
+                    Text(
+                        text = stringResource(Res.string.wallpaper_screen_button_label),
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
-
 
             if (showBottomSheet) {
                 NeoBrutalistBottomSheet(
