@@ -1,11 +1,11 @@
 [versions]
-agp = "8.9.1"
+agp = "8.9.2"
 android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.10.1"
 androidx-fragment = "1.8.6"
 androidx-lifecycle = "2.8.4"
-compose-multiplatform = "1.7.0"
+compose-multiplatform = "1.7.3"
 firebaseBom = "33.12.0"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
@@ -15,6 +15,7 @@ navigation = "2.8.9"
 splashscreen = "1.0.1"
 google-services = "4.4.2"
 viewmodel-compose = "2.8.2"
+jna = "5.17.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -34,6 +35,7 @@ coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.re
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 splashscreen-compose = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
+java-native-access = { module = "net.java.dev.jna:jna", version.ref = "jna" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
