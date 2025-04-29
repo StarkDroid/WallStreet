@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    id("com.google.gms.google-services")
     kotlin("plugin.serialization") version "2.1.10"
 }
 
@@ -29,8 +28,6 @@ kotlin {
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
-            implementation(libs.firebase.messaging)
-            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
