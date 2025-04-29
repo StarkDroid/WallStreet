@@ -3,12 +3,14 @@ package com.velocity.wallstreet.utils
 import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.data.model.Wallpapers
 import io.ktor.client.HttpClient
@@ -64,6 +66,22 @@ fun setWallpaperAction(imageUrl: String, context: Context, type: WallpaperType) 
                     WallpaperType.DownloadOnly -> {
                         saveImageToGallery(context, bitmap, format, extension)
                         Toast.makeText(context, "Wallpaper saved successfully", Toast.LENGTH_SHORT).show()
+                    }
+
+                    WallpaperType.ShareWallpaper -> {
+                        val imageUri = saveImageToGallery(context, bitmap, format, extension)
+                        imageUri?.let { uri ->
+                            val shareIntent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                setType("image/*")
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            }
+                            val chooserIntent = Intent.createChooser(shareIntent, "Share Wallpaper")
+                            chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(chooserIntent)
+                            Toast.makeText(context, "Sharing wallpaper...", Toast.LENGTH_SHORT).show()
+                        } ?: Toast.makeText(context, "Failed to share wallpaper", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

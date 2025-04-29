@@ -4,6 +4,7 @@
     <string name="wallpaper_type_lockscreen">LockScreen</string>
     <string name="wallpaper_type_both">Both</string>
     <string name="wallpaper_type_download">Download</string>
+    <string name="wallpaper_type_share">Share</string>
     <string name="wallpaper_set_button_icon_desc">Both</string>
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="default_notification_channel_name">WallStreet Updates</string>
