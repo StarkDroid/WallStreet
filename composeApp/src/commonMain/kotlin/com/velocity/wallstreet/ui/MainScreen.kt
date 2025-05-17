@@ -44,11 +44,12 @@ import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
 import com.velocity.wallstreet.viewmodel.MainViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = viewModel { MainViewModel() },
+    viewModel: MainViewModel = koinViewModel(),
     onImageClick: (String) -> Unit
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()

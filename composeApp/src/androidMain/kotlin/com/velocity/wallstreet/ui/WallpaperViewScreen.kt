@@ -29,7 +29,8 @@ import com.velocity.wallstreet.ui.component.BottomSheetContent
 import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
-import com.velocity.wallstreet.utils.setWallpaperAction
+import com.velocity.wallstreet.viewmodel.WallpaperScreenViewModel
+import com.velocity.wallstreet.viewmodel.WallpaperViewState
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.ui.res.stringResource as stringResourceCompose
 import wallstreet.composeapp.generated.resources.Res
@@ -39,13 +40,12 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 
 @Composable
 fun WallpaperViewScreen(
-    imageUrl: String,
+    viewState: WallpaperViewState,
+    viewModel: WallpaperScreenViewModel,
     onBackClick: () -> Unit
 ) {
-    val context = LocalContext.current
-
     var showBottomSheet by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(true) }
+    var isLoading by remember { mutableStateOf(false) }
 
     Scaffold { innerPadding ->
         Box(
@@ -64,7 +64,7 @@ fun WallpaperViewScreen(
 
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl)
+                    .data(viewModel.imageUrl)
                     .crossfade(true)
                     .listener(
                         onStart = { isLoading = true },
@@ -117,11 +117,7 @@ fun WallpaperViewScreen(
                 ) {
                     BottomSheetContent(
                         onApplyWallpaper = { type ->
-                            setWallpaperAction(
-                                imageUrl = imageUrl,
-                                context = context,
-                                type = type
-                            )
+                            viewModel.applyWallpaper(type)
                         }
                     )
                 }

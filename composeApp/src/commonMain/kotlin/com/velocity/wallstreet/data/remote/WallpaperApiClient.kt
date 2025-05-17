@@ -1,20 +1,21 @@
-package com.velocity.wallstreet.data
+package com.velocity.wallstreet.data.remote
 
 import com.velocity.wallstreet.data.model.Wallpapers
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import com.velocity.wallstreet.utils.Constants
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpRequestRetry
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.Json.Default.decodeFromString
 
-object WallpaperApiClient {
+class WallpaperApiClient {
     private val client = HttpClient(CIO) {
         install(ContentNegotiation) {
             json(
@@ -27,8 +28,9 @@ object WallpaperApiClient {
         }
 
         install(HttpRequestRetry) {
-            maxRetries = 3
+            maxRetries = Constants.DEFAULT_RETRY_COUNT
             retryOnServerErrors(maxRetries)
+            retryOnException(maxRetries)
         }
 
         defaultRequest {
@@ -41,11 +43,10 @@ object WallpaperApiClient {
 
     suspend fun getWallpapers(): Wallpapers {
         val url = Constants.WALLPAPER_API
-        val response: HttpResponse = client.get(url)
-        return if (response.status.isSuccess()) {
-            decodeFromString(response.body())
-        } else {
-            throw RuntimeException("Failed to get wallpapers: ${response.status.value}")
-        }
+        return client.get(url).body()
+    }
+
+    fun close() {
+        client.close()
     }
 }

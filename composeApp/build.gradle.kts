@@ -28,6 +28,8 @@ kotlin {
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
+            implementation(libs.koin.android)
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,6 +48,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

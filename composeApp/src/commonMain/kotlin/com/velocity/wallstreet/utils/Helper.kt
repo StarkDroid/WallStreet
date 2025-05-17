@@ -8,7 +8,7 @@ object PlatformUtils {
         return try {
             Class.forName("android.os.Build")
             true
-        } catch (e: ClassNotFoundException) {
+        } catch (_: ClassNotFoundException) {
             false
         }
     }
