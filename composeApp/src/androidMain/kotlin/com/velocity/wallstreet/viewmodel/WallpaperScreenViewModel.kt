@@ -1,12 +1,13 @@
 package com.velocity.wallstreet.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.velocity.wallstreet.data.repository.WallpaperRepository
 import androidx.lifecycle.viewModelScope
+import com.velocity.wallstreet.data.repository.WallpaperRepository
 import com.velocity.wallstreet.utils.WallpaperType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class WallpaperScreenViewModel(
@@ -14,26 +15,21 @@ class WallpaperScreenViewModel(
     val imageUrl: String
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(WallpaperViewState())
-    val state = _state.asStateFlow()
+    private val _isLoading = MutableStateFlow<OperationResult?>(null)
+    val isLoading: StateFlow<OperationResult?> = _isLoading.asStateFlow()
 
     fun applyWallpaper(type: WallpaperType) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _isLoading.value = OperationResult.Loading
 
             val result = repository.setWallpaper(imageUrl, type)
 
             result.onSuccess {
-                _state.update { it.copy(
-                    isLoading = false,
-                    actionMessage = getSuccessMessage(type),
-                    error = null
-                ) }
+                _isLoading.value = OperationResult.Success(getSuccessMessage(type))
+                delay(2000)
+                _isLoading.value = null
             }.onFailure { error ->
-                _state.update { it.copy(
-                    isLoading = false,
-                    error = error.message
-                ) }
+                _isLoading.value = OperationResult.Failure(error.message ?: "Unknown error")
             }
         }
     }
@@ -48,8 +44,8 @@ class WallpaperScreenViewModel(
     }
 }
 
-data class WallpaperViewState(
-    val isLoading: Boolean = false,
-    val actionMessage: String? = null,
-    val error: String? = null
-)
+sealed class OperationResult {
+    object Loading : OperationResult()
+    data class Success(val message: String) : OperationResult()
+    data class Failure(val message: String) : OperationResult()
+}

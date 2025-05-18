@@ -2,8 +2,8 @@ package com.velocity.wallstreet.navigation
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -43,11 +43,11 @@ fun WallStreetNavGraph() {
                 parameters = { parametersOf(imageUrl) }
             )
 
-            val wallpaperViewState by wallpaperViewModel.state.collectAsState()
+            val result by wallpaperViewModel.isLoading.collectAsStateWithLifecycle()
 
             WallpaperViewScreen(
                 viewModel = wallpaperViewModel,
-                viewState = wallpaperViewState,
+                operationResult = result,
                 onBackClick = {
                     navController.popBackStack()
                 }

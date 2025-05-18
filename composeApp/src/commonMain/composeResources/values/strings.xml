@@ -12,6 +12,7 @@
     <string name="wallpaper_type_lockscreen">LockScreen</string>
     <string name="wallpaper_type_both">Both</string>
     <string name="wallpaper_type_download">Download</string>
+    <string name="applying_wallpaper">Applying wallpaper...</string>
     <string-array name="subtitle_texts">
         <item>Explore beautiful wallpapers</item>
         <item>Find the perfect background</item>

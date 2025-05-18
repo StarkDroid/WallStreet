@@ -10,11 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -29,18 +25,18 @@ import com.velocity.wallstreet.ui.component.BottomSheetContent
 import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
+import com.velocity.wallstreet.viewmodel.OperationResult
 import com.velocity.wallstreet.viewmodel.WallpaperScreenViewModel
-import com.velocity.wallstreet.viewmodel.WallpaperViewState
 import org.jetbrains.compose.resources.stringResource
-import androidx.compose.ui.res.stringResource as stringResourceCompose
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
+import androidx.compose.ui.res.stringResource as stringResourceCompose
 
 
 @Composable
 fun WallpaperViewScreen(
-    viewState: WallpaperViewState,
+    operationResult: OperationResult?,
     viewModel: WallpaperScreenViewModel,
     onBackClick: () -> Unit
 ) {
@@ -113,12 +109,17 @@ fun WallpaperViewScreen(
             if (showBottomSheet) {
                 NeoBrutalistBottomSheet(
                     cornerRadius = 8.dp,
-                    onDismissRequest = { showBottomSheet = false }
+                    onDismissRequest = {
+                        if (operationResult == null) {
+                            showBottomSheet = false
+                        }
+                    }
                 ) {
                     BottomSheetContent(
+                        result = operationResult,
                         onApplyWallpaper = { type ->
                             viewModel.applyWallpaper(type)
-                        }
+                        },
                     )
                 }
             }
