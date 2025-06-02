@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,9 +33,12 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.utils.setWallpaper
+import com.velocity.wallstreet.data.repository.WallpaperRepository
+import com.velocity.wallstreet.utils.WallpaperType
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.download_text
 import wallstreet.composeapp.generated.resources.no_thumbnail_desc
@@ -44,10 +48,12 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 @Composable
 actual fun CardView(
     wallpapers: Model,
-    onImageClick: (String) -> Unit
+    onImageClick: (String) -> Unit,
 ) {
-    var isHovering by remember { mutableStateOf(false) }
+    val wallpaperRepository: WallpaperRepository = koinInject()
+    val coroutineScope = rememberCoroutineScope()
 
+    var isHovering by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
 
     LaunchedEffect(interactionSource) {
@@ -65,9 +71,6 @@ actual fun CardView(
             .height(250.dp)
             .hoverable(interactionSource = interactionSource),
         shadowColor = MaterialTheme.colorScheme.inversePrimary,
-        onClick = {
-            // Do nothing
-        }
     ) {
         if (wallpapers.imageUrl.isEmpty()) {
             Image(
@@ -101,7 +104,12 @@ actual fun CardView(
                     modifier = Modifier.pointerHoverIcon(icon = PointerIcon.Hand),
                     onClick = {
                         if (wallpapers.imageUrl.isNotEmpty()) {
-                            setWallpaper(wallpapers)
+                            coroutineScope.launch {
+                                wallpaperRepository.setWallpaper(
+                                    imageUrl = wallpapers.imageUrl,
+                                    type = WallpaperType.Both
+                                )
+                            }
                         }
                     },
                 ) {
