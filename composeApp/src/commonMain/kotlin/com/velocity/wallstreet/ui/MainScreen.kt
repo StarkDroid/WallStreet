@@ -50,7 +50,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
-    onImageClick: (String) -> Unit
+    onImageClick: (String) -> Unit = {}
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 

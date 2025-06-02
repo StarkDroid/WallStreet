@@ -7,9 +7,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.Toast
-import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.data.model.Wallpapers
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -19,6 +16,7 @@ import kotlinx.coroutines.withContext
 class WallpaperUtilsAndroid(
     private val context: Context
 ) : WallpaperFunctions {
+
     override suspend fun setWallpaper(
         imageUrl: String,
         type: WallpaperType
@@ -103,11 +101,8 @@ class WallpaperUtilsAndroid(
                 resolver.update(uri, contentValues, null, null)
             }
 
-
-            Toast.makeText(context, "Wallpaper saved to gallery", Toast.LENGTH_SHORT).show()
             Result.success(imageUri.toString())
         } catch (e: Exception) {
-            Toast.makeText(context, "Failed to save image ${e.message}", Toast.LENGTH_LONG).show()
             Result.failure(e)
         }
 
@@ -136,8 +131,4 @@ class WallpaperUtilsAndroid(
             else -> Bitmap.CompressFormat.JPEG to "jpg"
         }
     }
-}
-
-actual fun getWallpaperList(wallpaperData: Wallpapers): List<Model> {
-    return wallpaperData.mobile
 }

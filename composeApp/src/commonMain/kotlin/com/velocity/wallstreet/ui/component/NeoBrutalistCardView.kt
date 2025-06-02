@@ -31,7 +31,7 @@ import com.velocity.wallstreet.utils.NeoBrutalistShapes
 
 @Composable
 fun NeoBrutalistCardView(
-    onClick: () -> Unit,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.Transparent,
     borderColor: Color = Color.Black,
