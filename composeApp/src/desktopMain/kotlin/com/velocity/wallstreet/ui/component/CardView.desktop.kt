@@ -7,7 +7,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.HoverInteraction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -44,6 +48,7 @@ import wallstreet.composeapp.generated.resources.download_text
 import wallstreet.composeapp.generated.resources.no_thumbnail_desc
 import wallstreet.composeapp.generated.resources.no_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
+import wallstreet.composeapp.generated.resources.wallpaper_type_both
 
 @Composable
 actual fun CardView(
@@ -100,23 +105,47 @@ actual fun CardView(
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 16.dp)
             ) {
-                NeoBrutalistButton(
-                    modifier = Modifier.pointerHoverIcon(icon = PointerIcon.Hand),
-                    onClick = {
-                        if (wallpapers.imageUrl.isNotEmpty()) {
-                            coroutineScope.launch {
-                                wallpaperRepository.setWallpaper(
-                                    imageUrl = wallpapers.imageUrl,
-                                    type = WallpaperType.Both
-                                )
-                            }
-                        }
-                    },
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Text(
-                        text = stringResource(Res.string.download_text),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
+                    NeoBrutalistButton(
+                        modifier = Modifier.pointerHoverIcon(icon = PointerIcon.Hand),
+                        onClick = {
+                            if (wallpapers.imageUrl.isNotEmpty()) {
+                                coroutineScope.launch {
+                                    wallpaperRepository.setWallpaper(
+                                        imageUrl = wallpapers.imageUrl,
+                                        type = WallpaperType.Both
+                                    )
+                                }
+                            }
+                        },
+                    ) {
+                        Text(
+                            text = stringResource(Res.string.wallpaper_type_both),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+
+                    NeoBrutalistButton(
+                        modifier = Modifier.pointerHoverIcon(icon = PointerIcon.Hand),
+                        onClick = {
+                            if (wallpapers.imageUrl.isNotEmpty()) {
+                                coroutineScope.launch {
+                                    wallpaperRepository.downloadWallpaper(
+                                        imageUrl = wallpapers.imageUrl
+                                    )
+                                }
+                            }
+                        },
+                    ) {
+                        Text(
+                            text = stringResource(Res.string.download_text),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
                 }
             }
         }
