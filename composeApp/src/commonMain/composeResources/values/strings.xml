@@ -13,10 +13,4 @@
     <string name="wallpaper_type_both">Both</string>
     <string name="wallpaper_type_download">Download</string>
     <string name="applying_wallpaper">Performing Action...</string>
-    <string-array name="subtitle_texts">
-        <item>Explore beautiful wallpapers</item>
-        <item>Find the perfect background</item>
-        <item>High-quality images</item>
-        <item>Frequently updated with new walls</item>
-    </string-array>
 </resources>

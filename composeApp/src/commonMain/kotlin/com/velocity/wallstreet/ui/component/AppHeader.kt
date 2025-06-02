@@ -109,5 +109,4 @@ internal fun AppHeader(
         },
         scrollBehavior = scrollBehavior
     )
-    AnimatedHeaderText(scrollBehavior = scrollBehavior)
 }
