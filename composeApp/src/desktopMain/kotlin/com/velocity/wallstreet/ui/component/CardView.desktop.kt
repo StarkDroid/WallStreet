@@ -44,11 +44,11 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import wallstreet.composeapp.generated.resources.Res
-import wallstreet.composeapp.generated.resources.download_text
+import wallstreet.composeapp.generated.resources.desktop_wallpaper_apply
+import wallstreet.composeapp.generated.resources.desktop_wallpaper_download
 import wallstreet.composeapp.generated.resources.no_thumbnail_desc
 import wallstreet.composeapp.generated.resources.no_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
-import wallstreet.composeapp.generated.resources.wallpaper_type_both
 
 @Composable
 actual fun CardView(
@@ -122,7 +122,7 @@ actual fun CardView(
                         },
                     ) {
                         Text(
-                            text = stringResource(Res.string.wallpaper_type_both),
+                            text = stringResource(Res.string.desktop_wallpaper_apply),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
@@ -142,7 +142,7 @@ actual fun CardView(
                         },
                     ) {
                         Text(
-                            text = stringResource(Res.string.download_text),
+                            text = stringResource(Res.string.desktop_wallpaper_download),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }

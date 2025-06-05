@@ -12,7 +12,7 @@ import io.ktor.client.plugins.ServerResponseException
 interface WallpaperRepository {
     suspend fun getWallpaper(): Wallpapers
     suspend fun setWallpaper(imageUrl: String, type: WallpaperType): Result<Unit>
-    suspend fun downloadWallpaper(imageUrl: String): Result<String>
+    suspend fun downloadWallpaper(imageUrl: String): Result<Unit>
     fun getWallpaperList(wallpaperData: Wallpapers): List<Model>
 }
 
@@ -38,7 +38,7 @@ class WallpaperRepositoryImpl(
         return wallpaperFunctions.setWallpaper(imageUrl = imageUrl, type = type)
     }
 
-    override suspend fun downloadWallpaper(imageUrl: String): Result<String> {
+    override suspend fun downloadWallpaper(imageUrl: String): Result<Unit> {
         return wallpaperFunctions.downloadImage(imageUrl = imageUrl)
     }
 

@@ -11,7 +11,7 @@ interface WallpaperFunctions {
 
     suspend fun setWallpaper(imageUrl: String, type: WallpaperType): Result<Unit>
 
-    suspend fun downloadImage(imageUrl: String): Result<String>
+    suspend fun downloadImage(imageUrl: String): Result<Unit>
 }
 
 fun extractUniqueCategories(wallpapers: List<Model>): List<String> {

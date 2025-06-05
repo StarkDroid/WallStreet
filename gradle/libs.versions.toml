@@ -14,6 +14,7 @@ navigation = "2.8.9"
 splashscreen = "1.0.1"
 viewmodel-compose = "2.8.3"
 koin-version = "4.0.3"
+jna = "5.17.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -34,6 +35,7 @@ splashscreen-compose = { module = "androidx.core:core-splashscreen", version.ref
 koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin-version"}
 koin-compose-viewmodel = {module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-version"}
 koin-compose-viewmodel-nav = {module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin-version"}
+java-native-access = {module = "net.java.dev.jna:jna", version.ref = "jna"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -23,7 +23,7 @@ import com.velocity.wallstreet.utils.WallpaperType
 import com.velocity.wallstreet.viewmodel.OperationResult
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
-import wallstreet.composeapp.generated.resources.applying_wallpaper
+import wallstreet.composeapp.generated.resources.performing_action
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -101,7 +101,7 @@ fun BottomSheetContent(
                 text = when (result) {
                     is OperationResult.Success -> result.message
                     is OperationResult.Failure -> result.message
-                    else -> stringResource(Res.string.applying_wallpaper)
+                    else -> stringResource(Res.string.performing_action)
                 },
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
