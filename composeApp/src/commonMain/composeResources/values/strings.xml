@@ -8,10 +8,11 @@
     <string name="wallpaper_screen_button_label">Apply Wallpaper</string>
     <string name="main_screen_header_logo">MainScreen header logo</string>
     <string name="update_available_text">Download new update ⬇️</string>
-    <string-array name="subtitle_texts">
-        <item>Explore beautiful wallpapers</item>
-        <item>Find the perfect background</item>
-        <item>High-quality images</item>
-        <item>Frequently updated with new walls</item>
-    </string-array>
+    <string name="wallpaper_type_homescreen">HomeScreen</string>
+    <string name="wallpaper_type_lockscreen">LockScreen</string>
+    <string name="wallpaper_type_both">Both</string>
+    <string name="wallpaper_type_download">Download</string>
+    <string name="performing_action">Performing Action...</string>
+    <string name="desktop_wallpaper_apply">Apply Wallpaper</string>
+    <string name="desktop_wallpaper_download">Download Wallpaper</string>
 </resources>

@@ -1,10 +1,6 @@
 package com.velocity.wallstreet.ui.component
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.LazyGridState
@@ -15,8 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
-import com.velocity.wallstreet.viewmodel.MainScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

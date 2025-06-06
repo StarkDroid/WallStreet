@@ -1,45 +1,47 @@
 package com.velocity.wallstreet.utils
 
-import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.data.model.Wallpapers
-import io.ktor.http.Url
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.awt.Desktop
-import java.io.File
-import java.io.FileOutputStream
-import java.net.URI
 
-/**
- * Helper method to download and open the chosen wallpaper in default image viewer
- */
-fun setWallpaper(wallpaper: Model) {
-    CoroutineScope(Dispatchers.IO).launch {
-        val fileUrl = Url(wallpaper.imageUrl)
-        val fileName = fileUrl.segments.last()
-        val downloadDirectory = File(System.getProperty("user.home") + File.separator + "Downloads")
-        val downloadFile = File(downloadDirectory, fileName)
-        if (!downloadFile.exists()) {
-            val inputStream = URI(wallpaper.imageUrl).toURL().openStream()
-            val outputStream = FileOutputStream(downloadFile)
-            val byteArray = ByteArray(1024)
-            var count: Int
-            while (run {
-                    count = inputStream.read(byteArray)
-                    count
-                } > 0) {
-                outputStream.write(byteArray, 0, count)
+class WallpaperUtilsDesktop : WallpaperFunctions {
+
+    override suspend fun setWallpaper(
+        imageUrl: String,
+        type: WallpaperType
+    ): Result<Unit> {
+        return try {
+            when {
+                type is WallpaperType.DownloadOnly -> downloadImage(imageUrl)
+                else -> {
+                    when {
+                        PlatformUtils.isWindows() -> setWindowsWallpaper(downloadFile(imageUrl).absolutePath)
+                        PlatformUtils.isMacOS() -> {
+                            val script = """
+                                tell application "System Events"
+                                    set picture of every desktop to "${downloadFile(imageUrl).absolutePath}"
+                                end tell
+                            """.trimIndent()
+
+                            val process = ProcessBuilder("osascript", "-e", script).start()
+                            process.waitFor()
+                        }
+                    }
+                }
             }
-            outputStream.close()
-            inputStream.close()
-        }
-        if (downloadFile.exists()) {
-            Desktop.getDesktop().open(downloadFile)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
-}
 
-actual fun getWallpaperList(wallpaperData: Wallpapers): List<Model> {
-    return wallpaperData.desktop
+    override suspend fun downloadImage(imageUrl: String) = withContext(Dispatchers.IO) {
+        try {
+            downloadFile(imageUrl)
+            Desktop.getDesktop().open(downloadFile(imageUrl))
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

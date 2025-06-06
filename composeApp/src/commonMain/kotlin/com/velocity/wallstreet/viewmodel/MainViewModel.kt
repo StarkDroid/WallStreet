@@ -2,17 +2,17 @@ package com.velocity.wallstreet.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.velocity.wallstreet.data.WallpaperApiClient
-import com.velocity.wallstreet.data.model.Config
-import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.utils.getWallpaperList
+import com.velocity.wallstreet.data.model.MainScreenState
+import com.velocity.wallstreet.data.repository.WallpaperRepository
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val repository: WallpaperRepository
+) : ViewModel() {
     private val _state = MutableStateFlow(MainScreenState())
     val state = _state.asStateFlow()
 
@@ -24,17 +24,20 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             try {
-                val wallpaperData = WallpaperApiClient.getWallpapers()
+                val wallpaperData = repository.getWallpaper()
                 _state.update {
                     it.copy(
-                        wallpapers = getWallpaperList(wallpaperData).shuffled(),
+                        wallpapers = repository.getWallpaperList(wallpaperData).shuffled(),
                         config = wallpaperData.config,
                         isLoading = false
                     )
                 }
             } catch (e: ClientRequestException) {
-                _state.update { it.copy(isLoading = false) }
+                _state.update { it.copy(isLoading = false, error = e.message) }
                 println("Error fetching data: ${e.message}")
+            } catch (e: Exception) {
+                _state.update { it.copy(isLoading = false, error = "Failed tto load wallpapers") }
+                println("Unexpected error: ${e.message}")
             }
         }
     }
@@ -47,11 +50,3 @@ class MainViewModel : ViewModel() {
         _state.update { it.copy(showFAB = visible) }
     }
 }
-
-data class MainScreenState(
-    val wallpapers: List<Model> = emptyList(),
-    val config: Config? = null,
-    val isLoading: Boolean = true,
-    val selectedCategory: String? = null,
-    var showFAB: Boolean = false,
-)

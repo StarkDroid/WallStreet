@@ -28,6 +28,8 @@ kotlin {
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
+            implementation(libs.koin.android)
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,16 +48,18 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            implementation(libs.koin.compose.viewmodel.nav)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.java.native.access)
         }
     }
 }
 
 android {
-    version = "2.1.0"
+    version = "25.0"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -104,7 +108,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.1.0"
+    version = "2.5.0"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"

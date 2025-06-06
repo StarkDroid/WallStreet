@@ -1,45 +1,24 @@
 package com.velocity.wallstreet.ui.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
+import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.utils.PlatformUtils
 import com.velocity.wallstreet.utils.isNewVersionAvailable
-import com.velocity.wallstreet.viewmodel.MainScreenState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import wallstreet.composeapp.generated.resources.Res
-import wallstreet.composeapp.generated.resources.main_screen_header_logo
-import wallstreet.composeapp.generated.resources.mainscreen_title_text
-import wallstreet.composeapp.generated.resources.update_available_text
-import wallstreet.composeapp.generated.resources.wallstreet_logo_android
-import wallstreet.composeapp.generated.resources.wallstreet_logo_common
+import wallstreet.composeapp.generated.resources.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -130,5 +109,4 @@ internal fun AppHeader(
         },
         scrollBehavior = scrollBehavior
     )
-    AnimatedHeaderText(scrollBehavior = scrollBehavior)
 }
