@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">WallStreet</string>
     <string name="wallpaper_set_button_icon_desc">Both</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_name">WallStreet Updates</string>
     <string name="wallpaper_screen_desc_back_button">Back Button</string>
 </resources>

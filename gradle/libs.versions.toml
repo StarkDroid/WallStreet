@@ -6,6 +6,7 @@ androidx-activityCompose = "1.10.1"
 androidx-fragment = "1.8.8"
 androidx-lifecycle = "2.8.4"
 compose-multiplatform = "1.7.3"
+firebaseBom = "33.15.0"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
 ktor = "3.1.1"
@@ -14,6 +15,7 @@ navigation = "2.9.0"
 splashscreen = "1.0.1"
 viewmodel-compose = "2.8.3"
 koin-version = "4.0.3"
+google-services = "4.4.2"
 jna = "5.17.0"
 
 [libraries]
@@ -22,6 +24,8 @@ androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref
 androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "viewmodel-compose" }
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
@@ -34,7 +38,7 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 splashscreen-compose = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin-version"}
 koin-compose-viewmodel-nav = {module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin-version"}
-java-native-access = {module = "net.java.dev.jna:jna", version.ref = "jna"}
+java-native-access = { module = "net.java.dev.jna:jna", version.ref = "jna" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -42,3 +46,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "google-services" }

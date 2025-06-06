@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.google.gms.google-services")
     kotlin("plugin.serialization") version "2.1.10"
 }
 
@@ -30,6 +31,8 @@ kotlin {
             implementation(libs.splashscreen.compose)
             implementation(libs.koin.android)
             implementation(libs.koin.compose.viewmodel.nav)
+            implementation(libs.firebase.messaging)
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -59,7 +62,7 @@ kotlin {
 }
 
 android {
-    version = "25.0"
+    version = "2.5.0"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 

@@ -2,6 +2,7 @@
 .kotlin
 .gradle
 composeApp/release
+composeApp/google-services.json
 **/build/
 xcuserdata
 !src/**/build/
