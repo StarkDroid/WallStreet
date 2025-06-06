@@ -68,7 +68,7 @@ class WallpaperUtilsAndroid(
         }
     }
 
-    override suspend fun downloadImage(imageUrl: String): Result<String> {
+    override suspend fun downloadImage(imageUrl: String): Result<Unit> {
         return try {
             val bitmap = downloadBitmap(imageUrl = imageUrl).getOrThrow()
 
@@ -101,7 +101,7 @@ class WallpaperUtilsAndroid(
                 resolver.update(uri, contentValues, null, null)
             }
 
-            Result.success(imageUri.toString())
+            Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }
