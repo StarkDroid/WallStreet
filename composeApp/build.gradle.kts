@@ -59,7 +59,7 @@ kotlin {
 }
 
 android {
-    version = "2.1.0"
+    version = "25.0"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -108,7 +108,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.1.0"
+    version = "2.5.0"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"

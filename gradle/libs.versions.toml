@@ -1,16 +1,16 @@
 [versions]
 agp = "8.10.1"
 android-minSdk = "24"
-android-targetSdk = "34"
+android-targetSdk = "36"
 androidx-activityCompose = "1.10.1"
-androidx-fragment = "1.8.6"
+androidx-fragment = "1.8.8"
 androidx-lifecycle = "2.8.4"
 compose-multiplatform = "1.7.3"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
 ktor = "3.1.1"
 coil = "3.1.0"
-navigation = "2.8.9"
+navigation = "2.9.0"
 splashscreen = "1.0.1"
 viewmodel-compose = "2.8.3"
 koin-version = "4.0.3"
@@ -33,7 +33,6 @@ ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "k
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 splashscreen-compose = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin-version"}
-koin-compose-viewmodel = {module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-version"}
 koin-compose-viewmodel-nav = {module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin-version"}
 java-native-access = {module = "net.java.dev.jna:jna", version.ref = "jna"}
 
