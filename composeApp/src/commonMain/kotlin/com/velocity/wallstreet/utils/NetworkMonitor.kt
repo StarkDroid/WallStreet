@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class NetworkMonitor(private val context: PlatformContext) {
+open class NetworkMonitor(private val context: PlatformContext) {
 
     private val _isConnected = MutableStateFlow(true)
     val isConnected: StateFlow<Boolean> = _isConnected
@@ -20,7 +20,7 @@ class NetworkMonitor(private val context: PlatformContext) {
     private var job: Job? = null
 
     @OptIn(ExperimentalCoilApi::class)
-    fun startMonitoring(intervalMs: Long = 5000L) {
+    open fun startMonitoring(intervalMs: Long = 5000L) {
         job?.cancel()
         job = CoroutineScope(Dispatchers.Default).launch {
             val checker = ConnectivityChecker(context)
@@ -32,7 +32,7 @@ class NetworkMonitor(private val context: PlatformContext) {
         }
     }
 
-    fun stopMonitoring() {
+    open fun stopMonitoring() {
         job?.cancel()
     }
 }

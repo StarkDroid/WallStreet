@@ -5,16 +5,20 @@ import androidx.lifecycle.viewModelScope
 import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.data.repository.WallpaperRepository
 import com.velocity.wallstreet.utils.NetworkMonitor
+import com.velocity.wallstreet.utils.PlatformUtils
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class MainViewModel(
-    private val repository: WallpaperRepository,
-    private val networkMonitor: NetworkMonitor
-) : ViewModel() {
+    private val repository: WallpaperRepository
+) : ViewModel(), KoinComponent {
+
+    private val networkMonitor by inject<NetworkMonitor>(null)
 
     private val _state = MutableStateFlow(MainScreenState())
     val state = _state.asStateFlow()
@@ -26,8 +30,10 @@ class MainViewModel(
 
     private fun checkNetworkAvailability() {
         viewModelScope.launch {
-            networkMonitor.isConnected.collect { connected ->
-                _state.update { it.copy(isOnline = connected) }
+            if (PlatformUtils.isAndroid()) {
+                networkMonitor.isConnected.collect { connected ->
+                    _state.update { it.copy(isOnline = connected) }
+                }
             }
         }
     }
@@ -64,6 +70,8 @@ class MainViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        networkMonitor.stopMonitoring()
+        if (PlatformUtils.isAndroid()) {
+            networkMonitor.stopMonitoring()
+        }
     }
 }

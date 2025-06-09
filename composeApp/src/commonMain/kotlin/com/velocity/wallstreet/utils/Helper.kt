@@ -4,7 +4,7 @@ object PlatformUtils {
     fun isMacOS(): Boolean = System.getProperty("os.name").contains("Mac")
     fun isLinux(): Boolean = System.getProperty("os.name").contains("Linux") && !isAndroid()
     fun isWindows(): Boolean = System.getProperty("os.name").contains("Windows")
-    private fun isAndroid(): Boolean {
+    fun isAndroid(): Boolean {
         return try {
             Class.forName("android.os.Build")
             true
