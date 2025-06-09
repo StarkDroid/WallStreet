@@ -4,23 +4,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.data.repository.WallpaperRepository
+import com.velocity.wallstreet.utils.NetworkMonitor
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val repository: WallpaperRepository
+    private val repository: WallpaperRepository,
+    private val networkMonitor: NetworkMonitor
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(MainScreenState())
     val state = _state.asStateFlow()
 
     init {
+        checkNetworkAvailability()
         loadData()
     }
 
-    private fun loadData() {
+    private fun checkNetworkAvailability() {
+        viewModelScope.launch {
+            networkMonitor.isConnected.collect { connected ->
+                _state.update { it.copy(isOnline = connected) }
+            }
+        }
+    }
+
+    fun loadData() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             try {

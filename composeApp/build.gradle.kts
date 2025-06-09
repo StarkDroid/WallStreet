@@ -62,7 +62,7 @@ kotlin {
 }
 
 android {
-    version = "2.5.0"
+    version = "2.5.1"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -111,7 +111,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.5.0"
+    version = "2.5.1"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
@@ -125,7 +125,7 @@ compose.desktop {
             packageName = "WallStreet"
             vendor = "Trishiraj"
             packageVersion = project.version.toString()
-            description = "A compose multiplatform Wallpaper app made with MaterialUI for Desktop and Mobile"
+            description = "A compose multiplatform Wallpaper app with NeoBrutalismUI for Desktop and Mobile"
             copyright = "© 2024 - 25 Trishiraj. All rights reserved."
 
             val iconsRoot = project.file("src/desktopMain/desktop-icons")
