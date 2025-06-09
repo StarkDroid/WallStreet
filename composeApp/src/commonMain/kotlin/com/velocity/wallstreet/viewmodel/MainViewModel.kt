@@ -62,4 +62,9 @@ class MainViewModel(
     fun setShowFAB(visible: Boolean) {
         _state.update { it.copy(showFAB = visible) }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        networkMonitor.stopMonitoring()
+    }
 }
