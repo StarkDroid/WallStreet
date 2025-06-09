@@ -15,4 +15,5 @@
     <string name="performing_action">Performing Action...</string>
     <string name="desktop_wallpaper_apply">Apply Wallpaper</string>
     <string name="desktop_wallpaper_download">Download Wallpaper</string>
+    <string name="mainscreen_network_unavailable">Please connect to your internet, The page will refresh automatically</string>
 </resources>

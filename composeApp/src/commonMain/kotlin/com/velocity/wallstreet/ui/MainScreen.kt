@@ -32,7 +32,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.LocalPlatformContext
 import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
@@ -40,6 +39,7 @@ import com.velocity.wallstreet.ui.component.CategoryButton
 import com.velocity.wallstreet.ui.component.FloatingActionButton
 import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.ui.component.LoadingIndicator
+import com.velocity.wallstreet.ui.component.NetworkUI
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
@@ -52,6 +52,7 @@ fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
     onImageClick: (String) -> Unit = {}
 ) {
+    val platformContext = LocalPlatformContext.current
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 
     val coroutineScope = rememberCoroutineScope()
@@ -93,7 +94,7 @@ fun MainScreen(
             viewState.config?.let {
                 AppHeader(
                     viewState = viewState,
-                    currentAppVersion = getAppVersion(LocalPlatformContext.current),
+                    currentAppVersion = getAppVersion(platformContext),
                     latestAppVersion = it.appUpdateVersion,
                     scrollBehavior = scrollBehavior
                 )
@@ -120,6 +121,7 @@ fun MainScreen(
     ) { padding ->
         Box(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(padding)
                 .background(
                     color = MaterialTheme.colorScheme.surface,
@@ -128,9 +130,12 @@ fun MainScreen(
                         topEnd = animatedCornerRadius
                     )
                 )
-                .fillMaxSize()
         ) {
             when {
+                viewState.isOnline.not() -> {
+                    NetworkUI()
+                }
+
                 viewState.isLoading -> {
                     LoadingIndicator()
                 }

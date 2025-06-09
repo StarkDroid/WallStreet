@@ -6,5 +6,6 @@ data class MainScreenState(
     val isLoading: Boolean = false,
     val selectedCategory: String? = null,
     var showFAB: Boolean = true,
-    val error: String? = null
+    val error: String? = null,
+    val isOnline: Boolean = true
 )
