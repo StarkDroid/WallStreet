@@ -8,18 +8,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.Font
-import wallstreet.composeapp.generated.resources.Outfit_Medium
-import wallstreet.composeapp.generated.resources.Pacifico
 import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.Righteous
+import wallstreet.composeapp.generated.resources.WorkSans
 
 @Composable
 fun AppTypography(): Typography{
     val titleFont = FontFamily(
-        Font(resource = Res.font.Pacifico, weight = FontWeight.Medium)
+        Font(resource = Res.font.Righteous, weight = FontWeight.Medium)
     )
 
     val bodyFont = FontFamily(
-        Font(resource = Res.font.Outfit_Medium, weight = FontWeight.Normal)
+        Font(resource = Res.font.WorkSans, weight = FontWeight.W400)
     )
 
     return Typography(

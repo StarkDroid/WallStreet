@@ -95,7 +95,8 @@ fun WallpaperViewScreen(
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
-                        .padding(bottom = 50.dp, start = 24.dp, end = 24.dp)
+                        .padding(bottom = 50.dp, start = 24.dp, end = 24.dp),
+                    cornerRadius = 8.dp
                 ) {
                     Text(
                         text = stringResource(Res.string.wallpaper_screen_button_label),

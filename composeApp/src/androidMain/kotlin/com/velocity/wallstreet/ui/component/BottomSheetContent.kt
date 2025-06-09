@@ -130,7 +130,8 @@ fun BottomSheetContent(
                     }
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
                             imageVector = type.iconRes,
