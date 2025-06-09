@@ -34,7 +34,7 @@ import com.velocity.wallstreet.utils.NeoBrutalistShapes
 fun NeoBrutalistButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     borderWidth: Dp = 2.dp,
     shadowOffset: Dp = 4.dp,
     cornerRadius: Dp = NeoBrutalistShapes.slightlyRounded,

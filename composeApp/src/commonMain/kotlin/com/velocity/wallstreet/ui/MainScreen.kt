@@ -105,7 +105,7 @@ fun MainScreen(
                 modifier = Modifier
                     .navigationBarsPadding()
                     .height(25.dp),
-                containerColor = MaterialTheme.colorScheme.surface,
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
             ) {
                 BottomBarCredits()
             }
@@ -124,7 +124,7 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.surfaceContainer,
                     shape = RoundedCornerShape(
                         topStart = animatedCornerRadius,
                         topEnd = animatedCornerRadius

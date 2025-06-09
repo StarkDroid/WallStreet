@@ -27,7 +27,7 @@ import com.velocity.wallstreet.utils.NeoBrutalistShapes
 fun NeoBrutalistBottomSheet(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
     borderWidth: Dp = 2.dp,
     shadowOffset: Dp = 4.dp,
     cornerRadius: Dp = NeoBrutalistShapes.slightlyRounded,

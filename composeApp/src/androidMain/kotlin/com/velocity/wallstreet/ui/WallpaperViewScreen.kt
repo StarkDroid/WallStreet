@@ -80,10 +80,10 @@ fun WallpaperViewScreen(
                     .padding(innerPadding)
                     .padding(start = 16.dp, top = 40.dp),
                 onClick = onBackClick,
+                cornerRadius = 8.dp
             ) {
                 Icon(
                     imageVector = Icons.TwoTone.ArrowBackIosNew,
-                    tint = MaterialTheme.colorScheme.onPrimary,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
             }

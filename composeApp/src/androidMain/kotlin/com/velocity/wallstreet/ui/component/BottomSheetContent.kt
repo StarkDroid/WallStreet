@@ -122,7 +122,7 @@ fun BottomSheetContent(
         ) {
             WallpaperType.values.forEach { type ->
                 NeoBrutalistButton(
-                    backgroundColor = MaterialTheme.colorScheme.onSecondary,
+                    backgroundColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier
                         .weight(1f),
                     onClick = {
@@ -142,7 +142,8 @@ fun BottomSheetContent(
 
                         Text(
                             text = stringResource(type.label),
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

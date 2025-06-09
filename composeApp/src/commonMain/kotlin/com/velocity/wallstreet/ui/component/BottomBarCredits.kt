@@ -38,7 +38,7 @@ internal fun BottomBarCredits() {
                     style = SpanStyle(
                         fontWeight = FontWeight.Medium,
                         textDecoration = TextDecoration.Underline,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 )
             )
@@ -54,7 +54,7 @@ internal fun BottomBarCredits() {
         Text(
             text = hyperLinkText,
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.inversePrimary,
+            color = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .pointerHoverIcon(icon = PointerIcon.Hand)
