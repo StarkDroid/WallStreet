@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.R
+import com.velocity.wallstreet.theme.AppColors.successGreen
 import com.velocity.wallstreet.utils.WallpaperType
 import com.velocity.wallstreet.viewmodel.OperationResult
 import org.jetbrains.compose.resources.stringResource
@@ -63,7 +64,7 @@ fun BottomSheetContent(
             val (icon, tint, needsAnimation) = when (result) {
                 is OperationResult.Success -> Triple(
                     Icons.Filled.CheckCircle,
-                    MaterialTheme.colorScheme.surface,
+                    successGreen,
                     false
                 )
 
@@ -75,7 +76,7 @@ fun BottomSheetContent(
 
                 else -> Triple(
                     Icons.Filled.Refresh,
-                    MaterialTheme.colorScheme.surface,
+                    MaterialTheme.colorScheme.primary,
                     true
                 )
             }
@@ -104,7 +105,7 @@ fun BottomSheetContent(
                     else -> stringResource(Res.string.performing_action)
                 },
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
         }
@@ -122,7 +123,6 @@ fun BottomSheetContent(
         ) {
             WallpaperType.values.forEach { type ->
                 NeoBrutalistButton(
-                    backgroundColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     modifier = Modifier
                         .weight(1f),
                     onClick = {
@@ -135,7 +135,6 @@ fun BottomSheetContent(
                     ) {
                         Icon(
                             imageVector = type.iconRes,
-                            tint = MaterialTheme.colorScheme.onPrimary,
                             contentDescription = stringResource(R.string.wallpaper_set_button_icon_desc)
                         )
 
@@ -144,7 +143,6 @@ fun BottomSheetContent(
                         Text(
                             text = stringResource(type.label),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

@@ -2,7 +2,6 @@ package com.velocity.wallstreet.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.utils.Constants
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
@@ -55,9 +53,7 @@ internal fun BottomBarCredits() {
             text = hyperLinkText,
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .pointerHoverIcon(icon = PointerIcon.Hand)
+            modifier = Modifier.pointerHoverIcon(icon = PointerIcon.Hand)
         )
     }
 }

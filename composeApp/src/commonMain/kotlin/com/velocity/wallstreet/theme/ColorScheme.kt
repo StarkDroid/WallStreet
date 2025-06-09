@@ -40,3 +40,8 @@ val darkColorScheme = darkColorScheme(
     error = Color(0xFFCF6679),
     onError = Color.Black
 )
+
+// Custom App colors
+object AppColors {
+    val successGreen = Color(0xff428f42)
+}
