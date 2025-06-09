@@ -1,9 +1,5 @@
 package com.velocity.wallstreet.utils
 
-import coil3.PlatformContext
-import coil3.annotation.ExperimentalCoilApi
-import coil3.network.ConnectivityChecker
-
 object PlatformUtils {
     fun isMacOS(): Boolean = System.getProperty("os.name").contains("Mac")
     fun isLinux(): Boolean = System.getProperty("os.name").contains("Linux") && !isAndroid()
@@ -37,9 +33,4 @@ fun isNewVersionAvailable(currentVersion: String, latestVersion: String): Boolea
         }
     }
     return false
-}
-
-@OptIn(ExperimentalCoilApi::class)
-fun isNetworkAvailable(context: PlatformContext): Boolean {
-    return ConnectivityChecker(context).isOnline()
 }
