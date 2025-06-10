@@ -1,20 +1,26 @@
 package com.velocity.wallstreet.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.twotone.ArrowBackIosNew
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
@@ -34,7 +40,10 @@ import com.velocity.wallstreet.ui.component.NeoBrutalistButton
 import com.velocity.wallstreet.viewmodel.OperationResult
 import com.velocity.wallstreet.viewmodel.WallpaperScreenViewModel
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.ic_apply_wallpaper
+import wallstreet.composeapp.generated.resources.ic_back
 import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 import androidx.compose.ui.res.stringResource as stringResourceCompose
@@ -61,13 +70,26 @@ fun WallpaperViewScreen(
                         .padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
                     cornerRadius = 8.dp
                 ) {
-                    Text(
-                        text = stringResource(Res.string.wallpaper_screen_button_label),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.weight(1f)
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = vectorResource(Res.drawable.ic_apply_wallpaper),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            contentDescription = stringResource(Res.string.wallpaper_screen_button_label)
+                        )
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Text(
+                            text = stringResource(Res.string.wallpaper_screen_button_label),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 }
             }
         }
@@ -111,7 +133,7 @@ fun WallpaperViewScreen(
                 cornerRadius = 8.dp
             ) {
                 Icon(
-                    imageVector = Icons.TwoTone.ArrowBackIosNew,
+                    imageVector = vectorResource(Res.drawable.ic_back),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
@@ -135,14 +157,16 @@ fun WallpaperViewScreen(
                 }
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .blur(12.dp, BlurredEdgeTreatment.Unbounded)
-                    .align(Alignment.BottomCenter)
-                    .background(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
-            )
+            if (!isLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(120.dp)
+                        .blur(12.dp, BlurredEdgeTreatment.Unbounded)
+                        .align(Alignment.BottomCenter)
+                        .background(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+                )
+            }
         }
     }
 }
