@@ -1,8 +1,12 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.ArrowBackIosNew
@@ -13,6 +17,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +49,29 @@ fun WallpaperViewScreen(
     var showBottomSheet by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        bottomBar = {
+            if (!isLoading) {
+                NeoBrutalistButton(
+                    onClick = {
+                        showBottomSheet = true
+                    },
+                    modifier = Modifier
+                        .navigationBarsPadding()
+                        .padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
+                    cornerRadius = 8.dp
+                ) {
+                    Text(
+                        text = stringResource(Res.string.wallpaper_screen_button_label),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -84,27 +112,9 @@ fun WallpaperViewScreen(
             ) {
                 Icon(
                     imageVector = Icons.TwoTone.ArrowBackIosNew,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
-            }
-
-            if (!isLoading) {
-                NeoBrutalistButton(
-                    onClick = {
-                        showBottomSheet = true
-                    },
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(bottom = 50.dp, start = 24.dp, end = 24.dp),
-                    cornerRadius = 8.dp
-                ) {
-                    Text(
-                        text = stringResource(Res.string.wallpaper_screen_button_label),
-                        style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
             }
 
             if (showBottomSheet) {
@@ -124,6 +134,15 @@ fun WallpaperViewScreen(
                     )
                 }
             }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+                    .blur(12.dp, BlurredEdgeTreatment.Unbounded)
+                    .align(Alignment.BottomCenter)
+                    .background(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            )
         }
     }
 }

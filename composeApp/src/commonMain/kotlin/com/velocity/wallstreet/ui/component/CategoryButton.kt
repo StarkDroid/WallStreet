@@ -49,7 +49,11 @@ fun CategoryButton(
                 Text(
                     text = category,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = if (category == selectedCategory) {
+                        MaterialTheme.colorScheme.onPrimaryContainer
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    },
                     modifier = Modifier.padding(8.dp)
                 )
             }
