@@ -1,5 +1,10 @@
 package com.velocity.wallstreet.ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,11 +54,14 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 import androidx.compose.ui.res.stringResource as stringResourceCompose
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun WallpaperViewScreen(
     operationResult: OperationResult?,
     viewModel: WallpaperScreenViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    sharedTransitionScope: SharedTransitionScope,
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }
@@ -108,20 +116,30 @@ fun WallpaperViewScreen(
                 }
             }
 
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(viewModel.imageUrl)
-                    .crossfade(true)
-                    .listener(
-                        onStart = { isLoading = true },
-                        onSuccess = { _, _ -> isLoading = false },
-                        onError = { _, _ -> isLoading = false }
-                    )
-                    .build(),
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop,
-                contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
-            )
+            with(sharedTransitionScope) {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(viewModel.imageUrl)
+                        .crossfade(true)
+                        .listener(
+                            onStart = { isLoading = true },
+                            onSuccess = { _, _ -> isLoading = false },
+                            onError = { _, _ -> isLoading = false }
+                        )
+                        .build(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .sharedBounds(
+                            rememberSharedContentState(key = viewModel.imageUrl),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            enter = fadeIn(),
+                            exit = fadeOut(),
+                            resizeMode = SharedTransitionScope.ResizeMode.ScaleToBounds()
+                        ),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = stringResource(Res.string.wallpaper_thumbnail_desc)
+                )
+            }
 
             NeoBrutalistButton(
                 contentPadding = PaddingValues(12.dp),

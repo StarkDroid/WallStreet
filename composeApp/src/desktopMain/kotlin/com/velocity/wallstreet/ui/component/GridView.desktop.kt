@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -23,7 +22,7 @@ import com.velocity.wallstreet.data.model.Model
 actual fun GridView(
     wallpapers: List<Model>,
     onImageClick: (String) -> Unit,
-    gridState: LazyGridState
+    gridState: LazyGridState,
 ) {
 
     if (wallpapers.isNotEmpty()) {
@@ -37,7 +36,9 @@ actual fun GridView(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(wallpapers) { wallpaper ->
-                    CardView(wallpaper, onImageClick)
+                    CardView(
+                        wallpaper, onImageClick,
+                    )
                 }
             }
 
