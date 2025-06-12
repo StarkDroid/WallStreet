@@ -56,14 +56,16 @@ fun WallStreetNavGraph() {
                     parameters = { parametersOf(imageUrl) }
                 )
 
-                val result by wallpaperViewModel.isLoading.collectAsStateWithLifecycle()
+                val viewState by wallpaperViewModel.viewState.collectAsStateWithLifecycle()
 
                 WallpaperViewScreen(
-                    viewModel = wallpaperViewModel,
-                    operationResult = result,
+                    viewState = viewState,
+                    onImageLoadSuccess = wallpaperViewModel::onImageLoaded,
+                    onApplyWallpaper = wallpaperViewModel::applyWallpaper,
+                    onToggleBottomSheet = wallpaperViewModel::toggleBottomSheet,
                     onBackClick = { navController.popBackStack() },
                     animatedVisibilityScope = this,
-                    sharedTransitionScope = this@SharedTransitionLayout
+                    sharedTransitionScope = this@SharedTransitionLayout,
                 )
             }
         }
