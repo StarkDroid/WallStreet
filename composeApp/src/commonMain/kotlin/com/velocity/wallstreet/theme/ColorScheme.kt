@@ -1,8 +1,13 @@
 package com.velocity.wallstreet.theme
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+
+@Composable
+expect fun getColorScheme(darkTheme: Boolean): ColorScheme?
 
 // Light theme color scheme
 val lightColorScheme = lightColorScheme(
@@ -35,3 +40,8 @@ val darkColorScheme = darkColorScheme(
     error = Color(0xFFCF6679),
     onError = Color.Black
 )
+
+// Custom App colors
+object AppColors {
+    val successGreen = Color(0xff428f42)
+}

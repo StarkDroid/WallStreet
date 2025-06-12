@@ -63,7 +63,7 @@ internal fun AppHeader(
     LargeTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.background,
-            scrolledContainerColor = MaterialTheme.colorScheme.surface
+            scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         title = {
             Row(
@@ -86,7 +86,7 @@ internal fun AppHeader(
                     Text(
                         text = stringResource(Res.string.mainscreen_title_text),
                         style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.inversePrimary
+                        color = MaterialTheme.colorScheme.primary
                     )
 
                     if (isUpdateAvailable) {
@@ -101,7 +101,7 @@ internal fun AppHeader(
                             modifier = Modifier.padding(start = 8.dp),
                             text = currentAppVersion,
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.inversePrimary
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
                 }

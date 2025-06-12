@@ -54,12 +54,6 @@ class WallpaperUtilsAndroid(
                         )
                     }
                 }
-
-                WallpaperType.DownloadOnly -> {
-                    withContext(Dispatchers.IO) {
-                        downloadImage(imageUrl = imageUrl)
-                    }
-                }
             }
 
             Result.success(Unit)

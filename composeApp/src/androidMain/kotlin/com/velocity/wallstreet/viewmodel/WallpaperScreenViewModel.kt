@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class WallpaperScreenViewModel(
@@ -15,21 +16,59 @@ class WallpaperScreenViewModel(
     val imageUrl: String
 ) : ViewModel() {
 
-    private val _isLoading = MutableStateFlow<OperationResult?>(null)
-    val isLoading: StateFlow<OperationResult?> = _isLoading.asStateFlow()
+    private val _viewState = MutableStateFlow(WallpaperScreenViewState(imageUrl))
+    val viewState: StateFlow<WallpaperScreenViewState> = _viewState.asStateFlow()
 
     fun applyWallpaper(type: WallpaperType) {
         viewModelScope.launch {
-            _isLoading.value = OperationResult.Loading
+            _viewState.update {
+                it.copy(applyWallpaperState = OperationResult.Loading)
+            }
 
-            val result = repository.setWallpaper(imageUrl, type)
+            val result = repository.setWallpaper(_viewState.value.imageUrl, type)
 
             result.onSuccess {
-                _isLoading.value = OperationResult.Success(getSuccessMessage(type))
+                _viewState.update {
+                    it.copy(applyWallpaperState = OperationResult.Success(getSuccessMessage(type)))
+                }
                 delay(2000)
-                _isLoading.value = null
+                _viewState.update { it.copy(applyWallpaperState = null) }
             }.onFailure { error ->
-                _isLoading.value = OperationResult.Failure(error.message ?: "Unknown error")
+                _viewState.update {
+                    it.copy(
+                        applyWallpaperState = OperationResult.Failure(
+                            error.message ?: "Unknown error"
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    fun onImageLoaded() {
+        _viewState.update { it.copy(isLoading = false) }
+    }
+
+    fun toggleBottomSheet(show: Boolean) {
+        _viewState.update { it.copy(showBottomSheet = show) }
+    }
+
+    fun downloadWallpaper() {
+        viewModelScope.launch {
+            repository.downloadWallpaper(imageUrl).onSuccess {
+                _viewState.update {
+                    it.copy(
+                        showBottomSheet = true,
+                        applyWallpaperState = OperationResult.Success("Wallpaper saved to gallery")
+                    )
+                }
+                delay(2000)
+                _viewState.update {
+                    it.copy(
+                        applyWallpaperState = null,
+                        showBottomSheet = false
+                    )
+                }
             }
         }
     }
@@ -39,13 +78,19 @@ class WallpaperScreenViewModel(
             is WallpaperType.HomeScreen -> "Wallpaper set on home screen"
             is WallpaperType.LockScreen -> "Wallpaper set on lock screen"
             is WallpaperType.Both -> "Wallpaper set on both screens"
-            is WallpaperType.DownloadOnly -> "Wallpaper saved to gallery"
         }
     }
 }
 
 sealed class OperationResult {
-    object Loading : OperationResult()
+    data object Loading : OperationResult()
     data class Success(val message: String) : OperationResult()
     data class Failure(val message: String) : OperationResult()
 }
+
+data class WallpaperScreenViewState(
+    val imageUrl: String,
+    val isLoading: Boolean = true,
+    var showBottomSheet: Boolean = false,
+    val applyWallpaperState: OperationResult? = null
+)
