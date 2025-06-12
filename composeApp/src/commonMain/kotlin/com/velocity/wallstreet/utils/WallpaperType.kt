@@ -4,11 +4,9 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.ic_both_wallpaper
-import wallstreet.composeapp.generated.resources.ic_download_wallpaper
 import wallstreet.composeapp.generated.resources.ic_homescreen_wallpaper
 import wallstreet.composeapp.generated.resources.ic_lockscreen_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_type_both
-import wallstreet.composeapp.generated.resources.wallpaper_type_download
 import wallstreet.composeapp.generated.resources.wallpaper_type_homescreen
 import wallstreet.composeapp.generated.resources.wallpaper_type_lockscreen
 
@@ -25,12 +23,8 @@ sealed class WallpaperType(val label: StringResource, val iconRes: DrawableResou
         Res.string.wallpaper_type_both,
         Res.drawable.ic_both_wallpaper
     )
-    data object DownloadOnly : WallpaperType(
-        Res.string.wallpaper_type_download,
-        Res.drawable.ic_download_wallpaper
-    )
 
     companion object {
-        val values = listOf(HomeScreen, LockScreen, Both, DownloadOnly)
+        val values = listOf(HomeScreen, LockScreen, Both)
     }
 }

@@ -1,5 +1,7 @@
 package com.velocity.wallstreet.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -34,12 +36,14 @@ import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
 import androidx.compose.ui.res.stringResource as stringResourceCompose
 
 
+@RequiresApi(Build.VERSION_CODES.S)
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun WallpaperViewScreen(
     viewState: WallpaperScreenViewState,
     onImageLoadSuccess: () -> Unit,
     onToggleBottomSheet: (Boolean) -> Unit,
+    onDownloadWallpaper: () -> Unit,
     onBackClick: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope,
     sharedTransitionScope: SharedTransitionScope,
@@ -48,7 +52,10 @@ fun WallpaperViewScreen(
     Scaffold(
         bottomBar = {
             if (!viewState.isLoading) {
-                BottomBarContent(onToggleBottomSheet)
+                BottomBarContent(
+                    onToggleBottomSheet,
+                    onDownloadWallpaper
+                )
             }
         }
     ) { innerPadding ->

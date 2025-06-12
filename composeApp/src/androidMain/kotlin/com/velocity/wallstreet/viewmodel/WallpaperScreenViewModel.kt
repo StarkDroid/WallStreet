@@ -35,7 +35,11 @@ class WallpaperScreenViewModel(
                 _viewState.update { it.copy(applyWallpaperState = null) }
             }.onFailure { error ->
                 _viewState.update {
-                    it.copy(applyWallpaperState = OperationResult.Failure(error.message ?: "Unknown error"))
+                    it.copy(
+                        applyWallpaperState = OperationResult.Failure(
+                            error.message ?: "Unknown error"
+                        )
+                    )
                 }
             }
         }
@@ -49,12 +53,31 @@ class WallpaperScreenViewModel(
         _viewState.update { it.copy(showBottomSheet = show) }
     }
 
+    fun downloadWallpaper() {
+        viewModelScope.launch {
+            repository.downloadWallpaper(imageUrl).onSuccess {
+                _viewState.update {
+                    it.copy(
+                        showBottomSheet = true,
+                        applyWallpaperState = OperationResult.Success("Wallpaper saved to gallery")
+                    )
+                }
+                delay(2000)
+                _viewState.update {
+                    it.copy(
+                        applyWallpaperState = null,
+                        showBottomSheet = false
+                    )
+                }
+            }
+        }
+    }
+
     private fun getSuccessMessage(type: WallpaperType): String {
         return when (type) {
             is WallpaperType.HomeScreen -> "Wallpaper set on home screen"
             is WallpaperType.LockScreen -> "Wallpaper set on lock screen"
             is WallpaperType.Both -> "Wallpaper set on both screens"
-            is WallpaperType.DownloadOnly -> "Wallpaper saved to gallery"
         }
     }
 }

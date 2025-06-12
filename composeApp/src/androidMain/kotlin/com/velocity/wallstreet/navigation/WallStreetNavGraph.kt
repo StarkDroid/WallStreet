@@ -65,6 +65,7 @@ fun WallStreetNavGraph() {
                     viewState = viewState,
                     onImageLoadSuccess = wallpaperViewModel::onImageLoaded,
                     onToggleBottomSheet = wallpaperViewModel::toggleBottomSheet,
+                    onDownloadWallpaper = wallpaperViewModel::downloadWallpaper,
                     onBackClick = { navController.popBackStack() },
                     animatedVisibilityScope = this,
                     sharedTransitionScope = this@SharedTransitionLayout,

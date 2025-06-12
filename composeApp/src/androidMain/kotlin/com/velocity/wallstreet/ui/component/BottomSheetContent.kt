@@ -113,25 +113,24 @@ fun BottomSheetContent(
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        FlowRow(
+        FlowColumn (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
-            maxItemsInEachRow = 2,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             WallpaperType.values.forEach { type ->
                 NeoBrutalistButton(
-                    modifier = Modifier
-                        .weight(1f),
+                    modifier = Modifier.padding(horizontal = 24.dp),
                     onClick = {
                         onApplyWallpaper(type)
-                    }
+                    },
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             imageVector = vectorResource(type.iconRes),
