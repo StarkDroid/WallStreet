@@ -23,12 +23,8 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.R
 import com.velocity.wallstreet.ui.component.BottomBarContent
-import com.velocity.wallstreet.ui.component.BottomSheetContent
 import com.velocity.wallstreet.ui.component.LoadingIndicator
-import com.velocity.wallstreet.ui.component.NeoBrutalistBottomSheet
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
-import com.velocity.wallstreet.utils.WallpaperType
-import com.velocity.wallstreet.viewmodel.OperationResult
 import com.velocity.wallstreet.viewmodel.WallpaperScreenViewState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -43,7 +39,6 @@ import androidx.compose.ui.res.stringResource as stringResourceCompose
 fun WallpaperViewScreen(
     viewState: WallpaperScreenViewState,
     onImageLoadSuccess: () -> Unit,
-    onApplyWallpaper: (WallpaperType) -> Unit,
     onToggleBottomSheet: (Boolean) -> Unit,
     onBackClick: () -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope,
@@ -109,22 +104,6 @@ fun WallpaperViewScreen(
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
                 )
-            }
-
-            if (viewState.showBottomSheet) {
-                NeoBrutalistBottomSheet(
-                    cornerRadius = 8.dp,
-                    onDismissRequest = {
-                        if (viewState.applyWallpaperState !is OperationResult.Loading) {
-                            onToggleBottomSheet(false)
-                        }
-                    }
-                ) {
-                    BottomSheetContent(
-                        result = viewState.applyWallpaperState,
-                        onApplyWallpaper = onApplyWallpaper,
-                    )
-                }
             }
         }
     }
