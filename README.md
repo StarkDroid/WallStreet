@@ -6,7 +6,7 @@
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![macOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0)
 
-[![Jetpack Compose Desktop](https://img.shields.io/badge/Latest_release_download-v2.5.1-blue.svg)](https://github.com/StarkDroid/WallStreet/releases)
+[![Jetpack Compose Desktop](https://img.shields.io/badge/Latest_release_download-v2.6.0-blue.svg)](https://github.com/StarkDroid/WallStreet/releases)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/StarkDroid/WallStreet/total)
 [![Github Stars](https://img.shields.io/github/stars/StarkDroid/WallStreet)](https://github.com/StarkDroid/WallStreet)
 
@@ -17,14 +17,17 @@ This app leverages **Jetpack Compose / Kotlin Multi-Platform** to create a beaut
 ✅ Always free and OpenSource <br>
 ✅ No Ads or purchases <br>
 ✅ Performant, Responsive and Beautiful UI (NeoBrutalism) <br>
+✅ Dynamic app theme based on wallpaper <br>
+✅ All the goodness of Jetpack compose in one place <br>
 ✅ Your app, your own wallpaper collection (Read below to know how you can add more wallpapers yourself) <br>
 ✅ Multi-platform compatibility <br>
 ✅ Wallpapers constantly refreshed and added <br>
 ✅ Fits devices of all screen sizes <br>
 ✅ Single click to apply <br>
 ✅ Quickly filter through various wallpaper categories <br>
-✅ Download HD wallpapers instantly <br>
+✅ Download 4k wallpapers instantly <br>
 ✅ Actively maintained and evolving <br>
+✅ Lightweight in size <br>
 
 ## **Screenshots**
 
