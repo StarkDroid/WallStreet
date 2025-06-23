@@ -16,16 +16,18 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
-    
+
     jvm("desktop")
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.fragment.ktx)
+            implementation(libs.androidx.material)
+            implementation(libs.androidx.compose.material3)
             implementation(libs.ktor.client.android)
             implementation(libs.navigation.compose)
             implementation(libs.splashscreen.compose)
@@ -37,8 +39,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.materialIconsExtended)
+            implementation(libs.androidx.compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -62,7 +63,7 @@ kotlin {
 }
 
 android {
-    version = "2.5.1"
+    version = "2.6.0"
     namespace = "com.velocity.wallstreet"
     compileSdk = 35
 
@@ -70,7 +71,7 @@ android {
         applicationId = "com.velocity.wallstreet"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 6
+        versionCode = 7
         versionName = project.version.toString()
     }
     packaging {
@@ -83,7 +84,8 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt")
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "src/androidMain/proguard-rules.pro"
             )
 
             applicationVariants.all {
@@ -111,7 +113,7 @@ dependencies {
 }
 
 compose.desktop {
-    version = "2.5.1"
+    version = "2.6.0"
 
     application {
         mainClass = "com.velocity.wallstreet.MainKt"
@@ -152,4 +154,3 @@ compose.desktop {
         }
     }
 }
-

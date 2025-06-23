@@ -34,11 +34,11 @@ fun CategoryButton(
             Box(
                 modifier = Modifier
                     .padding(2.dp)
-                    .border(2.dp, MaterialTheme.colorScheme.inversePrimary, RoundedCornerShape(8.dp))
+                    .border(2.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp))
                     .clip(RoundedCornerShape(8.dp))
                     .background(
                         color = if (category == selectedCategory) {
-                            MaterialTheme.colorScheme.primary
+                            MaterialTheme.colorScheme.primaryContainer
                         } else {
                             Color.Transparent
                         },
@@ -50,9 +50,9 @@ fun CategoryButton(
                     text = category,
                     style = MaterialTheme.typography.bodySmall,
                     color = if (category == selectedCategory) {
-                        MaterialTheme.colorScheme.onPrimary
+                        MaterialTheme.colorScheme.onPrimaryContainer
                     } else {
-                        MaterialTheme.colorScheme.inversePrimary
+                        MaterialTheme.colorScheme.primary
                     },
                     modifier = Modifier.padding(8.dp)
                 )

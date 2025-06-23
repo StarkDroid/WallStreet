@@ -1,5 +1,10 @@
 package com.velocity.wallstreet.utils
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.runtime.staticCompositionLocalOf
+
 object PlatformUtils {
     fun isMacOS(): Boolean = System.getProperty("os.name").contains("Mac")
     fun isLinux(): Boolean = System.getProperty("os.name").contains("Linux") && !isAndroid()
@@ -33,4 +38,13 @@ fun isNewVersionAvailable(currentVersion: String, latestVersion: String): Boolea
         }
     }
     return false
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope> {
+    error("SharedTransitionScope not provided")
+}
+
+val LocalAnimatedVisibilityScope = staticCompositionLocalOf<AnimatedVisibilityScope> {
+    error("AnimatedVisibilityScope not provided")
 }

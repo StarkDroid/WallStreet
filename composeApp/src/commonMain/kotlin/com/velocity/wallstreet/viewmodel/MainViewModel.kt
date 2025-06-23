@@ -18,7 +18,7 @@ class MainViewModel(
     private val repository: WallpaperRepository
 ) : ViewModel(), KoinComponent {
 
-    private val networkMonitor by inject<NetworkMonitor>(null)
+    private val networkMonitor: NetworkMonitor by inject()
 
     private val _state = MutableStateFlow(MainScreenState())
     val state = _state.asStateFlow()

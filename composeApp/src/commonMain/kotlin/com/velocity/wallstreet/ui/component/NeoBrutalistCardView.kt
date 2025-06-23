@@ -2,6 +2,7 @@ package com.velocity.wallstreet.ui.component
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -64,12 +65,12 @@ fun NeoBrutalistCardView(
 
     Box(
         modifier = modifier
-            .fillMaxSize()
             .height(350.dp)
+            .fillMaxSize()
             .padding(8.dp)
             .clickable(
                 onClick = onClick,
-                indication = null,
+                indication = LocalIndication.current,
                 interactionSource = interactionSource
             ),
     ) {

@@ -12,20 +12,17 @@ class WallpaperUtilsDesktop : WallpaperFunctions {
     ): Result<Unit> {
         return try {
             when {
-                type is WallpaperType.DownloadOnly -> downloadImage(imageUrl)
-                else -> {
-                    when {
-                        PlatformUtils.isWindows() -> setWindowsWallpaper(downloadFile(imageUrl).absolutePath)
-                        PlatformUtils.isMacOS() -> {
-                            val script = """
+                PlatformUtils.isWindows() -> setWindowsWallpaper(downloadFile(imageUrl).absolutePath)
+                PlatformUtils.isMacOS() -> {
+                    val script = """
                                 tell application "System Events"
                                     set picture of every desktop to "${downloadFile(imageUrl).absolutePath}"
                                 end tell
                             """.trimIndent()
 
-                            val process = ProcessBuilder("osascript", "-e", script).start()
-                            process.waitFor()
-                        }
+                    withContext(Dispatchers.IO) {
+                        val process = ProcessBuilder("osascript", "-e", script).start()
+                        process.waitFor()
                     }
                 }
             }
