@@ -1,5 +1,5 @@
 # ----------------------------------
-# Desktop Specific Rules
+# Android Specific Rules
 # ----------------------------------
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt
@@ -9,9 +9,9 @@
 # Compose Rules
 # ----------------------------------
 -keep class androidx.compose.** { *; }
--keep class org.jetbrains.compose.** { *; }
 -dontwarn androidx.compose.**
--dontwarn org.jetbrains.compose.**
+-keep class androidx.lifecycle.** { *; }
+-dontwarn androidx.lifecycle.**
 
 # ----------------------------------
 # Ktor Rules
@@ -42,23 +42,18 @@
 -dontwarn kotlinx.**
 
 # ----------------------------------
+# Firebase Rules
+# ----------------------------------
+-keep class com.google.firebase.** { *; }
+-dontwarn com.google.firebase.**
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
+
+# ----------------------------------
 # Koin Rules
 # ----------------------------------
 -keep class org.koin.** { *; }
--dontwarn org.koin.**
 -keep class com.velocity.wallstreet.di.** { *; }
-
-# ----------------------------------
-# Lifecycle Rules
-# ----------------------------------
--keep class androidx.lifecycle.** { *; }
--dontwarn androidx.lifecycle.**
-
-# ----------------------------------
-# Android Core Rules
-# ----------------------------------
--keep class androidx.core.** { *; }
--dontwarn androidx.core.**
 
 # ----------------------------------
 # App-specific Rules
@@ -68,23 +63,6 @@
 
 # Keep your utility classes
 -keep class com.velocity.wallstreet.utils.** { *; }
--keepclasseswithmembers class com.velocity.wallstreet.utils.WallpaperUtilsDesktop { *; }
--keepclasseswithmembers class com.velocity.wallstreet.utils.PlatformUtils { *; }
-# Keep JNA classes and all implementations
--keep class com.sun.jna.** { *; }
--keep class * implements com.sun.jna.** { *; }
--keepattributes InnerClasses, Signature
-
-# Keep all utils classes and their members (including private ones)
--keep class com.velocity.wallstreet.utils.** { *; }
--keepclassmembers class com.velocity.wallstreet.utils.** { *; }
-
-# Specifically keep the wallpaper-related methods
--keepclassmembers class * {
-    boolean setWindowsWallpaper(java.lang.String);
-    java.io.File downloadFile(java.lang.String);
-    boolean SystemParametersInfoW(int, int, java.lang.String, int);
-}
 
 # Keep your UI components
 -keep class com.velocity.wallstreet.ui.** { *; }
@@ -106,11 +84,6 @@
     @org.jetbrains.annotations.Nullable *;
 }
 
-# Keep the main class
--keep class com.velocity.wallstreet.MainKt { *; }
-
-# ----------------------------------
-# General Rules
-# ----------------------------------
-# Ignore all warnings for unresolved classes
--ignorewarnings
+# Keep the application class
+-keep class com.velocity.wallstreet.WallStreetApplication { *; }
+-keep class com.velocity.wallstreet.MainActivity { *; }

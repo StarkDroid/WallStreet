@@ -16,7 +16,11 @@ import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.data.model.Model
 
 @Composable
-actual fun GridView(wallpapers: List<Model>, onImageClick: (String) -> Unit, gridState: LazyGridState) {
+actual fun GridView(
+    wallpapers: List<Model>,
+    onImageClick: (String) -> Unit,
+    gridState: LazyGridState,
+) {
 
     if (wallpapers.isNotEmpty()) {
         Box(
@@ -29,7 +33,9 @@ actual fun GridView(wallpapers: List<Model>, onImageClick: (String) -> Unit, gri
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 items(wallpapers) { wallpaper ->
-                    CardView(wallpaper, onImageClick)
+                    CardView(
+                        wallpaper, onImageClick
+                    )
                 }
             }
         }

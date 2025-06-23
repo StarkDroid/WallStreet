@@ -2,10 +2,6 @@ package com.velocity.wallstreet.ui.component
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,10 +15,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.velocity.wallstreet.R
+import com.velocity.wallstreet.theme.AppColors.successGreen
 import com.velocity.wallstreet.utils.WallpaperType
 import com.velocity.wallstreet.viewmodel.OperationResult
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import wallstreet.composeapp.generated.resources.Res
+import wallstreet.composeapp.generated.resources.ic_error
+import wallstreet.composeapp.generated.resources.ic_refresh
+import wallstreet.composeapp.generated.resources.ic_success
 import wallstreet.composeapp.generated.resources.performing_action
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -62,20 +63,20 @@ fun BottomSheetContent(
         ) {
             val (icon, tint, needsAnimation) = when (result) {
                 is OperationResult.Success -> Triple(
-                    Icons.Filled.CheckCircle,
-                    MaterialTheme.colorScheme.surface,
+                    vectorResource(Res.drawable.ic_success),
+                    successGreen,
                     false
                 )
 
                 is OperationResult.Failure -> Triple(
-                    Icons.Filled.Error,
+                    vectorResource(Res.drawable.ic_error),
                     MaterialTheme.colorScheme.error,
                     false
                 )
 
                 else -> Triple(
-                    Icons.Filled.Refresh,
-                    MaterialTheme.colorScheme.surface,
+                    vectorResource(Res.drawable.ic_refresh),
+                    MaterialTheme.colorScheme.primary,
                     true
                 )
             }
@@ -104,7 +105,7 @@ fun BottomSheetContent(
                     else -> stringResource(Res.string.performing_action)
                 },
                 style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
         }
@@ -112,29 +113,28 @@ fun BottomSheetContent(
 
         Spacer(modifier = Modifier.height(48.dp))
 
-        FlowRow(
+        FlowColumn (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp),
-            maxItemsInEachRow = 2,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             WallpaperType.values.forEach { type ->
                 NeoBrutalistButton(
-                    backgroundColor = MaterialTheme.colorScheme.onSecondary,
-                    modifier = Modifier
-                        .weight(1f),
+                    modifier = Modifier.padding(horizontal = 24.dp),
                     onClick = {
                         onApplyWallpaper(type)
-                    }
+                    },
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
-                            imageVector = type.iconRes,
-                            tint = MaterialTheme.colorScheme.onPrimary,
+                            imageVector = vectorResource(type.iconRes),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
                             contentDescription = stringResource(R.string.wallpaper_set_button_icon_desc)
                         )
 
@@ -142,7 +142,8 @@ fun BottomSheetContent(
 
                         Text(
                             text = stringResource(type.label),
-                            style = MaterialTheme.typography.bodyMedium
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            style = MaterialTheme.typography.bodyMedium,
                         )
                     }
                 }

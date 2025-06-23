@@ -3,17 +3,43 @@ package com.velocity.wallstreet.ui
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.LocalPlatformContext
-import com.velocity.wallstreet.ui.component.*
+import com.velocity.wallstreet.ui.component.AppHeader
+import com.velocity.wallstreet.ui.component.BottomBarCredits
+import com.velocity.wallstreet.ui.component.CategoryButton
+import com.velocity.wallstreet.ui.component.FloatingActionButton
+import com.velocity.wallstreet.ui.component.GridView
+import com.velocity.wallstreet.ui.component.LoadingIndicator
+import com.velocity.wallstreet.ui.component.NetworkUI
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.utils.getAppVersion
@@ -24,7 +50,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = koinViewModel(),
-    onImageClick: (String) -> Unit = {}
+    onImageClick: (String) -> Unit = {},
 ) {
     val platformContext = LocalPlatformContext.current
     val viewState by viewModel.state.collectAsStateWithLifecycle()
@@ -76,10 +102,10 @@ fun MainScreen(
         },
         bottomBar = {
             BottomAppBar(
-                modifier = Modifier
-                    .navigationBarsPadding()
-                    .height(25.dp),
-                containerColor = MaterialTheme.colorScheme.surface,
+                modifier = Modifier.height(40.dp),
+                contentPadding = PaddingValues(bottom = 16.dp),
+                windowInsets = WindowInsets(bottom = 0),
+                containerColor = MaterialTheme.colorScheme.surfaceContainer,
             ) {
                 BottomBarCredits()
             }
@@ -98,7 +124,7 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.surfaceContainer,
                     shape = RoundedCornerShape(
                         topStart = animatedCornerRadius,
                         topEnd = animatedCornerRadius
@@ -131,7 +157,7 @@ fun MainScreen(
                         GridView(
                             wallpapers = filteredWallpapers,
                             onImageClick = onImageClick,
-                            gridState = gridState
+                            gridState = gridState,
                         )
                     }
                 }

@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +33,7 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
@@ -42,10 +44,13 @@ import com.velocity.wallstreet.utils.WallpaperType
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.koinInject
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.desktop_wallpaper_apply
 import wallstreet.composeapp.generated.resources.desktop_wallpaper_download
+import wallstreet.composeapp.generated.resources.ic_apply_wallpaper
+import wallstreet.composeapp.generated.resources.ic_download_wallpaper
 import wallstreet.composeapp.generated.resources.no_thumbnail_desc
 import wallstreet.composeapp.generated.resources.no_wallpaper
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
@@ -121,10 +126,23 @@ actual fun CardView(
                             }
                         },
                     ) {
-                        Text(
-                            text = stringResource(Res.string.desktop_wallpaper_apply),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = vectorResource(Res.drawable.ic_apply_wallpaper),
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                contentDescription = stringResource(Res.string.desktop_wallpaper_apply)
+                            )
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = stringResource(Res.string.desktop_wallpaper_apply),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontSize = 14.sp
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.fillMaxWidth(0.05f))
@@ -141,10 +159,21 @@ actual fun CardView(
                             }
                         },
                     ) {
-                        Text(
-                            text = stringResource(Res.string.desktop_wallpaper_download),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = vectorResource(Res.drawable.ic_download_wallpaper),
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                contentDescription = stringResource(Res.string.desktop_wallpaper_download)
+                            )
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = stringResource(Res.string.desktop_wallpaper_download),
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontSize = 14.sp
+                            )
+                        }
                     }
                 }
             }
