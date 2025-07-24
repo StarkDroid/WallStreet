@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.velocity.wallstreet.R
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.engine.cio.CIO
 
 actual fun getAppVersion(context: Any): String {
     val androidContext = context as? Context ?: return "Unknown"
@@ -30,3 +32,13 @@ fun createNotificationChannel(context: Context) {
         notificationManager.createNotificationChannel(channel)
     }
 }
+
+actual object PlatformUtils {
+    actual fun isAndroid(): Boolean = true
+    actual fun isIOS(): Boolean = false
+    actual fun isLinux(): Boolean = false
+    actual fun isWindows(): Boolean = false
+    actual fun isMacOS(): Boolean = false
+}
+
+actual val httpClientEngine: HttpClientEngineFactory<*> = CIO

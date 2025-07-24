@@ -50,5 +50,4 @@ class WallpaperRepositoryImpl(
             else -> wallpaperData.mobile
         }
     }
-
 }

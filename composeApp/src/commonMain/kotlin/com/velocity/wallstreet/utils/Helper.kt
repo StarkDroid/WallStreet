@@ -4,26 +4,22 @@ import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.runtime.staticCompositionLocalOf
+import io.ktor.client.engine.HttpClientEngineFactory
 
-object PlatformUtils {
-    fun isMacOS(): Boolean = System.getProperty("os.name").contains("Mac")
-    fun isLinux(): Boolean = System.getProperty("os.name").contains("Linux") && !isAndroid()
-    fun isWindows(): Boolean = System.getProperty("os.name").contains("Windows")
-    fun isAndroid(): Boolean {
-        return try {
-            Class.forName("android.os.Build")
-            true
-        } catch (_: ClassNotFoundException) {
-            false
-        }
-    }
-
+expect object PlatformUtils {
+    fun isAndroid(): Boolean
+    fun isIOS(): Boolean
+    fun isLinux(): Boolean
+    fun isMacOS(): Boolean
+    fun isWindows(): Boolean
 }
 
 expect fun getAppVersion(context: Any): String
 
+expect val httpClientEngine: HttpClientEngineFactory<*>
+
 fun parseVersion(version: String): List<Int> {
-    return version.split(".").map { it.toInt() }
+    return version.split(".").map { it.toIntOrNull() ?: 0 }
 }
 
 fun isNewVersionAvailable(currentVersion: String, latestVersion: String): Boolean {

@@ -51,7 +51,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(libs.androidx.compose.material3)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -61,6 +61,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.darwin)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
@@ -70,6 +71,10 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.java.native.access)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }
