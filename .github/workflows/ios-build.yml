@@ -23,14 +23,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up Kotlin Multiplatform Dependencies
-        run: ./gradlew :composeApp:assembleDebugXCFramework
-
-      - name: Install CocoaPods (optional)
-        run: |
-          cd iosApp || exit 0
-          pod install || echo "No Podfile found — skipping"
-
       - name: Build Archive (unsigned)
         run: |
           cd iosApp
