@@ -1,0 +1,45 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK for Kotlin Multiplatform
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Kotlin Multiplatform Dependencies
+        run: ./gradlew :composeApp:assembleDebugXCFramework
+
+      - name: Install CocoaPods
+        run: |
+          cd iosApp
+          pod install || echo "No Podfile found — skipping"
+
+      - name: Build iOS App with Xcode
+        run: |
+          xcodebuild \
+            -workspace iosApp.xcworkspace \
+            -scheme iosApp \
+            -sdk iphoneos \
+            -configuration Release \
+            build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: iosApp/build
