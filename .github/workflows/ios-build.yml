@@ -2,9 +2,11 @@ name: iOS Build
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - base/ios_init
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
