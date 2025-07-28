@@ -11,14 +11,14 @@ on:
 
 jobs:
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up JDK for Kotlin Multiplatform
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -26,22 +26,50 @@ jobs:
       - name: Set up Kotlin Multiplatform Dependencies
         run: ./gradlew :composeApp:assembleDebugXCFramework
 
-      - name: Install CocoaPods
+      - name: Install CocoaPods (optional)
         run: |
-          cd iosApp
+          cd iosApp || exit 0
           pod install || echo "No Podfile found — skipping"
 
-      - name: Build iOS App with Xcode
+      - name: Build Archive (unsigned)
+        run: |
+          cd iosApp
+          xcodebuild \
+            -scheme iosApp \
+            -configuration Debug \
+            -sdk iphoneos \
+            -archivePath $RUNNER_TEMP/iosApp.xcarchive \
+            -destination 'generic/platform=iOS' \
+            archive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Create minimal exportOptions.plist
+        run: |
+          cat <<EOF > $RUNNER_TEMP/exportOptions.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+            <dict>
+              <key>method</key>
+              <string>development</string>
+              <key>signingStyle</key>
+              <string>manual</string>
+              <key>compileBitcode</key>
+              <false/>
+            </dict>
+          </plist>
+          EOF
+
+      - name: Export Unsigned IPA
         run: |
           xcodebuild \
-            -workspace iosApp.xcworkspace \
-            -scheme iosApp \
-            -sdk iphoneos \
-            -configuration Release \
-            build
+            -exportArchive \
+            -archivePath $RUNNER_TEMP/iosApp.xcarchive \
+            -exportPath $RUNNER_TEMP/iosAppExport \
+            -exportOptionsPlist $RUNNER_TEMP/exportOptions.plist \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
-      - name: Upload Build Artifact
+      - name: Upload Unsigned IPA Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ios-build
-          path: iosApp/build
+          name: ios-ipa
+          path: ${{ runner.temp }}/iosAppExport/*.ipa
