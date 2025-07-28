@@ -19,8 +19,8 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.utils.LocalAnimatedVisibilityScope
-import com.velocity.wallstreet.utils.LocalSharedTransitionScope
+import com.velocity.wallstreet.theme.LocalAnimatedVisibilityScope
+import com.velocity.wallstreet.theme.LocalSharedTransitionScope
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res

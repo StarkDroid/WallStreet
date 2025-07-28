@@ -1,7 +1,5 @@
-package com.velocity.wallstreet.ui
+package com.velocity.wallstreet.ui.screen
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -18,12 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.velocity.wallstreet.R
 import com.velocity.wallstreet.ui.component.BottomBarContent
 import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
@@ -32,11 +29,10 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import wallstreet.composeapp.generated.resources.Res
 import wallstreet.composeapp.generated.resources.ic_back
+import wallstreet.composeapp.generated.resources.wallpaper_screen_desc_back_button
 import wallstreet.composeapp.generated.resources.wallpaper_thumbnail_desc
-import androidx.compose.ui.res.stringResource as stringResourceCompose
 
 
-@RequiresApi(Build.VERSION_CODES.S)
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun WallpaperViewScreen(
@@ -48,6 +44,8 @@ fun WallpaperViewScreen(
     animatedVisibilityScope: AnimatedVisibilityScope,
     sharedTransitionScope: SharedTransitionScope,
 ) {
+
+    val context = LocalPlatformContext.current
 
     Scaffold(
         bottomBar = {
@@ -75,7 +73,7 @@ fun WallpaperViewScreen(
 
             with(sharedTransitionScope) {
                 AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
+                    model = ImageRequest.Builder(context)
                         .data(viewState.imageUrl)
                         .crossfade(true)
                         .listener(
@@ -109,7 +107,7 @@ fun WallpaperViewScreen(
                 Icon(
                     imageVector = vectorResource(Res.drawable.ic_back),
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                    contentDescription = stringResourceCompose(R.string.wallpaper_screen_desc_back_button)
+                    contentDescription = stringResource(Res.string.wallpaper_screen_desc_back_button)
                 )
             }
         }

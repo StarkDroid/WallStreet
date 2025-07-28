@@ -19,8 +19,8 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.velocity.wallstreet.data.model.Model
-import com.velocity.wallstreet.utils.LocalAnimatedVisibilityScope
-import com.velocity.wallstreet.utils.LocalSharedTransitionScope
+import com.velocity.wallstreet.theme.LocalAnimatedVisibilityScope
+import com.velocity.wallstreet.theme.LocalSharedTransitionScope
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.Res
@@ -36,6 +36,7 @@ actual fun CardView(
 ) {
     val sharedTransitionScope = LocalSharedTransitionScope.current
     val animatedVisibilityScope = LocalAnimatedVisibilityScope.current
+    val context = LocalPlatformContext.current
 
     with(sharedTransitionScope) {
         NeoBrutalistCardView(
@@ -56,7 +57,7 @@ actual fun CardView(
                 )
             } else {
                 AsyncImage(
-                    model = ImageRequest.Builder(LocalPlatformContext.current)
+                    model = ImageRequest.Builder(context)
                         .data(wallpapers.thumbnailUrl)
                         .crossfade(true)
                         .build(),

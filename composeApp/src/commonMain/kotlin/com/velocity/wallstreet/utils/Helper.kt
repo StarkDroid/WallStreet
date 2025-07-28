@@ -1,9 +1,5 @@
 package com.velocity.wallstreet.utils
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.runtime.staticCompositionLocalOf
 import io.ktor.client.engine.HttpClientEngineFactory
 
 expect object PlatformUtils {
@@ -34,13 +30,4 @@ fun isNewVersionAvailable(currentVersion: String, latestVersion: String): Boolea
         }
     }
     return false
-}
-
-@OptIn(ExperimentalSharedTransitionApi::class)
-val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope> {
-    error("SharedTransitionScope not provided")
-}
-
-val LocalAnimatedVisibilityScope = staticCompositionLocalOf<AnimatedVisibilityScope> {
-    error("AnimatedVisibilityScope not provided")
 }

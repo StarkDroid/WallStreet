@@ -16,4 +16,5 @@
     <string name="desktop_wallpaper_apply">Apply Wallpaper</string>
     <string name="desktop_wallpaper_download">Download Wallpaper</string>
     <string name="mainscreen_network_unavailable">Please connect to your internet, The page will refresh automatically</string>
+    <string name="wallpaper_screen_desc_back_button">Back Button</string>
 </resources>

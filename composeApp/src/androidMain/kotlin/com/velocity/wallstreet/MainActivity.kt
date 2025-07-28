@@ -8,8 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.core.view.WindowCompat
-import com.velocity.wallstreet.navigation.WallStreetNavGraph
-import com.velocity.wallstreet.theme.AppTheme
 import com.velocity.wallstreet.utils.NotificationPermissionHandler
 import com.velocity.wallstreet.utils.createNotificationChannel
 
@@ -44,9 +42,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             windowDecor.isAppearanceLightStatusBars = !isSystemInDarkTheme()
 
-            AppTheme {
-                WallStreetNavGraph()
-            }
+            App()
         }
     }
 }

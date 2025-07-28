@@ -11,10 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.R
 import com.velocity.wallstreet.theme.AppColors.successGreen
 import com.velocity.wallstreet.utils.WallpaperType
 import com.velocity.wallstreet.viewmodel.OperationResult
@@ -25,6 +23,7 @@ import wallstreet.composeapp.generated.resources.ic_error
 import wallstreet.composeapp.generated.resources.ic_refresh
 import wallstreet.composeapp.generated.resources.ic_success
 import wallstreet.composeapp.generated.resources.performing_action
+import wallstreet.composeapp.generated.resources.wallpaper_type_both
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -135,7 +134,7 @@ fun BottomSheetContent(
                         Icon(
                             imageVector = vectorResource(type.iconRes),
                             tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                            contentDescription = stringResource(R.string.wallpaper_set_button_icon_desc)
+                            contentDescription = stringResource(Res.string.wallpaper_type_both)
                         )
 
                         Spacer(modifier = Modifier.width(8.dp))

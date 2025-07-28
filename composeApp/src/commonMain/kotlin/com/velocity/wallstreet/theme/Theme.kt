@@ -1,5 +1,8 @@
 package com.velocity.wallstreet.theme
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,4 +34,13 @@ fun AppTheme(
             content = content
         )
     }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+val LocalSharedTransitionScope = staticCompositionLocalOf<SharedTransitionScope> {
+    error("SharedTransitionScope not provided")
+}
+
+val LocalAnimatedVisibilityScope = staticCompositionLocalOf<AnimatedVisibilityScope> {
+    error("AnimatedVisibilityScope not provided")
 }

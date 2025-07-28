@@ -1,4 +1,4 @@
-package com.velocity.wallstreet.ui
+package com.velocity.wallstreet.ui.screen
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween

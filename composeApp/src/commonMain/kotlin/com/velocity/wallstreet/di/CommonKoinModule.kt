@@ -6,8 +6,10 @@ import com.velocity.wallstreet.data.repository.WallpaperRepository
 import com.velocity.wallstreet.data.repository.WallpaperRepositoryImpl
 import com.velocity.wallstreet.utils.NetworkMonitor
 import com.velocity.wallstreet.viewmodel.MainViewModel
+import com.velocity.wallstreet.viewmodel.WallpaperScreenViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -21,4 +23,10 @@ val commonModule = module {
     }
 
     viewModelOf(::MainViewModel)
+    viewModel { (imageUrl: String) ->
+        WallpaperScreenViewModel(
+            repository = get(),
+            imageUrl = imageUrl
+        )
+    }
 }
