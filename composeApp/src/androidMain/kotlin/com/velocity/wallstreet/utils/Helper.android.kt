@@ -5,11 +5,12 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.velocity.wallstreet.R
+import com.velocity.wallstreet.data.factory.ContextFactory
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.engine.cio.CIO
 
-actual fun getAppVersion(context: Any): String {
-    val androidContext = context as? Context ?: return "Unknown"
+actual fun getAppVersion(context: ContextFactory): String {
+    val androidContext = context.getContext() as Context
     val packageInfo = androidContext.packageManager.getPackageInfo(androidContext.packageName, 0)
     return packageInfo.versionName ?: "Unknown"
 }

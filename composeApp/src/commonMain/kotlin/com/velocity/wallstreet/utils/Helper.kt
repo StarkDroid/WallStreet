@@ -1,5 +1,6 @@
 package com.velocity.wallstreet.utils
 
+import com.velocity.wallstreet.data.factory.ContextFactory
 import io.ktor.client.engine.HttpClientEngineFactory
 
 expect object PlatformUtils {
@@ -10,7 +11,7 @@ expect object PlatformUtils {
     fun isWindows(): Boolean
 }
 
-expect fun getAppVersion(context: Any): String
+expect fun getAppVersion(context: ContextFactory): String
 
 expect val httpClientEngine: HttpClientEngineFactory<*>
 

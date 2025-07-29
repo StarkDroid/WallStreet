@@ -3,6 +3,7 @@ package com.velocity.wallstreet.utils
 import com.sun.jna.Library
 import com.sun.jna.Native
 import com.sun.jna.win32.W32APIOptions
+import com.velocity.wallstreet.data.factory.ContextFactory
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.engine.cio.CIO
 import io.ktor.http.Url
@@ -13,7 +14,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.net.URI
 
-actual fun getAppVersion(context: Any): String {
+actual fun getAppVersion(context: ContextFactory): String {
     return System.getProperty("app.version")
 }
 
