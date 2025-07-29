@@ -39,7 +39,6 @@ import com.velocity.wallstreet.ui.component.GridView
 import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NetworkUI
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
-import com.velocity.wallstreet.utils.extractUniqueCategories
 import com.velocity.wallstreet.viewmodel.MainScreenState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,20 +61,6 @@ fun MainScreen(
         animationSpec = tween(durationMillis = 200),
         label = "corner-radius"
     )
-
-    val (categories, filteredWallpapers) = remember(
-        viewState.wallpapers,
-        viewState.selectedCategory
-    ) {
-        Pair(
-            extractUniqueCategories(viewState.wallpapers),
-            if (viewState.selectedCategory != null) {
-                viewState.wallpapers.filter { it.category == viewState.selectedCategory }
-            } else {
-                viewState.wallpapers
-            }
-        )
-    }
 
     LaunchedEffect(gridState) {
         snapshotFlow { gridState.firstVisibleItemIndex }.collect { index ->
@@ -137,7 +122,7 @@ fun MainScreen(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         CategoryButton(
-                            categories = categories,
+                            categories = viewState.categories,
                             selectedCategory = viewState.selectedCategory,
                             onCategorySelected = { category ->
                                 setSelectedCategory(if (viewState.selectedCategory == category) null else category)
@@ -145,7 +130,7 @@ fun MainScreen(
                         )
 
                         GridView(
-                            wallpapers = filteredWallpapers,
+                            wallpapers = viewState.filteredWallpapers,
                             onImageClick = onImageClick,
                             gridState = gridState,
                         )
