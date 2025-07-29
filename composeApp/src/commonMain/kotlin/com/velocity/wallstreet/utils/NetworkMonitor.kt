@@ -24,6 +24,10 @@ open class NetworkMonitor(private val context: PlatformContext) {
         job?.cancel()
         job = CoroutineScope(Dispatchers.Default).launch {
             val checker = ConnectivityChecker(context)
+
+            val initialCheck = checker.isOnline()
+            _isConnected.emit(initialCheck)
+
             while (isActive) {
                 val isOnline = checker.isOnline()
                 _isConnected.emit(isOnline)
