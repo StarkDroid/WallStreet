@@ -9,8 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
+import com.velocity.wallstreet.viewmodel.MainScreenState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.vectorResource

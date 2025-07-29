@@ -2,10 +2,14 @@ package com.velocity.wallstreet.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.velocity.wallstreet.data.model.MainScreenState
+import com.velocity.wallstreet.data.factory.ContextFactory
+import com.velocity.wallstreet.data.model.Config
+import com.velocity.wallstreet.data.model.Model
 import com.velocity.wallstreet.data.repository.WallpaperRepository
 import com.velocity.wallstreet.utils.NetworkMonitor
 import com.velocity.wallstreet.utils.PlatformUtils
+import com.velocity.wallstreet.utils.getAppVersion
+import com.velocity.wallstreet.utils.isNewVersionAvailable
 import io.ktor.client.plugins.ClientRequestException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +19,8 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class MainViewModel(
-    private val repository: WallpaperRepository
+    private val repository: WallpaperRepository,
+    private val context: ContextFactory
 ) : ViewModel(), KoinComponent {
 
     private val networkMonitor: NetworkMonitor by inject()
@@ -43,11 +48,23 @@ class MainViewModel(
             _state.update { it.copy(isLoading = true) }
             try {
                 val wallpaperData = repository.getWallpaper()
+                val currentVersion = getAppVersion(context)
+                val latestVersion = wallpaperData.config.appUpdateVersion
+                val updateUrl = when {
+                    PlatformUtils.isMacOS() -> wallpaperData.config.macUpdateUrl
+                    PlatformUtils.isWindows() -> wallpaperData.config.windowsUpdateUrl
+                    PlatformUtils.isLinux() -> wallpaperData.config.linuxUpdateUrl
+                    else -> wallpaperData.config.androidUpdateUrl
+                }
+
                 _state.update {
                     it.copy(
                         wallpapers = repository.getWallpaperList(wallpaperData).shuffled(),
                         config = wallpaperData.config,
-                        isLoading = false
+                        isLoading = false,
+                        currentAppVersion = currentVersion,
+                        latestAppVersion = latestVersion,
+                        updateURL = updateUrl
                     )
                 }
             } catch (e: ClientRequestException) {
@@ -73,5 +90,22 @@ class MainViewModel(
         if (PlatformUtils.isAndroid()) {
             networkMonitor.stopMonitoring()
         }
+    }
+}
+
+data class MainScreenState(
+    val wallpapers: List<Model> = emptyList(),
+    val config: Config? = null,
+    val isLoading: Boolean = false,
+    val selectedCategory: String? = null,
+    var showFAB: Boolean = true,
+    val error: String? = null,
+    val isOnline: Boolean = true,
+    val currentAppVersion: String = "",
+    val latestAppVersion: String = "",
+    val updateURL: String = ""
+) {
+    fun isUpdateAvailable(): Boolean {
+        return isNewVersionAvailable(currentAppVersion, latestAppVersion)
     }
 }

@@ -11,7 +11,7 @@ class WallStreetApplication : Application() {
 
         initKoin {
             androidContext(this@WallStreetApplication)
-            modules(androidModule)
+            modules(androidModule(this@WallStreetApplication))
         }
     }
 }

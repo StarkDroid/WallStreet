@@ -4,18 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.velocity.wallstreet.data.model.MainScreenState
 import com.velocity.wallstreet.utils.PlatformUtils
-import com.velocity.wallstreet.utils.isNewVersionAvailable
+import com.velocity.wallstreet.viewmodel.MainScreenState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import wallstreet.composeapp.generated.resources.*
@@ -24,18 +20,12 @@ import wallstreet.composeapp.generated.resources.*
 @Composable
 internal fun AppHeader(
     viewState: MainScreenState,
-    currentAppVersion: String,
-    latestAppVersion: String,
     scrollBehavior: TopAppBarScrollBehavior,
 ) {
-    val isUpdateAvailable = isNewVersionAvailable(currentAppVersion, latestAppVersion)
-
-    val updateUrl = remember { mutableStateOf("") }
-
     val hyperLinkText = buildAnnotatedString {
         withLink(
             LinkAnnotation.Url(
-                url = updateUrl.value,
+                url = viewState.updateURL,
                 TextLinkStyles(
                     style = SpanStyle(
                         fontWeight = FontWeight.Medium,
@@ -47,17 +37,6 @@ internal fun AppHeader(
         ) {
             append(stringResource(Res.string.update_available_text))
         }
-    }
-
-    LaunchedEffect(viewState.config) {
-        updateUrl.value = viewState.config?.let { config ->
-            when {
-                PlatformUtils.isMacOS() -> config.macUpdateUrl
-                PlatformUtils.isWindows() -> config.windowsUpdateUrl
-                PlatformUtils.isLinux() -> config.linuxUpdateUrl
-                else -> config.androidUpdateUrl
-            }
-        } ?: ""
     }
 
     LargeTopAppBar(
@@ -89,7 +68,7 @@ internal fun AppHeader(
                         color = MaterialTheme.colorScheme.primary
                     )
 
-                    if (isUpdateAvailable) {
+                    if (viewState.isUpdateAvailable()) {
                         Text(
                             modifier = Modifier.padding(start = 8.dp),
                             text = hyperLinkText,
@@ -99,7 +78,7 @@ internal fun AppHeader(
                     } else {
                         Text(
                             modifier = Modifier.padding(start = 8.dp),
-                            text = currentAppVersion,
+                            text = viewState.currentAppVersion,
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary
                         )

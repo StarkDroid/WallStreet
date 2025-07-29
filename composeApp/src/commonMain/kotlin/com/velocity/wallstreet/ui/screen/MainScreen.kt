@@ -31,8 +31,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.LocalPlatformContext
 import com.velocity.wallstreet.ui.component.AppHeader
 import com.velocity.wallstreet.ui.component.BottomBarCredits
 import com.velocity.wallstreet.ui.component.CategoryButton
@@ -42,19 +40,16 @@ import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NetworkUI
 import com.velocity.wallstreet.utils.NeoBrutalistShapes
 import com.velocity.wallstreet.utils.extractUniqueCategories
-import com.velocity.wallstreet.utils.getAppVersion
-import com.velocity.wallstreet.viewmodel.MainViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import com.velocity.wallstreet.viewmodel.MainScreenState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel = koinViewModel(),
+    viewState: MainScreenState,
     onImageClick: (String) -> Unit = {},
+    showFAB: (Boolean) -> Unit,
+    setSelectedCategory: (String?) -> Unit,
 ) {
-    val platformContext = LocalPlatformContext.current
-    val viewState by viewModel.state.collectAsStateWithLifecycle()
-
     val coroutineScope = rememberCoroutineScope()
     val gridState = rememberLazyGridState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -64,7 +59,8 @@ fun MainScreen(
     }
     val animatedCornerRadius by animateDpAsState(
         targetValue = if (collapseFraction == 1f) 0.dp else NeoBrutalistShapes.Rounded,
-        animationSpec = tween(durationMillis = 200)
+        animationSpec = tween(durationMillis = 200),
+        label = "corner-radius"
     )
 
     val (categories, filteredWallpapers) = remember(
@@ -83,7 +79,7 @@ fun MainScreen(
 
     LaunchedEffect(gridState) {
         snapshotFlow { gridState.firstVisibleItemIndex }.collect { index ->
-            viewModel.setShowFAB(index > 2)
+            showFAB(index > 2)
         }
     }
 
@@ -91,14 +87,10 @@ fun MainScreen(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         contentWindowInsets = WindowInsets.systemBars,
         topBar = {
-            viewState.config?.let {
-                AppHeader(
-                    viewState = viewState,
-                    currentAppVersion = getAppVersion(platformContext),
-                    latestAppVersion = it.appUpdateVersion,
-                    scrollBehavior = scrollBehavior
-                )
-            }
+            AppHeader(
+                viewState = viewState,
+                scrollBehavior = scrollBehavior
+            )
         },
         bottomBar = {
             BottomAppBar(
@@ -148,9 +140,7 @@ fun MainScreen(
                             categories = categories,
                             selectedCategory = viewState.selectedCategory,
                             onCategorySelected = { category ->
-                                viewModel.setSelectedCategory(
-                                    if (viewState.selectedCategory == category) null else category
-                                )
+                                setSelectedCategory(if (viewState.selectedCategory == category) null else category)
                             }
                         )
 
