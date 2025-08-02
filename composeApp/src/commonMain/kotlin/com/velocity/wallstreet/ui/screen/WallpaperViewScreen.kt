@@ -24,6 +24,7 @@ import coil3.request.crossfade
 import com.velocity.wallstreet.ui.component.BottomBarContent
 import com.velocity.wallstreet.ui.component.LoadingIndicator
 import com.velocity.wallstreet.ui.component.NeoBrutalistButton
+import com.velocity.wallstreet.utils.WallpaperType
 import com.velocity.wallstreet.viewmodel.WallpaperScreenViewState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -41,6 +42,7 @@ fun WallpaperViewScreen(
     onToggleBottomSheet: (Boolean) -> Unit,
     onDownloadWallpaper: () -> Unit,
     onBackClick: () -> Unit,
+    applyWallpaper: (WallpaperType) -> Unit,
     animatedVisibilityScope: AnimatedVisibilityScope,
     sharedTransitionScope: SharedTransitionScope,
 ) {
@@ -52,7 +54,8 @@ fun WallpaperViewScreen(
             if (!viewState.isLoading) {
                 BottomBarContent(
                     onToggleBottomSheet,
-                    onDownloadWallpaper
+                    onDownloadWallpaper,
+                    applyWallpaper
                 )
             }
         }

@@ -48,6 +48,7 @@ fun NavGraphBuilder.wallpaperViewScreen(
             onImageLoadSuccess = wallpaperViewModel::onImageLoaded,
             onToggleBottomSheet = wallpaperViewModel::toggleBottomSheet,
             onDownloadWallpaper = wallpaperViewModel::downloadWallpaper,
+            applyWallpaper = wallpaperViewModel::applyWallpaper,
             onBackClick = onBackClick,
             animatedVisibilityScope = this,
             sharedTransitionScope = sharedTransitionScope,

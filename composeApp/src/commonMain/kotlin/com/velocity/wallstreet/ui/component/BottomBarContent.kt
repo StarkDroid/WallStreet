@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.velocity.wallstreet.utils.PlatformUtils
+import com.velocity.wallstreet.utils.WallpaperType
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import wallstreet.composeapp.generated.resources.Res
@@ -27,7 +29,8 @@ import wallstreet.composeapp.generated.resources.wallpaper_screen_button_label
 @Composable
 fun BottomBarContent(
     onToggleBottomSheet: (Boolean) -> Unit,
-    onDownloadWallpaper: () -> Unit
+    onDownloadWallpaper: () -> Unit,
+    applyWallpaper: (WallpaperType) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -37,7 +40,13 @@ fun BottomBarContent(
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
     ) {
         NeoBrutalistButton(
-            onClick = { onToggleBottomSheet(true) },
+            onClick = {
+                if (PlatformUtils.isIOS()) {
+                    applyWallpaper(WallpaperType.Both)
+                } else {
+                    onToggleBottomSheet(true)
+                }
+            },
             cornerRadius = 8.dp
         ) {
             Icon(
